@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Harshitha's Portfolio BA</title>
+<!-- Font Awesome CDN for icons -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+<style>
+  /* Basic reset and styling */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #eee;
+    line-height: 1.6;
+  }
+
+  nav {
+    display: flex;
+    background: rgba(34, 34, 34, 0.95);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0; 
+    padding: 0;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  nav li {
+    margin: 0 1rem;
+  }
+
+  nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+  }
+
+  nav a:hover {
+    color: #ffdd57;
+    background: rgba(255, 221, 87, 0.1);
+  }
+
+  nav a.active {
+    color: #fff;
+    background: rgba(255, 221, 87, 0.2);
+    text-shadow: 0 0 8px #ffdd57;
+    animation: sparkle 2s infinite;
+  }
+
+  /* Sparkle animation for active nav */
+  @keyframes sparkle {
+    0%, 100% { text-shadow: 0 0 8px #ffdd57, 0 0 15px #ffdd57; }
+    50% { text-shadow: 0 0 20px #fff, 0 0 30px #fff; }
+  }
+
+  main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  section {
+    background: rgba(255,255,255,0.08);
+    margin-bottom: 2rem;
+    border-radius: 15px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    padding: 0 2rem;
+    transition: max-height 0.8s cubic-bezier(0.4,0,0.2,1), opacity 0.8s ease, padding 0.5s ease;
+    box-shadow: 0 0 25px rgba(255, 221, 87, 0.15);
+    border: 1px solid rgba(255, 221, 87, 0.1);
+  }
+
+  section.active {
+    max-height: none;
+    opacity: 1;
+    padding: 2rem;
+  }
+
+  /* Section heading */
+  section h2 {
+    margin-top: 0;
+    color: #ffdd57;
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+
+  section h3 {
+    color: #ffdd57;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  section h4 {
+    color: #ffdd57;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+  }
+
+  /* Hero section styles */
+  .hero {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(255,221,87,0.1), rgba(47,79,79,0.1));
+    border-radius: 20px;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #ffdd57;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+
+  .hero h2 {
+    font-size: 1.5rem;
+    color: #ccc;
+    font-weight: 400;
+  }
+
+  /* Skills progress bars */
+  .skills-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .skills-list li {
+    margin-bottom: 1.5rem;
+    background: rgba(255,255,255,0.05);
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .skill-name {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #ffdd57;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.1);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ffdd57, #ffa726);
+    border-radius: 5px;
+    position: relative;
+    transition: width 1s ease;
+  }
+
+  /* Experience accordion styles */
+  .accordion-item {
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .accordion-header {
+    width: 100%;
+    padding: 1.5rem;
+    background: rgba(255,221,87,0.1);
+    border: none;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s ease;
+  }
+
+  .accordion-header:hover {
+    background: rgba(255,221,87,0.2);
+  }
+
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    background: rgba(255,255,255,0.03);
+    transition: max-height 0.5s ease, padding 0.3s ease;
+  }
+
+  .accordion-content.active {
+    max-height: 300px;
+    padding: 1.5rem;
+  }
+
+  .accordion-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+  }
+
+  .accordion-item.active .accordion-icon {
+    transform: rotate(45deg);
+  }
+
+  /* Timeline styles for projects */
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+    border-left: 4px solid #ffdd57;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    background: rgba(255,255,255,0.05);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+
+  .timeline-icon {
+    position: absolute;
+    left: -50px;
+    top: 1rem;
+    background: linear-gradient(135deg, #ffdd57, #ffa726);
+    color: #333;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  /* Education timeline */
+  .edu-timeline {
+    position: relative;
+  }
+
+  .edu-item {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    border-left: 4px solid #ffdd57;
+  }
+
+  .edu-role {
+    color: #ffdd57;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .edu-date {
+    color: #ccc;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  /* Leadership cards */
+  .leadership-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .leadership-card {
+    background: rgba(255,255,255,0.05);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255,221,87,0.2);
+  }
+
+  .leadership-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(255,221,87,0.3);
+  }
+
+  .leadership-icon {
+    font-size: 3rem;
+    color: #ffdd57;
+    margin-bottom: 1rem;
+  }
+
+  /* Contact section */
+  .contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .contact-item {
+    background: rgba(255,255,255,0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid rgba(255,221,87,0.2);
+  }
+
+  .contact-item i {
+    font-size: 2rem;
+    color: #ffdd57;
+    margin-bottom: 1rem;
+  }
+
+  .contact-item a {
+    color: #ffdd57;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .contact-item a:hover {
+    color: #fff;
+  }
+
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    nav ul {
+      justify-content: flex-start;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    
+    nav li {
+      flex-shrink: 0;
+    }
+    
+    .hero h1 {
+      font-size: 2rem;
+    }
+    
+    .hero h2 {
+      font-size: 1.2rem;
+    }
+    
+    section {
+      padding: 0 1rem;
+    }
+    
+    section.active {
+      padding: 1.5rem;
+    }
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #ffdd57;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ffa726;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav-bar" id="navbar">
+    <ul class="nav-list">
+      <li><a href="#" data-target="home" class="active"><i class="fas fa-home"></i><span>Home</span></a></li>
+      <li><a href="#" data-target="about"><i class="fas fa-user"></i><span>About</span></a></li>
+      <li><a href="#" data-target="career-summary"><i class="fas fa-briefcase"></i><span>Career</span></a></li>
+      <li><a href="#" data-target="education"><i class="fas fa-graduation-cap"></i><span>Education</span></a></li>
+      <li><a href="#" data-target="skills"><i class="fas fa-code"></i><span>Skills</span></a></li>
+      <li><a href="#" data-target="experience"><i class="fas fa-laptop-code"></i><span>Experience</span></a></li>
+      <li><a href="#" data-target="projects"><i class="fas fa-project-diagram"></i><span>Projects</span></a></li>
+      <li><a href="#" data-target="leadership"><i class="fas fa-users-cog"></i><span>Leadership</span></a></li>
+      <li><a href="#" data-target="contact"><i class="fas fa-envelope"></i><span>Contact</span></a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="home" class="active">
+    <div class="hero">
+      <h1>Hi, I'm Harshitha</h1>
+      <h2>Business Analyst Graduate | Financial Analyst</h2>
+      <p style="margin-top: 2rem; font-size: 1.2rem; color: #ccc; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Transforming complex data into actionable business insights with expertise in AI-driven solutions, data visualization, and strategic analytics.
+      </p>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: center;">
+      <div style="text-align: center;">
+        <div style="width: 200px; height: 200px; background: linear-gradient(135deg, #ffdd57, #ffa726); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: #333;">
+          <i class="fas fa-user"></i>
+        </div>
+      </div>
+      <div>
+        <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+          I am a detail-oriented and driven master's student in Business Analytics at the University of North Texas, with a strong foundation in data analysis, problem-solving, and business intelligence. With experience in AI-driven solutions, data visualization, and statistical modeling, I am skilled at turning complex data into actionable insights that support strategic decision-making.
+        </p>
+        <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+          My hands-on work includes projects in malnutrition analytics, AI-powered hiring systems, and fraud detection, showcasing my ability to blend technical expertise with real-world impact. I am proficient in Python, Tableau, SQL, and cloud technologies, and passionate about leveraging data to drive business growth and innovation.
+        </p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
+          <span style="background: rgba(255,221,87,0.2); color: #ffdd57; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">Data Analytics</span>
+          <span style="background: rgba(255,221,87,0.2); color: #ffdd57; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">AI Solutions</span>
+          <span style="background: rgba(255,221,87,0.2); color: #ffdd57; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">Business Intelligence</span>
+          <span style="background: rgba(255,221,87,0.2); color: #ffdd57; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">Strategic Planning</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="career-summary">
+    <h2>Career Summary</h2>
+    <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 15px; border-left: 5px solid #ffdd57;">
+      <p style="font-size: 1.2rem; margin-bottom: 2rem; text-align: center; color: #ffdd57; font-weight: 600;">
+        "Transforming Data into Strategic Business Value"
+      </p>
+      <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+        Detail-oriented and analytical master's student specializing in Business Analytics, with a Bachelor of Commerce in Computer Applications. I am skilled in data analysis, problem-solving, and leveraging technology for business insights. Adept at applying statistical and analytical tools to drive decision-making and optimize business performance.
+      </p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+        <div style="text-align: center; padding: 1.5rem; background: rgba(255,221,87,0.1); border-radius: 10px;">
+          <i class="fas fa-chart-line" style="font-size: 2.5rem; color: #ffdd57; margin-bottom: 1rem;"></i>
+          <h4>Data-Driven Decision Making</h4>
+          <p>Expert in transforming complex datasets into actionable business insights using advanced analytics and visualization tools.</p>
+        </div>
+        <div style="text-align: center; padding: 1.5rem; background: rgba(255,221,87,0.1); border-radius: 10px;">
+          <i class="fas fa-robot" style="font-size: 2.5rem; color: #ffdd57; margin-bottom: 1rem;"></i>
+          <h4>AI & Machine Learning</h4>
+          <p>Developing intelligent solutions for hiring, fraud detection, and predictive analytics to drive business innovation.</p>
+        </div>
+        <div style="text-align: center; padding: 1.5rem; background: rgba(255,221,87,0.1); border-radius: 10px;">
+          <i class="fas fa-lightbulb" style="font-size: 2.5rem; color: #ffdd57; margin-bottom: 1rem;"></i>
+          <h4>Strategic Innovation</h4>
+          <p>Bridging the gap between technical capabilities and business strategy to create sustainable competitive advantages.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="edu-timeline">
+      <div class="edu-item">
+        <h3 style="color: #ffdd57; margin-bottom: 0.5rem;">University of North Texas</h3>
+        <div class="edu-role">M.S. Business Analytics</div>
+        <div class="edu-date">Expected December 2025</div>
+        <div style="margin-top: 1rem;">
+          <p><strong style="color: #ffdd57;">GPA:</strong> 3.5 / 4.0</p>
+          <p><strong style="color: #ffdd57;">Relevant Coursework:</strong></p>
+          <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+            <li>Data Visualization & Business Intelligence</li>
+            <li>Data Mining & Predictive Analytics</li>
+            <li>Advanced Business Statistics</li>
+            <li>Machine Learning for Business Applications</li>
+            <li>Financial Analytics & Risk Management</li>
+          </ul>
+          <p style="margin-top: 1rem;"><strong style="color: #ffdd57;">Capstone Project:</strong> Improved sales forecasts by 15% using ensemble ML models and real-time data integration.</p>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <h3 style="color: #ffdd57; margin-bottom: 0.5rem;">Osmania University</h3>
+        <div class="edu-role">Bachelor of Commerce (Computer Applications)</div>
+        <div class="edu-date">June 2020 – April 2023</div>
+        <div style="margin-top: 1rem;">
+          <p><strong style="color: #ffdd57;">GPA:</strong> 4.0 / 4.0 (First Class with Distinction)</p>
+          <p><strong style="color: #ffdd57;">Relevant Coursework:</strong></p>
+          <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+            <li>Database Management Systems</li>
+            <li>Business Statistics & Quantitative Methods</li>
+            <li>Management Information Systems</li>
+            <li>Financial Accounting & Cost Analysis</li>
+            <li>Operations Research & Decision Science</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <h3 style="color: #ffdd57; margin-bottom: 1.5rem; text-align: center;">Certifications & Workshops</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        <div style="background: rgba(255,221,87,0.1); padding: 1.5rem; border-radius: 10px; display: flex; align-items: center; gap: 1rem;">
+          <i class="fas fa-rocket" style="font-size: 2rem; color: #ffdd57;"></i>
+          <div>
+            <h4 style="margin-bottom: 0.5rem;">Entrepreneurship Orientation Program (NSIC)</h4>
+            <p>Comprehensive training on launching and sustaining startups, including business model development and market analysis.</p>
+          </div>
+        </div>
+        <div style="background: rgba(255,221,87,0.1); padding: 1.5rem; border-radius: 10px; display: flex; align-items: center; gap: 1rem;">
+          <i class="fas fa-bullhorn" style="font-size: 2rem; color: #ffdd57;"></i>
+          <div>
+            <h4 style="margin-bottom: 0.5rem;">Ad Mad Competition Winner</h4>
+            <p>First place in strategic advertising competition, demonstrating creative problem-solving under pressure.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Technical & Analytical Skills</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+      <div>
+        <h3 style="margin-bottom: 1.5rem; color: #ffdd57;">Programming & Analytics</h3>
+        <ul class="skills-list">
+          <li>
+            <span class="skill-name">Python</span>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 90%;">90%</div>
+            </div>
+          </li>
+          <li>
+            <span class="skill-name">R</span>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 85%;">85%</div>
+            </div>
+          </li>
+          <li>
+            <span class="skill-name">SQL (MySQL, PostgreSQL)</span>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 88%;">88%</div>
+            </div>
+          </li>
+          <li>
+            <span class="skill-name">NumPy & Pandas</span>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 92%;">92%</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 style="margin-bottom: 1.5rem; color: #ffdd57;">Visualization & BI Tools</h3>
+        <ul class="skills-list">
+          <li>
+            <span class="skill-name">Tableau</span>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 87%;">87%</div>
+            </div>
+          </li>
+          <li>
+            <span class="skill-name">Power BI</span>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 82%;">82%</div>
+            </div>
+          </li>
+          <li>
+            <span class="skill-name">MS Excel (Advanced)</span>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 90%;">90%</div>
+            </div>
+          </li>
+          <li>
+            <span class="skill-name">Google Analytics</span>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 78%;">78%</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div style="margin-top: 3rem;">
+      <h3 style="margin-bottom: 1.5rem; color: #ffdd57; text-align: center;">Cloud & Database Technologies</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        <div style="text-align: center; padding: 1rem; background: rgba(255,221,87,0.1); border-radius: 10px;">
+          <i class="fab fa-google" style="font-size: 2rem; color: #ffdd57; margin-bottom: 0.5rem;"></i>
+          <p><strong>Google Cloud Platform</strong><br>80% Proficiency</p>
+        </div>
+        <div style="text-align: center; padding: 1rem; background: rgba(255,221,87,0.1); border-radius: 10px;">
+          <i class="fas fa-database" style="font-size: 2rem; color: #ffdd57; margin-bottom: 0.5rem;"></i>
+          <p><strong>MongoDB</strong><br>80% Proficiency</p>
+        </div>
+        <div style="text-align: center; padding: 1rem; background: rgba(255,221,87,0.1); border-radius: 10px;">
+          <i class="fas fa-server" style="font-size: 2rem; color: #ffdd57; margin-bottom: 0.5rem;"></i>
+          <p><strong>Big Data & NoSQL</strong><br>75% Proficiency</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Professional Experience</h2>
+    
+    <div class="accordion-item">
+      <button class="accordion-header">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <span style="font-size: 1.5rem;">💼</span>
+          <div style="text-align: left;">
+            <div style="font-weight: 700;">Entrepreneurship/Business Development Intern</div>
+            <div style="font-size: 0.9rem; color: #ccc;">NSIC – Hyderabad, India | May 2022 – March 2023</div>
+          </div>
+        </div>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-content">
+        <p style="margin-bottom: 1rem;"><strong style="color: #ffdd57;">Role Overview:</strong> Analyzed market trends, financial feasibility, and industrial awareness to support small business growth initiatives.</p>
+        
+        <h4 style="color: #ffdd57; margin-top: 1.5rem;">Key Responsibilities:</h4>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li>Collected and analyzed data from 50+ small businesses to identify growth patterns and market opportunities</li>
+          <li>Developed comprehensive financial models to assess business viability and ROI projections</li>
+          <li>Created data-driven insights and recommendations that influenced strategic business decisions</li>
+          <li>Conducted market research using statistical analysis to identify industry trends and competitive positioning</li>
+        </ul>
+        
+        <h4 style="color: #ffdd57; margin-top: 1.5rem;">Impact & Achievements:</h4>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li>Improved business assessment accuracy by 25% through implementation of data-driven evaluation frameworks</li>
+          <li>Contributed to strategic planning that resulted in 15% increase in successful business launches</li>
+          <li>Developed automated reporting dashboards that reduced analysis time by 40%</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <span style="font-size: 1.5rem;">🎓</span>
+          <div style="text-align: left;">
+            <div style="font-weight: 700;">Counselor/Data Insights Mentor</div>
+            <div style="font-size: 0.9rem; color: #ccc;">Voice 4 Girls – Hyderabad, India | August 2021 – March 2022</div>
+          </div>
+        </div>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-content">
+        <p style="margin-bottom: 1rem;"><strong style="color: #ffdd57;">Role Overview:</strong> Empowered students through mentorship while leveraging data analytics to improve educational outcomes and engagement strategies.</p>
+        
+        <h4 style="color: #ffdd57; margin-top: 1.5rem;">Key Responsibilities:</h4>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li>Conducted interactive counsel
