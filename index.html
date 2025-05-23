@@ -3,543 +3,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Harshitha's Portfolio BA</title>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  />
+  <title>Portfolio</title>
   <style>
-    * {
+    /* Reset */
+    body, html {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
     }
 
-    body {
-      background: #f8f8ff;
-      color: #333;
-      line-height: 1.6;
-      transition: background 0.5s ease;
+    /* Background GIF */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('https://media.giphy.com/media/l0HlUQfQy5RGFhKX2/giphy.gif') no-repeat center center/cover;
+      filter: brightness(0.35);
+      z-index: -2;
+      animation: bgFade 30s ease-in-out infinite alternate;
     }
 
-    nav {
-      background: #222;
-      padding: 1em 2em;
-      position: sticky;
-      top: 0;
-      z-index: 999;
+    /* Optional slow fade animation on background */
+    @keyframes bgFade {
+      0% { filter: brightness(0.35); }
+      100% { filter: brightness(0.45); }
+    }
+
+    /* Dark overlay for better text contrast */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.4);
+      z-index: -1;
+    }
+
+    /* Navigation styles from before */
+    nav#navbar {
       display: flex;
       justify-content: center;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      gap: 35px;
+      background-color: rgba(31, 31, 46, 0.85);
+      padding: 15px 30px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
-    nav ul {
-      display: flex;
-      gap: 1.5em;
-      list-style: none;
-    }
-
-    nav a {
+    nav#navbar a {
       color: #ccc;
       text-decoration: none;
-      font-size: 1rem;
-      transition: color 0.3s ease, transform 0.3s ease;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      padding: 8px;
+      transition: color 0.3s ease;
     }
 
-    nav a:hover {
-      color: #fff;
-      transform: scale(1.1);
+    nav#navbar a:hover {
+      color: #0fd8d8;
     }
 
-    nav a.active {
-      color: #61dafb;
-      border-bottom: 2px solid #61dafb;
+    nav#navbar a.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      background-color: #0fd8d8;
+      border-radius: 50%;
+      animation: pulse 1s infinite ease-in-out;
     }
 
-    .hero {
-      text-align: center;
-      padding: 4em 1em;
-      background: linear-gradient(135deg, #6dd5ed, #2193b0);
+    @keyframes pulse {
+      0%, 100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translateX(-50%) scale(1.6);
+        opacity: 0.6;
+      }
+    }
+
+    /* Content padding so content doesn't hide behind navbar */
+    .content {
+      padding-top: 80px;
       color: white;
-      animation: fadeInSlide 1.2s ease forwards;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 20px 40px;
+      text-align: center;
     }
 
-    .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.3em;
-    }
-
-    .hero h2 {
-      font-size: 1.5rem;
-      font-weight: 300;
-      opacity: 0.9;
-    }
-
-    main {
-      padding: 2em 10vw;
-    }
-
-    section {
-      display: none;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInSection 0.6s forwards;
-    }
-
-    section.active {
-      display: block;
-    }
-
-    section h2 {
-      font-size: 2rem;
-      margin-bottom: 1em;
-      color: #2193b0;
-    }
-
-    section p {
-      font-size: 1.1rem;
-      max-width: 800px;
-      animation: textFadeIn 1s ease-in-out;
-    }
-
-    /* Animations */
-    @keyframes fadeInSlide {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInSection {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes textFadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Optional Accordion Styles */
-    .accordion-header {
-      cursor: pointer;
-      padding: 1em;
-      background: #eee;
-      margin-bottom: 0.5em;
-      transition: background 0.3s ease;
-    }
-
-    .accordion-header:hover {
-      background: #ddd;
-    }
-
-    .accordion-content {
-      max-height: 0;
-      overflow: hidden;
-      background: #f9f9f9;
-      padding: 0 1em;
-      transition: max-height 0.5s ease;
-    }
-
-    .accordion-item.active .accordion-content {
-      max-height: 500px;
-      padding: 1em;
-    }
   </style>
 </head>
 <body>
-  <!-- Navigation Bar -->
-  <nav>
-    <ul>
-      <li><a href="#about" class="active"><i class="fas fa-user"></i> About</a></li>
-      <li><a href="#skills"><i class="fas fa-cogs"></i> Skills</a></li>
-      <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
-      <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
-      <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
-      <li><a href="#leadership"><i class="fas fa-users"></i> Leadership</a></li>
-    </ul>
-  </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Harshitha Sreiya Palaparthi</h1>
-    <h2>Business Analytics Enthusiast</h2>
-  </section>
+<nav id="navbar">
+  <a href="#about" class="active">About Me</a>
+  <a href="#career-summary">Career Summary</a>
+  <a href="#education">Education</a>
+  <a href="#skills">Skills</a>
+  <a href="#experience">Experience</a>
+  <a href="#projects">Projects</a>
+  <a href="#leadership">Leadership</a>
+</nav>
 
-  <!-- Main Content -->
-  <main>
-    <section id="about" class="active">
-      <h2>About Me</h2>
-      <p>Passionate about uncovering insights through data and translating them into impactful strategies. I combine analytical thinking with creativity to turn numbers into narratives and empower decision-making through visualization and storytelling.</p>
-    </section>
-      <!-- Career Summary Section -->
-  <section id="career-summary" class="fade-in-up fade-delay-2">
-    <h2>Career Summary</h2>
-    <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 15px; border-left: 5px solid #ffdd57;">
-      <p style="font-size: 1.2rem; margin-bottom: 2rem; text-align: center; color: #ffdd57; font-weight: 600;">
-        "Transforming Data into Strategic Business Value"
-      </p>
-      <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
-        Detail-oriented and analytical master's student specializing in Business Analytics, with a Bachelor of Commerce in Computer Applications.
-        Skilled in data analysis, problem-solving, and leveraging technology for business insights.
-        Adept at applying statistical and analytical tools to drive decision-making and optimize business performance.
-      </p>
+<div class="content">
+  <h1>Welcome to My Portfolio</h1>
+  <p>Explore my skills, experience, and projects while enjoying this animated background.</p>
+</div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
-        <div class="fade-in-up fade-delay-1" style="text-align: center; padding: 1.5rem; background: rgba(255,221,87,0.1); border-radius: 10px;">
-          <i class="fas fa-chart-line" style="font-size: 2.5rem; color: #ffdd57; margin-bottom: 1rem;"></i>
-          <h4>Data-Driven Decision Making</h4>
-          <p>Expert in transforming complex datasets into actionable business insights using advanced analytics and visualization tools.</p>
-        </div>
-        <div class="fade-in-up fade-delay-2" style="text-align: center; padding: 1.5rem; background: rgba(255,221,87,0.1); border-radius: 10px;">
-          <i class="fas fa-robot" style="font-size: 2.5rem; color: #ffdd57; margin-bottom: 1rem;"></i>
-          <h4>AI & Machine Learning</h4>
-          <p>Developing intelligent solutions for hiring, fraud detection, and predictive analytics to drive business innovation.</p>
-        </div>
-        <div class="fade-in-up fade-delay-3" style="text-align: center; padding: 1.5rem; background: rgba(255,221,87,0.1); border-radius: 10px;">
-          <i class="fas fa-lightbulb" style="font-size: 2.5rem; color: #ffdd57; margin-bottom: 1rem;"></i>
-          <h4>Strategic Innovation</h4>
-          <p>Bridging the gap between technical capabilities and business strategy to create sustainable competitive advantages.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-   <!-- Education Section -->
-  <section id="education">
-    <h2>Education</h2>
-    <div class="edu-timeline">
-      <div class="edu-item">
-        <h3 style="color: #ffdd57; margin-bottom: 0.5rem;">University of North Texas</h3>
-        <div class="edu-role">M.S. Business Analytics</div>
-        <div class="edu-date">Expected December 2025</div>
-        <div style="margin-top: 1rem;">
-          <p><strong style="color: #ffdd57;">GPA:</strong> 3.5 / 4.0</p>
-          <p><strong style="color: #ffdd57;">Relevant Coursework:</strong></p>
-          <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-            <li>Data Visualization & Business Intelligence</li>
-            <li>Data Mining & Predictive Analytics</li>
-            <li>Advanced Business Statistics</li>
-            <li>Machine Learning for Business Applications</li>
-            <li>Financial Analytics & Risk Management</li>
-          </ul>
-          <p style="margin-top: 1rem;"><strong style="color: #ffdd57;">Capstone Project:</strong> Improved sales forecasts by 15% using ensemble ML models and real-time data integration.</p>
-        </div>
-      </div>
-
-      <div class="edu-item">
-        <h3 style="color: #ffdd57; margin-bottom: 0.5rem;">Osmania University</h3>
-        <div class="edu-role">Bachelor of Commerce (Computer Applications)</div>
-        <div class="edu-date">June 2020 – April 2023</div>
-        <div style="margin-top: 1rem;">
-          <p><strong style="color: #ffdd57;">GPA:</strong> 4.0 / 4.0 (First Class with Distinction)</p>
-          <p><strong style="color: #ffdd57;">Relevant Coursework:</strong></p>
-          <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-            <li>Database Management Systems</li>
-            <li>Business Statistics & Quantitative Methods</li>
-            <li>Management Information Systems</li>
-            <li>Financial Accounting & Cost Analysis</li>
-            <li>Operations Research & Decision Science</li>
-          </ul>
-        </div>
-      </div> 
-    </div>
-
-    <div style="margin-top: 3rem;">
-      <h3 style="color: #ffdd57; margin-bottom: 1.5rem; text-align: center;">Certifications & Workshops</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-        <div style="background: rgba(255,221,87,0.1); padding: 1.5rem; border-radius: 10px; display: flex; align-items: center; gap: 1rem;">
-          <i class="fas fa-rocket" style="font-size: 2rem; color: #ffdd57;"></i>
-          <div>
-            <h4 style="margin-bottom: 0.5rem;">Entrepreneurship Orientation Program (NSIC)</h4>
-            <p>Comprehensive training on launching and sustaining startups, including business model development and market analysis.</p>
-          </div>
-        </div>
-        <div style="background: rgba(255,221,87,0.1); padding: 1.5rem; border-radius: 10px; display: flex; align-items: center; gap: 1rem;">
-          <i class="fas fa-bullhorn" style="font-size: 2rem; color: #ffdd57;"></i>
-          <div>
-            <h4 style="margin-bottom: 0.5rem;">Ad Mad Competition Winner</h4>
-            <p>First place in strategic advertising competition, demonstrating creative problem-solving under pressure.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-   <!-- Technical & Analytical Skills -->
-
-  <section id="skills">
-    <h2>Technical & Analytical Skills</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-      <div>
-        <h3 style="margin-bottom: 1.5rem; color: #ffdd57;">Programming & Analytics</h3>
-        <ul class="skills-list">
-          <li>
-            <span class="skill-name">Python</span>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 90%;">90%</div>
-            </div>
-          </li>
-          <li>
-            <span class="skill-name">R</span>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 85%;">85%</div>
-            </div>
-          </li>
-          <li>
-            <span class="skill-name">SQL (MySQL, PostgreSQL)</span>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 88%;">88%</div>
-            </div>
-          </li>
-          <li>
-            <span class="skill-name">NumPy & Pandas</span>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 92%;">92%</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 style="margin-bottom: 1.5rem; color: #ffdd57;">Visualization & BI Tools</h3>
-        <ul class="skills-list">
-          <li>
-            <span class="skill-name">Tableau</span>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 87%;">87%</div>
-            </div>
-          </li>
-          <li>
-            <span class="skill-name">Power BI</span>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 82%;">82%</div>
-            </div>
-          </li>
-          <li>
-            <span class="skill-name">MS Excel (Advanced)</span>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 90%;">90%</div>
-            </div>
-          </li>
-          <li>
-            <span class="skill-name">Google Analytics</span>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 78%;">78%</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-  </section>
-      <!-- Experience -->
-  <section id="experience" class="accordion-section" style="max-width: 800px; margin: 4rem auto; font-family: 'Times New Roman', Times, serif; color: #333;">
-    <h2 style="text-align: center; font-size: 2.8rem; font-weight: 900; margin-bottom: 3rem; color: #1a237e;">Internship & Employment Experience</h2>
-
-    <div class="accordion-item">
-      <button class="accordion-header">
-        <span>💼</span> Entrepreneurship/Business Development Intern, NSIC – Hyderabad, IND
-        <time>May 2022 – Mar 2023</time>
-        <span class="accordion-icon">+</span>
-      </button>
-      <div class="accordion-content">
-        <p>I worked on understanding how market trends, financial feasibility, and industrial awareness impact small business growth. My role was to analyze market data, evaluate business growth patterns, and develop insights to help small businesses make informed decisions. I collected and analyzed data from small businesses, identified trends in sales, customer demand, and industry growth, and created a basic financial model to assess business viability.</p>
-      </div>
-    </div>
-
-    <div class="accordion-item">
-      <button class="accordion-header">
-        <span>🎓</span> Counselor/Data Insights Mentor, Voice 4 Girls – Hyderabad, IND
-        <time>Aug 2021 – Mar 2022</time>
-        <span class="accordion-icon">+</span>
-      </button>
-      <div class="accordion-content">
-        <p>I worked to empower students by helping them develop key skills for personal and academic growth. My goal was to mentor students, analyze learning patterns, and provide insights on effective teaching strategies to improve engagement and knowledge retention. Conducted interactive counseling sessions, assessed student progress using qualitative insights, and adapted my mentoring techniques based on observed trends. Additionally, I used basic data analysis methods (surveys, feedback tracking) to understand learning gaps and improve counseling effectiveness. Improved students’ confidence, problem-solving, and decision-making skills, while also strengthening my ability to analyze behavioral trends, communicate insights effectively, and apply data-driven approaches to learning.</p>
-      </div>
-    </div>
-  </section>
-
-    <!-- Project Section-->
-    <section id="projects" class="section">
-  <h2>Projects</h2>
-
-  <!-- Project 1 -->
-  <div class="card">
-    <h3>Hiring Assistant AI – Agentic Resume Screening System</h3>
-    <p><strong>Type:</strong> Academic Project</p>
-    <p><strong>Description:</strong> An intelligent hiring assistant that transforms recruitment using agentic AI and RAG for autonomous resume screening, ranking, recruiter chat, and continuous feedback integration in a privacy-first, offline-ready architecture.</p>
-    
-    <p><strong>Objective:</strong> To develop a lightweight, privacy-compliant, fully offline RAG-powered AI assistant that reduces hiring friction, enhances fairness, and adapts to evolving recruiter criteria in real-time.</p>
-    
-    <p><strong>Core Features:</strong></p>
-    <ul>
-      <li>Resume Parsing using PyMuPDF</li>
-      <li>Semantic Matching with SentenceTransformers</li>
-      <li>Hybrid Scoring via Pandas & rubric logic</li>
-      <li>Recruiter chat with quantized Mistral-7B-Instruct</li>
-      <li>Feedback loop to refine rankings</li>
-    </ul>
-
-    <p><strong>Technologies & Architecture:</strong></p>
-    <ul>
-      <li>Python 3.x, Streamlit, PyMuPDF</li>
-      <li>SentenceTransformers (all-MiniLM-L6-v2), Pandas</li>
-      <li>ctransformers, RAG, Mistral-7B</li>
-      <li>Offline-first architecture, privacy by design</li>
-    </ul>
-
-    <p><strong>Key Outcomes:</strong> Efficiency, Transparency, Adaptability, Privacy-Focused</p>
-    <p><strong>Keywords:</strong> Python, Streamlit, RAG, Offline AI, Mistral-7B</p>
-  </div>
-
-  <!-- Project 2 -->
-  <div class="card">
-    <h3>Visualizing Global Trends in Child Malnutrition</h3>
-    <p><strong>Type:</strong> Academic Project</p>
-    <p><strong>Description:</strong> A deep dive into malnutrition trends (stunting, wasting, underweight, overweight) across geography, gender, and age using WHO, UNICEF, and World Bank data, turned into powerful dashboards for global stakeholders.</p>
-
-    <p><strong>Key Deliverables:</strong></p>
-    <ul>
-      <li>Malnutrition Severity Dashboard (filterable)</li>
-      <li>Child Patterns Dashboard with trend analysis</li>
-      <li>Geospatial heatmaps</li>
-    </ul>
-
-    <p><strong>Data Engineering:</strong></p>
-    <ul>
-      <li>Cleaned health datasets from 1970–2022</li>
-      <li>Mapped historical & comparative data</li>
-      <li>Identified hotspots like Papua New Guinea & Yemen</li>
-    </ul>
-
-    <p><strong>Tech Stack:</strong> Python, Pandas, Tableau, Power BI, Geospatial Analysis, Excel</p>
-    <p><strong>Impact:</strong> Enabled better policymaking through interactive visualizations and real-world data insights.</p>
-    <p><strong>Keywords:</strong> Python, Pandas, Tableau, Geospatial, Data Cleansing</p>
-  </div>
-
-  <!-- Project 3 -->
-  <div class="card">
-    <h3>AI-Powered Fraud Detection in Banking</h3>
-    <p><strong>Type:</strong> Academic Project</p>
-    <p><strong>Description:</strong> Designed a real-time AI-driven fraud detection system replacing rule-based methods with ML models for proactive prediction, pattern recognition, and explainable AI.</p>
-
-    <p><strong>Core Features:</strong></p>
-    <ul>
-      <li>Real-Time Monitoring (<300ms latency)</li>
-      <li>Supervised + Unsupervised ML</li>
-      <li>Investigation Module for analyst workflow</li>
-      <li>Explainable AI using SHAP/LIME</li>
-      <li>Risk scoring with instant alerts</li>
-    </ul>
-
-    <p><strong>Technical Highlights:</strong></p>
-    <ul>
-      <li>Continuous Learning via analyst feedback</li>
-      <li>99.99% Uptime – Scalable Microservices</li>
-      <li>Secure: AES-256, TLS 1.3, MFA, RBAC</li>
-      <li>Ethical AI practices with bias mitigation</li>
-    </ul>
-
-    <p><strong>Use Cases:</strong> Real-time fraud monitoring, compliance enforcement (GDPR, AML, CCPA), and financial trust reinforcement.</p>
-    <p><strong>Keywords:</strong> ML, SHAP, LIME, Real-Time Analytics, Compliance</p>
-  </div>
-</section>
-
-  <!-- Leadership & Community Involvement Section -->
-  <section id="leadership" style="padding: 2rem; max-width: 800px; margin: auto; font-family: 'Times New Roman', Times, serif;">
-    <h2 style="text-align: center; font-weight: 700; font-size: 2.2rem; margin-bottom: 2rem; color: #333;">Leadership & Community Involvement</h2>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;">
-
-      <div class="card" style="flex: 1 1 250px; background: #f0f8ff; border-radius: 12px; box-shadow: 0 4px 12px rgb(0 0 0 / 0.1); padding: 1.8rem; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-        <div style="font-size: 3rem; color: #4a90e2; margin-bottom: 1rem; text-align: center;">📊</div>
-        <h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 0.8rem; color: #1a1a1a;">UNT Business Analytics Club</h3>
-        <p style="color: #555; font-size: 1rem; line-height: 1.4;">
-          Active Member since <strong>Jan 2024</strong>. Engaged in seminars, analytics challenges, and peer learning events.
-        </p>
-      </div>
-
-      <div class="card" style="flex: 1 1 250px; background: #fff0f6; border-radius: 12px; box-shadow: 0 4px 12px rgb(0 0 0 / 0.1); padding: 1.8rem; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-        <div style="font-size: 3rem; color: #e94e77; margin-bottom: 1rem; text-align: center;">🏆</div>
-        <h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 0.8rem; color: #1a1a1a;">Ad Mad Competition – Winner (Hyderabad, 2022)</h3>
-        <p style="color: #555; font-size: 1rem; line-height: 1.4;">
-          Led a creative ad campaign addressing a social challenge, emphasizing innovation and marketing insight.
-        </p>
-      </div>
-
-      <div class="card" style="flex: 1 1 250px; background: #e8f6f3; border-radius: 12px; box-shadow: 0 4px 12px rgb(0 0 0 / 0.1); padding: 1.8rem; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-        <div style="font-size: 3rem; color: #34a853; margin-bottom: 1rem; text-align: center;">🏊‍♂️</div>
-        <h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 0.8rem; color: #1a1a1a;">National-Level Swimmer</h3>
-        <p style="color: #555; font-size: 1rem; line-height: 1.4;">
-          Represented school and undergraduate college at national swim meets, demonstrating discipline, competitive spirit, and time management.
-        </p>
-      </div>
-
-    </div>
-  </section>
-    
-  </main>
-  
-<!-- Footer -->
-<footer style="background-color: #0f2027; color: white; padding: 1.5rem 0; text-align: center;">
-  <div style="font-size: 1.6rem; margin-bottom: 0.5rem;">
-    <a href="https://www.linkedin.com/in/harshitha-sreiya-palaparthi-4434b4340" target="_blank" class="social-link" title="Connect on LinkedIn">
-      <i class="fab fa-linkedin"></i>
-    </a>
-    <a href="mailto:harshithasrieya@gmail.com" class="social-link" title="Send an Email">
-      <i class="fas fa-envelope"></i>
-    </a>
-  </div>
-  <p style="margin: 0.5rem 0;">Developed & deployed by Harshitha — <i class="fab fa-github"></i> open-source passion</p>
-  <p id="datetime" style="font-size: 0.85rem; color: #ccc;"></p>
-</footer>
-  
-  <script>
-    const navLinks = document.querySelectorAll("nav a");
-    const sections = document.querySelectorAll("main section");
-
-    navLinks.forEach(link => {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-
-        navLinks.forEach(l => l.classList.remove("active"));
-        this.classList.add("active");
-
-        sections.forEach(sec => {
-          sec.classList.remove("active");
-          sec.style.display = "none";
-        });
-
-        const target = document.querySelector(this.getAttribute("href"));
-        if (target) {
-          target.classList.add("active");
-          target.style.display = "block";
-        }
-      });
-    });
-
-    // Accordion logic (if used)
-    const accordions = document.querySelectorAll(".accordion-header");
-    accordions.forEach(header => {
-      header.addEventListener("click", () => {
-        const item = header.parentElement;
-        item.classList.toggle("active");
-      });
-    });
-  </script>
 </body>
 </html>
