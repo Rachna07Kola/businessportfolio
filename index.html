@@ -18,21 +18,36 @@ body, html {
 }
 
 /* Background GIF */
+body {
+  margin: 0;
+  height: 100vh;
+  position: relative; /* Needed to position ::before */
+  overflow: hidden;
+}
+
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: url('https://cdn.dribbble.com/userupload/35540897/file/original-7b9335903fdfa34d29222e2b4faccd5b.gif') no-repeat center center/cover;
   filter: brightness(0.35);
-  z-index: -2;
+  z-index: -1;
   animation: bgFade 30s ease-in-out infinite alternate;
 }
 
-/* Slow fade animation on background */
+/* Example fade animation */
 @keyframes bgFade {
-  0% { filter: brightness(0.35); }
-  100% { filter: brightness(0.45); }
+  0% {
+    filter: brightness(0.35);
+  }
+  50% {
+    filter: brightness(0.6);
+  }
+  100% {
+    filter: brightness(0.35);
+  }
 }
+
 
 /* Dark overlay for better text contrast */
 body::after {
@@ -81,7 +96,7 @@ nav#navbar a.active::after {
   transform: translateX(-50%);
   width: 6px;
   height: 6px;
-  background-color: #0fd8d8;
+  background-color: #0fd8d8;pr
   border-radius: 50%;
   animation: pulse 1s infinite ease-in-out;
 }
@@ -144,6 +159,15 @@ nav#navbar a.active::after {
   gap: 40px;
   align-items: flex-start;
   margin-bottom: 40px;
+}
+  @media (max-width: 768px) {
+  .project-flex {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .gif-container, .project-block {
+    flex: 1 1 100%;
+  }
 }
 
 /* GIF container */
@@ -564,7 +588,27 @@ nav#navbar a.active::after {
 </section>
 
 
+<script>
+  const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("#navbar a");
 
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 100;
+    if (pageYOffset >= sectionTop) {
+      current = section.getAttribute("id");
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === `#${current}`) {
+      link.classList.add("active");
+    }
+  });
+});
+
+</script>
 
 
 </body>
