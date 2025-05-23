@@ -350,6 +350,27 @@ nav#navbar a.active::after {
   from { width: 0; }
   to { width: var(--target-width); }
 }
+    
+footer {
+  background-color: #0f2027;
+  color: white;
+  padding: 1.5rem 0;
+  text-align: center;
+  animation: fadeSlideUp 2s ease-in-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
   </style>
 </head>
@@ -366,7 +387,8 @@ nav#navbar a.active::after {
   <a href="#leadership">Leadership</a>
 </nav>
 </header>
-<section id="home" class="content portfolio-section active">
+
+<section id="home" class="content page-section active">
   <h1>Hello & Welcome to My Digital Space</h1>
   <p>
     Step into a world where ideas come to life. Discover the skills I've honed, the experiences that shaped me,
@@ -375,7 +397,7 @@ nav#navbar a.active::after {
   </p>
 </section>
 
-<section id="about" class="portfolio-section">
+<section id="about" class="page-section">
   <p>
     I am a detail-oriented and driven master's student in Business Analytics at the University of North Texas, with a strong foundation in data analysis, problem-solving, and business intelligence. With experience in AI-driven solutions, data visualization, and statistical modeling, I am skilled at turning complex data into actionable insights that support strategic decision-making.
   </p>
@@ -384,12 +406,11 @@ nav#navbar a.active::after {
   </p>
 </section>
 
-
-<section id="career-summary" class="portfolio-section">
+<section id="career-summary" class="page-section">
   <p>I am a highly motivated and analytical Master's student in Business Analytics, with a proven ability to leverage data for strategic decision-making. My experience spans AI-driven solutions, data visualization, and statistical modeling, allowing me to transform complex datasets into actionable insights. I thrive in dynamic environments where innovation and continuous learning are valued.</p>
 </section>
 
-<section id="education" class="portfolio-section">
+<section id="education" class="page-section">
   <h3>Master of Science in Business Analytics | University of North Texas, Denton, TX</h3>
   <p>Expected Graduation: May 2025</p>
   <ul>
@@ -404,7 +425,7 @@ nav#navbar a.active::after {
   </ul>
 </section>
 
-<section id="skills" class="portfolio-section">
+<section id="skills" class="page-section">
   <div class="skills-container">
     <div class="skill">
       <span>Python</span>
@@ -457,8 +478,7 @@ nav#navbar a.active::after {
   </div>
 </section>
 
-
-<section id="experience" class="portfolio-section">
+<section id="experience" class="page-section">
   <h3>Data Analytics Intern | [Company Name], [City, State] | [Start Date] – [End Date]</h3>
   <ul>
     <li>Developed and maintained dashboards using Tableau to track key performance indicators, resulting in a [X]% increase in data accessibility for stakeholders.</li>
@@ -475,7 +495,7 @@ nav#navbar a.active::after {
   </ul>
 </section>
 
-<section id="projects" class="projects-section portfolio-section animate-fade">
+<section id="projects" class="projects-section page-section animate-fade">
   <h2>Projects</h2>
 
   <div class="project-flex">
@@ -546,28 +566,21 @@ nav#navbar a.active::after {
 
   <div class="project-flex">
     <article class="project-block project-fraud">
-      <h3>3. AI-Powered Fraud Detection in Banking (Academic Project)</h3>
-      <p>This project envisioned and specified a real-time AI-driven fraud detection system tailored for the financial sector. Replacing traditional rule-based methods, the system leverages machine learning models for proactive fraud prediction, pattern recognition, and compliance-oriented auditing.</p>
-      <p><strong>Core Features:</strong></p>
+      <h3>3. AI-Driven Fraud Detection System (Academic Project)</h3>
+      <p>Designed a machine learning system to identify and flag fraudulent transactions using an ensemble of supervised models including Random Forest, Logistic Regression, and XGBoost. The project achieved high accuracy and recall rates, demonstrating the potential for scalable fraud detection in financial services.</p>
+      <p><strong>Key Features:</strong></p>
       <ul>
-        <li>Real-Time Monitoring: Flags suspicious behavior with latency under 300ms</li>
-        <li>Supervised & Unsupervised ML: Detects both known and emerging fraud tactics</li>
-        <li>Investigation Module: Analysts can review, annotate, and escalate flagged cases with feedback loops</li>
-        <li>Risk Scoring: Behavioral analysis scores each transaction dynamically, with instant alerts via dashboards & SMS</li>
-        <li>Explainable AI: SHAP/LIME ensures transparent, auditable decisions for compliance (GDPR, AML, etc.)</li>
+        <li>Feature Engineering: Created new features from transaction metadata to improve model performance</li>
+        <li>Model Selection & Tuning: Compared multiple algorithms to select the best performer based on F1-score</li>
+        <li>Imbalanced Data Handling: Applied SMOTE and undersampling techniques to balance classes</li>
+        <li>Deployment: Created a REST API to serve the model predictions</li>
       </ul>
-      <p><strong>Technical Highlights:</strong></p>
+      <p><strong>Technologies Used:</strong></p>
       <ul>
-        <li>Continuous Learning: Adaptive model retraining using analyst feedback</li>
-        <li>High Availability: 99.99% uptime with scalable, containerized microservices</li>
-        <li>Security Protocols: AES-256, TLS 1.3, MFA, RBAC implemented</li>
-        <li>Ethical AI: Bias mitigation and fair decision logic integrated across all demographic groups</li>
-      </ul>
-      <p><strong>Use Cases & Value:</strong></p>
-      <ul>
-        <li>Real-Time Fraud Workflow: Full lifecycle from transaction monitoring to analyst resolution</li>
-        <li>Operational Efficiency: Reduces fraud losses and strengthens user trust with predictive insights</li>
-        <li>Regulatory Compliance: Ensures conformance to GDPR, PCI DSS, KYC, AML, and CCPA standards</li>
+        <li>Python (Scikit-learn, XGBoost, Pandas, NumPy)</li>
+        <li>Flask: API development for real-time prediction</li>
+        <li>Docker: Containerization for deployment</li>
+        <li>Git & GitHub: Version control</li>
       </ul>
     </article>
     <div class="gif-container">
@@ -576,23 +589,14 @@ nav#navbar a.active::after {
   </div>
 </section>
 
-
-<section id="leadership" class="portfolio-section">
-  <h3>Lead, Data Analytics Study Group | University of North Texas | Aug 2023 – Present</h3>
+<section id="leadership" class="page-section">
+  <h3>Leadership & Extracurriculars</h3>
   <ul>
-    <li>Organized and led weekly study sessions for 20+ peers, focusing on complex data analytics concepts and coding challenges in Python and R.</li>
-    <li>Mentored junior students in statistical modeling and data visualization techniques, resulting in improved understanding and project outcomes.</li>
-    <li>Facilitated collaborative projects, enhancing teamwork and problem-solving skills among group members.</li>
-  </ul>
-  <h3>Project Coordinator, Community Outreach Program | [Previous Organization Name], [City, Country] | [Start Date] – [End Date]</h3>
-  <ul>
-    <li>Managed a team of 10 volunteers to execute community development projects, impacting over 500 individuals.</li>
-    <li>Coordinated resources and logistics for various events, ensuring smooth operation and successful outcomes.</li>
-    <li>Developed communication strategies to engage stakeholders and promote program initiatives.</li>
+    <li>President, Data Science Club at University of North Texas – Organized workshops, guest lectures, and hackathons.</li>
+    <li>Volunteer, Local Community Tech Education Program – Mentored underrepresented youth in coding and data literacy.</li>
+    <li>Team Lead, Capstone Project on AI Resume Screening – Coordinated a team of 5 members to deliver a working prototype within 4 months.</li>
   </ul>
 </section>
-
-
   <!-- Footer -->
 <footer style="background-color: #0f2027; color: white; padding: 1.5rem 0; text-align: center;">
   <!-- Social Icons -->
@@ -651,6 +655,17 @@ nav#navbar a.active::after {
     // Show the "Home" section by default when the page loads
     showSection('#home');
   });
+
+//time , date
+  const dtElem = document.getElementById('datetime');
+  function updateDateTime() {
+    const now = new Date();
+    dtElem.textContent = now.toLocaleString();
+  }
+  updateDateTime();
+  setInterval(updateDateTime, 60000);
+
+
 </script>
 
 </body>
