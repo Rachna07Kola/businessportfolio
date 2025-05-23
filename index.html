@@ -10,7 +10,7 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Times New Roman', Times, serif;
       overflow-x: hidden;
     }
     /* Background GIF */
@@ -101,6 +101,78 @@
       padding: 80px 20px 40px;
       text-align: center;
     }
+/* General Reset & Base */
+/* GIF Container */
+.gif-container {
+  flex: 1 1 400px;
+  text-align: center;
+  padding: 20px;
+}
+
+.gif-container img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Project Section */
+.projects-section {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* Section Title */
+.projects-section h2 {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 40px;
+  color: #222;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+/* Project Block */
+.project-block {
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #eee;
+}
+
+.project-block h3 {
+  color: #004aad;
+  margin-bottom: 10px;
+}
+
+.project-block p {
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.project-block ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.project-block ul li {
+  margin-bottom: 6px;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .projects-section {
+    padding: 20px 15px;
+  }
+
+  .gif-container img {
+    max-width: 90%;
+  }
+}
 
   </style>
 </head>
@@ -117,9 +189,62 @@
 </nav>
 
 <div class="content">
-  <h1>Welcome to My Portfolio</h1>
-  <p>Explore my skills, experience, and projects while enjoying this animated background.</p>
+  <h1>Hello & Welcome to My Digital Space</h1>
+  <p>Step into a world where ideas come to life. Discover the skills I've honed, the experiences that shaped me, and the projects that showcase my passion for technology and innovation — all set against a dynamic, animated backdrop that reflects the energy I bring to every challenge.</p>
 </div>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div style="flex: 1 1 400px; text-align: center;">
+  <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" 
+       alt="Work Mood GIF" 
+       style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);" />
+</div>
+
+<div style="padding: 20px; font-family: Arial, sans-serif; color: #333;">
+  <h2 style="text-align: center;">Projects</h2>
+
+  <div style="margin-bottom: 40px;">
+    <h3>1. Hiring Assistant AI – Agentic Resume Screening System</h3>
+    <p><strong>Objective:</strong> A lightweight, privacy-compliant, offline RAG-powered AI assistant that streamlines hiring while ensuring fairness.</p>
+    <ul>
+      <li><strong>Resume Parsing:</strong> PyMuPDF-based extraction</li>
+      <li><strong>Semantic Matching:</strong> SentenceTransformers embeddings + in-memory similarity</li>
+      <li><strong>Hybrid Scoring:</strong> Combines embeddings with rubric logic using Pandas</li>
+      <li><strong>Recruiter Interaction:</strong> Powered by quantized Mistral-7B-Instruct via ctransformers</li>
+      <li><strong>Feedback Loop:</strong> Recruiter-driven adaptive ranking and logic updates</li>
+    </ul>
+    <p><strong>Technologies:</strong> Python, Streamlit, PyMuPDF, SentenceTransformers, Pandas, ctransformers, RAG</p>
+    <p><strong>Key Outcomes:</strong> Automated triage, transparency in scoring, offline secure ops, adaptive feedback.</p>
+  </div>
+
+  <div style="margin-bottom: 40px;">
+    <h3>2. Visualizing Global Trends in Child Malnutrition</h3>
+    <p><strong>Overview:</strong> Created interactive dashboards from global datasets to analyze and combat child malnutrition.</p>
+    <ul>
+      <li><strong>Dashboards:</strong> Severity by geography/gender/year, pattern trends, heatmaps</li>
+      <li><strong>Data Handling:</strong> Cleaned massive datasets (1970–2022), resolved inconsistencies</li>
+      <li><strong>Hotspot Analysis:</strong> Highlighted regions like Papua New Guinea & Yemen</li>
+    </ul>
+    <p><strong>Tools & Tech:</strong> Python (Pandas, NumPy), Tableau/Power BI, Excel/Sheets</p>
+    <p><strong>Insights:</strong> Enabled data-driven decisions for health policy and intervention.</p>
+  </div>
+
+  <div style="margin-bottom: 40px;">
+    <h3>3. AI-Powered Fraud Detection in Banking</h3>
+    <p><strong>Purpose:</strong> Design of an AI-driven system for proactive fraud detection and regulatory compliance in banking.</p>
+    <ul>
+      <li><strong>Real-Time Monitoring:</strong> <300ms latency fraud alerts</li>
+      <li><strong>ML Techniques:</strong> Supervised + unsupervised models with feedback retraining</li>
+      <li><strong>Explainability:</strong> SHAP/LIME for transparent decisions</li>
+      <li><strong>Security:</strong> AES-256, TLS 1.3, MFA, RBAC compliance</li>
+    </ul>
+    <p><strong>Stack:</strong> Containerized microservices, adaptive ML pipeline, compliance frameworks</p>
+    <p><strong>Outcomes:</strong> Improved fraud detection, regulatory alignment, and customer trust.</p>
+  </div>
+</div>
+</section>
+
 
 </body>
 </html>
