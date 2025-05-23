@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio</title>
   <style>
-   
 /* Reset */
 body, html {
   margin: 0;
@@ -14,7 +13,7 @@ body, html {
   font-family: 'Times New Roman', Times, serif;
   overflow-x: hidden;
   color: #eee;
-  background: #222;
+  background: #fff;
 }
 
 /* Background GIF */
@@ -36,11 +35,11 @@ body::before {
 
 /* Dark overlay for better text contrast */
 body::after {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0,0,0,0.4);
-  z-index: -1;
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8); /* White overlay with some transparency */
+  z-index: -1;
 }
 
 /* Navigation Bar */
@@ -110,12 +109,12 @@ nav#navbar a.active::after {
 }
 
 /* Initially hide all sections except home */
-.portfolio-section {
+.page-section {
   display: none;
 }
 
 /* Display the active section */
-.portfolio-section.active {
+.page-section.active {
   display: block;
 }
 
@@ -352,7 +351,6 @@ nav#navbar a.active::after {
   to { width: var(--target-width); }
 }
 
-
   </style>
 </head>
 <body>
@@ -378,7 +376,6 @@ nav#navbar a.active::after {
 </section>
 
 <section id="about" class="portfolio-section">
-  <h2>About Me</h2>
   <p>
     I am a detail-oriented and driven master's student in Business Analytics at the University of North Texas, with a strong foundation in data analysis, problem-solving, and business intelligence. With experience in AI-driven solutions, data visualization, and statistical modeling, I am skilled at turning complex data into actionable insights that support strategic decision-making.
   </p>
@@ -389,12 +386,10 @@ nav#navbar a.active::after {
 
 
 <section id="career-summary" class="portfolio-section">
-  <h2>Career Summary</h2>
   <p>I am a highly motivated and analytical Master's student in Business Analytics, with a proven ability to leverage data for strategic decision-making. My experience spans AI-driven solutions, data visualization, and statistical modeling, allowing me to transform complex datasets into actionable insights. I thrive in dynamic environments where innovation and continuous learning are valued.</p>
 </section>
 
 <section id="education" class="portfolio-section">
-  <h2>Education</h2>
   <h3>Master of Science in Business Analytics | University of North Texas, Denton, TX</h3>
   <p>Expected Graduation: May 2025</p>
   <ul>
@@ -410,7 +405,6 @@ nav#navbar a.active::after {
 </section>
 
 <section id="skills" class="portfolio-section">
-  <h2>Technical & Analytical Skills</h2>
   <div class="skills-container">
     <div class="skill">
       <span>Python</span>
@@ -465,7 +459,6 @@ nav#navbar a.active::after {
 
 
 <section id="experience" class="portfolio-section">
-  <h2>Experience</h2>
   <h3>Data Analytics Intern | [Company Name], [City, State] | [Start Date] – [End Date]</h3>
   <ul>
     <li>Developed and maintained dashboards using Tableau to track key performance indicators, resulting in a [X]% increase in data accessibility for stakeholders.</li>
@@ -585,7 +578,6 @@ nav#navbar a.active::after {
 
 
 <section id="leadership" class="portfolio-section">
-  <h2>Leadership</h2>
   <h3>Lead, Data Analytics Study Group | University of North Texas | Aug 2023 – Present</h3>
   <ul>
     <li>Organized and led weekly study sessions for 20+ peers, focusing on complex data analytics concepts and coding challenges in Python and R.</li>
@@ -599,6 +591,29 @@ nav#navbar a.active::after {
     <li>Developed communication strategies to engage stakeholders and promote program initiatives.</li>
   </ul>
 </section>
+
+
+  <!-- Footer -->
+<footer style="background-color: #0f2027; color: white; padding: 1.5rem 0; text-align: center;">
+  <!-- Social Icons -->
+  <div style="font-size: 1.6rem; margin-bottom: 0.5rem;">
+    <!-- LinkedIn -->
+    <a href="www.linkedin.com/in/harshitha-sreiya-palaparthi-4434b4340" target="_blank" style="color: white; margin: 0 1rem;">
+      <i class="fab fa-linkedin"></i>
+    </a>
+
+    <!-- Gmail -->
+    <a href="harshithasrieya@gmail.com" style="color: white; margin: 0 1rem;">
+      <i class="fas fa-envelope"></i>
+    </a>
+  </div>
+
+  <!-- Custom Text -->
+  <p style="margin: 0.5rem 0;">Made with <i class="fab fa-github"></i> by Harshitha</p>
+
+  <!-- Current Date and Time -->
+  <p id="datetime" style="font-size: 0.85rem; color: #ccc;"></p>
+</footer>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
