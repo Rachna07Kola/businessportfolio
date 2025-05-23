@@ -234,6 +234,112 @@ nav#navbar a.active::after {
   border-bottom: 2px solid #ddd;
   padding-bottom: 10px;
 }
+/* ABOUT ME SECTION STYLING */
+#about {
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #f0f8ff;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 60px auto;
+  animation: fadeInGlow 2s ease-in-out forwards;
+  opacity: 0;
+  transform: translateY(40px);
+  box-shadow: 0 0 15px rgba(173, 216, 230, 0.3);
+}
+
+/* Glowing Animation */
+@keyframes fadeInGlow {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+    box-shadow: 0 0 0px rgba(173, 216, 230, 0);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 15px rgba(173, 216, 230, 0.6);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 0 25px rgba(173, 216, 230, 0.7);
+  }
+}
+
+#about h2 {
+  font-size: 36px;
+  color: #00f5d4;
+  text-shadow: 0 0 10px rgba(0, 245, 212, 0.6);
+  margin-bottom: 20px;
+}
+
+#about p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #e0f7fa;
+  max-width: 800px;
+  margin: 0 auto 20px;
+}
+/* SKILLS SECTION STYLING */
+#skills {
+  background: #1b003b;
+  padding: 60px 20px;
+  color: #f5f5f5;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#skills h2 {
+  font-size: 36px;
+  color: #d4a5ff;
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px rgba(212, 165, 255, 0.4);
+}
+
+.skills-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.skill {
+  margin-bottom: 20px;
+}
+
+.skill span {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  color: #f0e6ff;
+}
+
+.progress {
+  background-color: #330066;
+  border-radius: 25px;
+  overflow: hidden;
+  height: 22px;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #9b30ff, #c154c1);
+  height: 100%;
+  line-height: 22px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+  padding-right: 10px;
+  border-radius: 25px;
+  width: 0;
+  animation: fillProgress 2s ease forwards;
+}
+
+@keyframes fillProgress {
+  from { width: 0; }
+  to { width: var(--target-width); }
+}
 
 
   </style>
@@ -242,7 +348,7 @@ nav#navbar a.active::after {
 <header>
 <nav id="navbar">
   <a href="#home" class="active">Home</a>
-  <a href="#about" class="active">About Me</a>
+  <a href="#about">About Me</a>
   <a href="#career-summary">Career Summary</a>
   <a href="#education">Education</a>
   <a href="#skills">Skills</a>
@@ -251,37 +357,107 @@ nav#navbar a.active::after {
   <a href="#leadership">Leadership</a>
 </nav>
 </header>
-
-<!-- Hero Section -->
-  
-<!-- Home Section -->
-
+<!-- HOME SECTION -->
 <section id="home" class="content">
   <h1>Hello & Welcome to My Digital Space</h1>
   <p>
-    Step into a world where ideas come to life. Discover the skills I've honed,
-    the experiences that shaped me, and the projects that showcase my passion
-    for technology and innovation — all set against a dynamic, animated backdrop
-    that reflects the energy I bring to every challenge.
+    Step into a world where ideas come to life. Discover the skills I've honed, the experiences that shaped me,
+    and the projects that showcase my passion for technology and innovation — all set against a dynamic, animated
+    backdrop that reflects the energy I bring to every challenge.
   </p>
 </section>
 
-<!-- About Me Section -->
+<!-- ABOUT ME SECTION -->
+<section id="about">
+  <h2>About Me</h2>
+  <p>
+    I am a detail-oriented and driven master's student in Business Analytics at the University of North Texas, with a strong foundation in data analysis, problem-solving, and business intelligence. With experience in AI-driven solutions, data visualization, and statistical modeling, I am skilled at turning complex data into actionable insights that support strategic decision-making.
+  </p>
+  <p>
+    My hands-on work includes projects in malnutrition analytics, AI-powered hiring systems, and fraud detection, showcasing my ability to blend technical expertise with real-world impact. I am proficient in Python, Tableau, SQL, and cloud technologies, and passionate about leveraging data to drive business growth and innovation.
+  </p>
+</section>
 
-<!-- Career Summary Section -->
 
-<!-- Education Section -->
+<!--  CAREER SUMMARY SECTION -->
+<section id="career-summary">
+  <h2>Career Summary</h2>
+  <p> <!-- Career summary details --> </p>
+</section>
 
-<!-- Skills Section -->
+<!-- EDUCATION SECTION -->
+<section id="education">
+  <h2>Education</h2>
+  <p> <!-- Education content --> </p>
+</section>
 
-<!-- Experience Section -->
+<!-- SKILLS SECTION  -->
+<section id="skills">
+  <h2>Technical & Analytical Skills</h2>
+  <div class="skills-container">
+    <div class="skill">
+      <span>Python</span>
+      <div class="progress"><div class="progress-bar" style="width: 90%;">90%</div></div>
+    </div>
+    <div class="skill">
+      <span>NumPy</span>
+      <div class="progress"><div class="progress-bar" style="width: 88%;">88%</div></div>
+    </div>
+    <div class="skill">
+      <span>Pandas</span>
+      <div class="progress"><div class="progress-bar" style="width: 89%;">89%</div></div>
+    </div>
+    <div class="skill">
+      <span>R</span>
+      <div class="progress"><div class="progress-bar" style="width: 85%;">85%</div></div>
+    </div>
+    <div class="skill">
+      <span>Power BI</span>
+      <div class="progress"><div class="progress-bar" style="width: 82%;">82%</div></div>
+    </div>
+    <div class="skill">
+      <span>Tableau</span>
+      <div class="progress"><div class="progress-bar" style="width: 87%;">87%</div></div>
+    </div>
+    <div class="skill">
+      <span>MySQL</span>
+      <div class="progress"><div class="progress-bar" style="width: 86%;">86%</div></div>
+    </div>
+    <div class="skill">
+      <span>MS Excel</span>
+      <div class="progress"><div class="progress-bar" style="width: 90%;">90%</div></div>
+    </div>
+    <div class="skill">
+      <span>Big Data</span>
+      <div class="progress"><div class="progress-bar" style="width: 75%;">75%</div></div>
+    </div>
+    <div class="skill">
+      <span>NoSQL</span>
+      <div class="progress"><div class="progress-bar" style="width: 78%;">78%</div></div>
+    </div>
+    <div class="skill">
+      <span>MongoDB</span>
+      <div class="progress"><div class="progress-bar" style="width: 80%;">80%</div></div>
+    </div>
+    <div class="skill">
+      <span>Google Cloud Platform (GCP)</span>
+      <div class="progress"><div class="progress-bar" style="width: 80%;">80%</div></div>
+    </div>
+  </div>
+</section>
 
-<!-- Leadership Section -->
 
+<!--EXPERIENCE SECTION -->
+<section id="experience">
+  <h2>Experience</h2>
+  <p> <!-- Work experience --> </p>
+</section>
 
-<!-- Project  Section -->
-
+<!-- PROJECTS SECTION  -->
+<!-- ========== PROJECTS SECTION ========== -->
 <section id="projects" class="projects-section animate-fade">
+  <h2>Projects</h2>
+
   <div class="project-flex">
     <article class="project-block project-hiring">
       <h3>1. Hiring Assistant AI – Agentic Resume Screening System (Academic Project)</h3>
@@ -379,6 +555,16 @@ nav#navbar a.active::after {
     </div>
   </div>
 </section>
+
+
+<!--LEADERSHIP SECTION-->
+<section id="leadership">
+  <h2>Leadership</h2>
+  <p> <!-- Leadership experience --> </p>
+</section>
+
+
+
 
 
 </body>
