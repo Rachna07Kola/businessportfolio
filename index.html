@@ -20,31 +20,6 @@ body, html {
   position: relative;
 }
 
-/* =========================
-   BACKGROUND GIF & OVERLAY
-========================= */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: url('https://cdn.dribbble.com/userupload/35540897/file/original-7b9335903fdfa34d29222e2b4faccd5b.gif') no-repeat center center / cover;
-  filter: brightness(0.35);
-  z-index: -2;
-  animation: bgFade 30s ease-in-out infinite alternate;
-}
-
-@keyframes bgFade {
-  0% { filter: brightness(0.35); }
-  100% { filter: brightness(0.45); }
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0,0,0,0.5);
-  z-index: -1;
-}
 
 /* =========================
    NAVIGATION BAR
@@ -416,6 +391,51 @@ footer {
     transform: translateY(0);
   }
 }
+/* =========================
+   HOME SECTION
+========================= */
+#home {
+  position: relative;
+  min-height: 100vh; /* full viewport height */
+  background: url('https://cdn.dribbble.com/userupload/35540897/file/original-7b9335903fdfa34d29222e2b4faccd5b.gif') no-repeat center center / cover;
+  overflow: hidden;
+  z-index: 0;
+}
+
+#home::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35); /* dark overlay for contrast */
+  z-index: 1;
+}
+
+#home .text-block { 
+  background: rgba(255, 255, 255, 0.15); /* very light transparent white */
+  color: #eee;
+  padding: 20px;
+  border-radius: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Animation for home section text fade-in and slide-up */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animation to home section text block */
+#home .text-block {
+  animation: fadeIn 2s ease-in-out forwards;
+  opacity: 0; /* start hidden for animation */
+}
 
   </style>
 </head>
@@ -434,12 +454,14 @@ footer {
 </header>
 
 <section id="home" class="content page-section active">
-  <h1>Hello & Welcome to My Digital Space</h1>
+  <div class="text-block">
+   <h1>Hello & Welcome to My Digital Space</h1>
   <p>
     Step into a world where ideas come to life. Discover the skills I've honed, the experiences that shaped me,
     and the projects that showcase my passion for technology and innovation — all set against a dynamic, animated
     backdrop that reflects the energy I bring to every challenge.
   </p>
+   </div>
 </section>
 
 <section id="about" class="page-section">
