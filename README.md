@@ -1,114 +1,107 @@
+# Harshitha Sreiya Palaparthi
+
+**Business Analyst Graduate | Financial Analyst**  
+📧 harshithasrieya@gmail.com  
+🔗 [LinkedIn](https://www.linkedin.com/in/harshitha-sreiya-palaparthi-4434b4340)
 
 ---
 
-## 👩‍💻 About Me
+## 👋 About Me
 
-🎓 I’m a Master's student in **Business Analytics** at the University of North Texas, passionate about turning complex data into crystal-clear insights. Whether it's forecasting sales using ML, visualizing global malnutrition trends, or designing AI-powered fraud detection — I'm all about **data with impact**.
+I’m Harshitha, a detail-oriented and driven M.S. Business Analytics student at the **University of North Texas**, with a strong foundation in data analysis, business intelligence, and AI-powered decision systems. I specialize in transforming complex datasets into actionable insights to drive strategic outcomes.
 
-💡 With a background in **Commerce and Computer Applications**, I blend business acumen with tech-savviness to solve real-world challenges.
-
-> _“Good analysis is art, science, and empathy — all in one.”_
+My passion lies in using data science and analytics to solve real-world problems, especially in areas like healthcare, hiring, and fraud detection. I bring hands-on expertise with tools like Python, Tableau, SQL, and GCP, and enjoy building solutions that are not only data-smart but also ethical and user-friendly.
 
 ---
 
-## 📚 Education
+## 🎓 Education
 
-### 🎓 University of North Texas (M.S. in Business Analytics)  
-📆 *2023 – 2025* | 🎯 GPA: 3.5 / 4.0  
-**Capstone:** Improved sales forecasts by 15% using ML models  
-**Courses:** Data Mining · Predictive Analysis · Data Visualization · Business Statistics
+**M.S. in Business Analytics**  
+University of North Texas (Expected Dec 2025)  
+GPA: 3.5 / 4.0  
+_Coursework: Data Visualization, Predictive Analytics, Business Statistics_  
+- 📈 *Capstone:* Improved sales forecasts by 15% using ML models
 
-### 🎓 Osmania University (B.Com in Computer Applications)  
-📆 *2020 – 2023* | 🎯 GPA: 4.0 / 4.0  
-Courses in DBMS, MIS, Business Statistics, and Financial Accounting
-
----
-
-## 🧠 Skills at a Glance
-
-| Programming     | Python 🐍 (90%) · R 📊 (85%) · SQL (86%) · MongoDB (80%) |
-|----------------|--------------------------------------------------------|
-| Tools & Tech    | Tableau (87%) · Power BI (82%) · Excel (90%) · GCP (80%) |
-| Data Handling   | Pandas (89%) · NumPy (88%) · NoSQL (78%) · Big Data (75%) |
-| Soft Skills     | Problem Solving 💡 · Communication 🗣️ · Analytical Thinking 🔍 |
+**Bachelor of Commerce (Computer Applications)**  
+Osmania University, India (2020–2023)  
+GPA: 4.0 / 4.0
 
 ---
 
-## 🏆 Certifications & Workshops
+## 💡 Projects
 
-- 🧪 **Entrepreneurship Orientation Program** (NSIC) – Launching & sustaining startups  
-- 🎭 **Ad Mad Competition (Winner)** – Built a creative ad campaign under pressure
+### 📌 [Hiring Assistant AI – Agentic Resume Screening](#)
+> **An AI-driven, privacy-first resume screening system**
 
----
-
-## 💼 Experience Snapshot
-
-### 📊 NSIC – Business Development Intern (May 2022 – Mar 2023)  
-- Evaluated business models for growth & viability  
-- Analyzed market trends and built financial models  
-- Helped small businesses make data-backed decisions
-
-### 🎓 Voice 4 Girls – Data Insights Mentor (Aug 2021 – Mar 2022)  
-- Mentored students & identified learning gaps via surveys  
-- Applied qualitative data analysis for effective teaching  
-- Enhanced engagement, confidence, and problem-solving
+- Built an intelligent offline AI assistant using RAG architecture to screen and rank resumes.
+- Technologies: Python, Streamlit, SentenceTransformers, Pandas, ctransformers (Mistral-7B), PyMuPDF
+- 🛠 Key Features: Resume parsing, semantic matching, dynamic recruiter chat, feedback loop
+- 📉 Reduced time-to-hire and ensured privacy with fully offline architecture
 
 ---
 
-## 🔬 Signature Projects
+### 📌 [Visualizing Global Child Malnutrition](#)
+> **Interactive dashboards revealing health inequalities**
 
-### 🧠 **Hiring Assistant AI – Agentic Resume Screener**
-> Redefining recruitment with offline, RAG-powered AI 🤖
-
-**Built With:** Python · Streamlit · PyMuPDF · SentenceTransformers · Mistral-7B  
-- ✅ Autonomous resume parsing & semantic ranking  
-- 💬 Real-time recruiter interaction using local LLM  
-- 🔐 Privacy-first, fully offline design  
-- 🛠️ Dynamic rubric evolution with feedback loop
-
-📈 **Impact:** Reduced hiring time, improved fairness, zero cloud dependencies
+- Analyzed global datasets from WHO, UNICEF, World Bank
+- Tools: Python, Tableau, Power BI, Excel
+- 🗺 Created dashboards & geospatial heatmaps for targeted decision-making
+- 🏥 Identified critical malnutrition hotspots in countries like Papua New Guinea & Yemen
 
 ---
 
-### 🌍 **Visualizing Global Child Malnutrition**
-> Interactive dashboards for global stakeholders 🌐
+### 📌 [AI-Powered Fraud Detection in Banking](#)
+> **Real-time predictive system for identifying financial fraud**
 
-**Tools:** Tableau · Python · Excel · WHO + UNICEF + World Bank data  
-- 📊 1970–2022 trends by age, gender, geography  
-- 🗺️ Geospatial maps of malnutrition hotspots  
-- 🧼 Cleaned & standardized massive health datasets
-
-🔍 **Outcome:** Empowered actionable decisions on child health inequality
+- Replaced rule-based checks with supervised & unsupervised ML models
+- Technologies: Python, SHAP/LIME, secure APIs
+- 🔍 Delivered under 300ms latency fraud detection with full audit trails
+- 🛡 Ensured compliance (GDPR, AML, PCI DSS) with ethical AI design
 
 ---
 
-### 🏦 **AI-Powered Fraud Detection in Banking**
-> Real-time predictive fraud system with ML + Explainable AI 🛡️
+## 🔧 Technical Skills
 
-**Built With:** Python · SHAP · LIME · Microservices · AES-256  
-- ⚡ Sub-300ms fraud prediction pipeline  
-- 🔍 SHAP/LIME for decision transparency  
-- 🔄 Continuous learning from analyst feedback  
-- 🛡️ GDPR, AML, PCI DSS, CCPA-compliant
-
-🚀 **Result:** Reduced financial risk, real-time intervention, bias mitigation
-
----
-
-## 🌱 Beyond Analytics
-
-- 📊 **UNT Business Analytics Club** – Active Member (since Jan 2024)  
-  Engaging in seminars, challenges & collaborative learning
-
-- 🧠 **Ad Mad Competition (Winner)** – Creative leadership in social issue marketing
-
-- 🏊‍♀️ **National-Level Swimmer** – Competed at national meets; learned discipline & time management
+| Technology        | Proficiency (%) |
+|-------------------|-----------------|
+| **Python**        | 90%             |
+| **Pandas / NumPy**| 88–89%          |
+| **SQL / MySQL**   | 86%             |
+| **Tableau**       | 87%             |
+| **Power BI**      | 82%             |
+| **MS Excel**      | 90%             |
+| **R**             | 85%             |
+| **MongoDB / NoSQL**| 78–80%         |
+| **Big Data**      | 75%             |
+| **Google Cloud**  | 80%             |
 
 ---
 
-## 🤝 Let’s Connect!
+## 💼 Experience
 
-📫 **Email:** [harshithasrieya@gmail.com](mailto:harshithasrieya@gmail.com)  
-🔗 **LinkedIn:** [linkedin.com/in/harshitha-sreiya-palaparthi-4434b4340](https://www.linkedin.com/in/harshitha-sreiya-palaparthi-4434b4340)
+**NSIC – Business Development Intern (2022–2023)**  
+- Analyzed market and financial data to advise small businesses  
+- Built financial models to assess feasibility and growth patterns  
+
+**Voice 4 Girls – Counselor / Data Mentor (2021–2022)**  
+- Conducted counseling & learning analytics to empower underprivileged students  
+- Applied qualitative data techniques to improve teaching strategies  
 
 ---
+
+## 🏅 Certifications & Leadership
+
+- 🏆 **Ad Mad Competition Winner** – Strategic advertising under pressure (Hyderabad, 2022)
+- 💡 **Entrepreneurship Orientation Program** – NSIC, India
+- 🌊 **National-Level Swimmer** – Demonstrated competitive excellence & discipline
+- 📊 **UNT Business Analytics Club** – Active member participating in seminars and data challenges
+
+---
+
+## 📫 Contact
+
+Feel free to reach out via [email](mailto:harshithasrieya@gmail.com) or connect with me on [LinkedIn](https://www.linkedin.com/in/harshitha-sreiya-palaparthi-4434b4340). I’m always open to opportunities, collaborations, and conversations around data, business strategy, and analytics.
+
+---
+
+### ⭐ Let’s turn data into decisions!
