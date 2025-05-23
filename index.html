@@ -1,615 +1,642 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio</title>
-  <style>
-   
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio</title>
+  <style>
+   
 /* Reset */
 body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Times New Roman', Times, serif;
-  overflow-x: hidden;
-  color: #eee;
-  background: #222;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Times New Roman', Times, serif;
+  overflow-x: hidden;
+  color: #eee;
+  background: #222;
 }
 
 /* Background GIF */
-body {
-  margin: 0;
-  height: 100vh;
-  position: relative; /* Needed to position ::before */
-  overflow: hidden;
-}
-
 body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: url('https://cdn.dribbble.com/userupload/35540897/file/original-7b9335903fdfa34d29222e2b4faccd5b.gif') no-repeat center center/cover;
-  filter: brightness(0.35);
-  z-index: -1;
-  animation: bgFade 30s ease-in-out infinite alternate;
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('https://cdn.dribbble.com/userupload/35540897/file/original-7b9335903fdfa34d29222e2b4faccd5b.gif') no-repeat center center/cover;
+  filter: brightness(0.35);
+  z-index: -2;
+  animation: bgFade 30s ease-in-out infinite alternate;
 }
 
-/* Example fade animation */
+/* Slow fade animation on background */
 @keyframes bgFade {
-  0% {
-    filter: brightness(0.35);
-  }
-  50% {
-    filter: brightness(0.6);
-  }
-  100% {
-    filter: brightness(0.35);
-  }
+  0% { filter: brightness(0.35); }
+  100% { filter: brightness(0.45); }
 }
-
 
 /* Dark overlay for better text contrast */
 body::after {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0,0,0,0.4);
-  z-index: -1;
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: -1;
 }
 
 /* Navigation Bar */
 nav#navbar {
-  display: flex;
-  justify-content: center;
-  gap: 35px;
-  background-color: rgba(31, 31, 46, 0.85);
-  padding: 15px 30px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  background-color: rgba(31, 31, 46, 0.85);
+  padding: 15px 30px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
 }
 
 nav#navbar a {
-  color: #ccc;
-  text-decoration: none;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: relative;
-  padding: 8px;
-  transition: color 0.3s ease;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  padding: 8px;
+  transition: color 0.3s ease;
 }
 
 nav#navbar a:hover {
-  color: #0fd8d8;
+  color: #0fd8d8;
 }
 
 nav#navbar a.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 6px;
-  height: 6px;
-  background-color: #0fd8d8;pr
-  border-radius: 50%;
-  animation: pulse 1s infinite ease-in-out;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background-color: #0fd8d8;
+  border-radius: 50%;
+  animation: pulse 1s infinite ease-in-out;
 }
 
 @keyframes pulse {
-  0%, 100% {
-    transform: translateX(-50%) scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: translateX(-50%) scale(1.6);
-    opacity: 0.6;
-  }
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-50%) scale(1.6);
+    opacity: 0.6;
+  }
 }
 
 /* Content Wrapper to avoid navbar overlap */
 .content {
-  padding-top: 80px;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 80px 20px 40px;
-  text-align: center;
-  animation: fadeIn 2s ease-in-out;
-  color: white;
-  font-family: 'Times New Roman', serif;
+  padding-top: 80px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 20px 40px;
+  text-align: center;
+  animation: fadeIn 2s ease-in-out;
+  color: white;
+  font-family: 'Times New Roman', serif;
 }
 
+/* Initially hide all sections except home */
+.portfolio-section {
+  display: none;
+}
+
+/* Display the active section */
+.portfolio-section.active {
+  display: block;
+}
+
+
 @keyframes fadeIn {
-  from {opacity: 0; transform: translateY(20px);}
-  to {opacity: 1; transform: translateY(0);}
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
 }
 
 /* Projects Section */
 .projects-section {
-  position: relative;
-  padding: 40px 20px;
-  max-width: 1000px;
-  margin: 40px auto;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.85);
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
-  color: #333;
-  font-family: 'Times New Roman', serif;
-  overflow: hidden;
+  position: relative;
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 40px auto;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  color: #333;
+  font-family: 'Times New Roman', serif;
+  overflow: hidden;
 }
 
 .projects-section::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format') center center/cover no-repeat;
-  filter: blur(12px) brightness(0.8);
-  z-index: -1;
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format') center center/cover no-repeat;
+  filter: blur(12px) brightness(0.8);
+  z-index: -1;
 }
 
 /* Project Flex container */
 .project-flex {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  align-items: flex-start;
-  margin-bottom: 40px;
-}
-  @media (max-width: 768px) {
-  .project-flex {
-    flex-direction: column;
-    gap: 20px;
-  }
-  .gif-container, .project-block {
-    flex: 1 1 100%;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 40px;
 }
 
 /* GIF container */
 .gif-container {
-  flex: 1 1 400px;
-  text-align: center;
+  flex: 1 1 400px;
+  text-align: center;
 }
 
 .gif-container img {
-  width: 100%;
-  max-width: 400px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
 
 /* Project Block */
 .project-block {
-  position: relative;
-  flex: 2 1 600px;
-  padding: 24px 32px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.8);
-  box-shadow: 0 0 16px rgba(0,0,0,0.1);
-  overflow: hidden;
-  margin-bottom: 40px;
+  position: relative;
+  flex: 2 1 600px;
+  padding: 24px 32px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 0 16px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 40px;
 }
 
 .project-block::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-size: cover;
-  background-position: center;
-  filter: blur(8px) brightness(0.7);
-  opacity: 0.3;
-  z-index: -1;
-  transition: opacity 0.3s ease;
-  border-radius: 16px;
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px) brightness(0.7);
+  opacity: 0.3;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  border-radius: 16px;
 }
 
 .project-block:hover::before {
-  opacity: 0.45;
+  opacity: 0.45;
 }
 
 /* Individual project backgrounds */
 .project-hiring::before {
-  background-image: url('https://images.yourstory.com/cs/wordpress/2018/02/cv_scan_robo.gif');
+  background-image: url('https://images.yourstory.com/cs/wordpress/2018/02/cv_scan_robo.gif');
 }
 
 .project-malnutrition::before {
-  background-image: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format');
+  background-image: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format');
 }
 
 .project-fraud::before {
-  background-image: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format');
+  background-image: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format');
 }
 
 /* Project text styling */
 .project-block h3 {
-  color: #004aad;
-  margin-bottom: 10px;
-  font-size: 20px;
+  color: #004aad;
+  margin-bottom: 10px;
+  font-size: 20px;
 }
 
 .project-block p,
 .project-block ul {
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 10px;
-  color: #222;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  color: #222;
 }
 
 .project-block ul {
-  list-style-type: disc;
-  padding-left: 20px;
+  list-style-type: disc;
+  padding-left: 20px;
 }
 
 .project-block ul li {
-  margin-bottom: 6px;
+  margin-bottom: 6px;
 }
 
 /* Headings */
 .projects-section h2 {
-  text-align: center;
-  font-size: 2em;
-  margin-bottom: 40px;
-  color: #222;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 10px;
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 40px;
+  color: #222;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
 }
 /* ABOUT ME SECTION STYLING */
 #about {
-  padding: 60px 20px;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: #f0f8ff;
-  font-family: 'Segoe UI', sans-serif;
-  text-align: center;
-  border-radius: 12px;
-  max-width: 900px;
-  margin: 60px auto;
-  animation: fadeInGlow 2s ease-in-out forwards;
-  opacity: 0;
-  transform: translateY(40px);
-  box-shadow: 0 0 15px rgba(173, 216, 230, 0.3);
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #f0f8ff;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 60px auto;
+  animation: fadeInGlow 2s ease-in-out forwards;
+  opacity: 0;
+  transform: translateY(40px);
+  box-shadow: 0 0 15px rgba(173, 216, 230, 0.3);
 }
 
 /* Glowing Animation */
 @keyframes fadeInGlow {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-    box-shadow: 0 0 0px rgba(173, 216, 230, 0);
-  }
-  50% {
-    opacity: 0.8;
-    box-shadow: 0 0 15px rgba(173, 216, 230, 0.6);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    box-shadow: 0 0 25px rgba(173, 216, 230, 0.7);
-  }
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+    box-shadow: 0 0 0px rgba(173, 216, 230, 0);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 15px rgba(173, 216, 230, 0.6);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 0 25px rgba(173, 216, 230, 0.7);
+  }
 }
 
 #about h2 {
-  font-size: 36px;
-  color: #00f5d4;
-  text-shadow: 0 0 10px rgba(0, 245, 212, 0.6);
-  margin-bottom: 20px;
+  font-size: 36px;
+  color: #00f5d4;
+  text-shadow: 0 0 10px rgba(0, 245, 212, 0.6);
+  margin-bottom: 20px;
 }
 
 #about p {
-  font-size: 18px;
-  line-height: 1.8;
-  color: #e0f7fa;
-  max-width: 800px;
-  margin: 0 auto 20px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #e0f7fa;
+  max-width: 800px;
+  margin: 0 auto 20px;
 }
 /* SKILLS SECTION STYLING */
 #skills {
-  background: #1b003b;
-  padding: 60px 20px;
-  color: #f5f5f5;
-  text-align: center;
-  font-family: 'Segoe UI', sans-serif;
+  background: #1b003b;
+  padding: 60px 20px;
+  color: #f5f5f5;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 #skills h2 {
-  font-size: 36px;
-  color: #d4a5ff;
-  margin-bottom: 40px;
-  text-shadow: 0 0 10px rgba(212, 165, 255, 0.4);
+  font-size: 36px;
+  color: #d4a5ff;
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px rgba(212, 165, 255, 0.4);
 }
 
 .skills-container {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: left;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
 }
 
 .skill {
-  margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .skill span {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
-  color: #f0e6ff;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  color: #f0e6ff;
 }
 
 .progress {
-  background-color: #330066;
-  border-radius: 25px;
-  overflow: hidden;
-  height: 22px;
+  background-color: #330066;
+  border-radius: 25px;
+  overflow: hidden;
+  height: 22px;
 }
 
 .progress-bar {
-  background: linear-gradient(90deg, #9b30ff, #c154c1);
-  height: 100%;
-  line-height: 22px;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: right;
-  padding-right: 10px;
-  border-radius: 25px;
-  width: 0;
-  animation: fillProgress 2s ease forwards;
+  background: linear-gradient(90deg, #9b30ff, #c154c1);
+  height: 100%;
+  line-height: 22px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+  padding-right: 10px;
+  border-radius: 25px;
+  width: 0;
+  animation: fillProgress 2s ease forwards;
 }
 
 @keyframes fillProgress {
-  from { width: 0; }
-  to { width: var(--target-width); }
+  from { width: 0; }
+  to { width: var(--target-width); }
 }
 
 
-  </style>
+  </style>
 </head>
 <body>
 <header>
 <nav id="navbar">
-  <a href="#home" class="active">Home</a>
-  <a href="#about">About Me</a>
-  <a href="#career-summary">Career Summary</a>
-  <a href="#education">Education</a>
-  <a href="#skills">Skills</a>
-  <a href="#experience">Experience</a>
-  <a href="#projects">Projects</a>
-  <a href="#leadership">Leadership</a>
+  <a href="#home" class="active">Home</a>
+  <a href="#about">About Me</a>
+  <a href="#career-summary">Career Summary</a>
+  <a href="#education">Education</a>
+  <a href="#skills">Skills</a>
+  <a href="#experience">Experience</a>
+  <a href="#projects">Projects</a>
+  <a href="#leadership">Leadership</a>
 </nav>
 </header>
-<!-- HOME SECTION -->
-<section id="home" class="content">
-  <h1>Hello & Welcome to My Digital Space</h1>
-  <p>
-    Step into a world where ideas come to life. Discover the skills I've honed, the experiences that shaped me,
-    and the projects that showcase my passion for technology and innovation — all set against a dynamic, animated
-    backdrop that reflects the energy I bring to every challenge.
-  </p>
+<section id="home" class="content portfolio-section active">
+  <h1>Hello & Welcome to My Digital Space</h1>
+  <p>
+    Step into a world where ideas come to life. Discover the skills I've honed, the experiences that shaped me,
+    and the projects that showcase my passion for technology and innovation — all set against a dynamic, animated
+    backdrop that reflects the energy I bring to every challenge.
+  </p>
 </section>
 
-<!-- ABOUT ME SECTION -->
-<section id="about">
-  <h2>About Me</h2>
-  <p>
-    I am a detail-oriented and driven master's student in Business Analytics at the University of North Texas, with a strong foundation in data analysis, problem-solving, and business intelligence. With experience in AI-driven solutions, data visualization, and statistical modeling, I am skilled at turning complex data into actionable insights that support strategic decision-making.
-  </p>
-  <p>
-    My hands-on work includes projects in malnutrition analytics, AI-powered hiring systems, and fraud detection, showcasing my ability to blend technical expertise with real-world impact. I am proficient in Python, Tableau, SQL, and cloud technologies, and passionate about leveraging data to drive business growth and innovation.
-  </p>
-</section>
-
-
-<!--  CAREER SUMMARY SECTION -->
-<section id="career-summary">
-  <h2>Career Summary</h2>
-  <p> <!-- Career summary details --> </p>
-</section>
-
-<!-- EDUCATION SECTION -->
-<section id="education">
-  <h2>Education</h2>
-  <p> <!-- Education content --> </p>
-</section>
-
-<!-- SKILLS SECTION  -->
-<section id="skills">
-  <h2>Technical & Analytical Skills</h2>
-  <div class="skills-container">
-    <div class="skill">
-      <span>Python</span>
-      <div class="progress"><div class="progress-bar" style="width: 90%;">90%</div></div>
-    </div>
-    <div class="skill">
-      <span>NumPy</span>
-      <div class="progress"><div class="progress-bar" style="width: 88%;">88%</div></div>
-    </div>
-    <div class="skill">
-      <span>Pandas</span>
-      <div class="progress"><div class="progress-bar" style="width: 89%;">89%</div></div>
-    </div>
-    <div class="skill">
-      <span>R</span>
-      <div class="progress"><div class="progress-bar" style="width: 85%;">85%</div></div>
-    </div>
-    <div class="skill">
-      <span>Power BI</span>
-      <div class="progress"><div class="progress-bar" style="width: 82%;">82%</div></div>
-    </div>
-    <div class="skill">
-      <span>Tableau</span>
-      <div class="progress"><div class="progress-bar" style="width: 87%;">87%</div></div>
-    </div>
-    <div class="skill">
-      <span>MySQL</span>
-      <div class="progress"><div class="progress-bar" style="width: 86%;">86%</div></div>
-    </div>
-    <div class="skill">
-      <span>MS Excel</span>
-      <div class="progress"><div class="progress-bar" style="width: 90%;">90%</div></div>
-    </div>
-    <div class="skill">
-      <span>Big Data</span>
-      <div class="progress"><div class="progress-bar" style="width: 75%;">75%</div></div>
-    </div>
-    <div class="skill">
-      <span>NoSQL</span>
-      <div class="progress"><div class="progress-bar" style="width: 78%;">78%</div></div>
-    </div>
-    <div class="skill">
-      <span>MongoDB</span>
-      <div class="progress"><div class="progress-bar" style="width: 80%;">80%</div></div>
-    </div>
-    <div class="skill">
-      <span>Google Cloud Platform (GCP)</span>
-      <div class="progress"><div class="progress-bar" style="width: 80%;">80%</div></div>
-    </div>
-  </div>
+<section id="about" class="portfolio-section">
+  <h2>About Me</h2>
+  <p>
+    I am a detail-oriented and driven master's student in Business Analytics at the University of North Texas, with a strong foundation in data analysis, problem-solving, and business intelligence. With experience in AI-driven solutions, data visualization, and statistical modeling, I am skilled at turning complex data into actionable insights that support strategic decision-making.
+  </p>
+  <p>
+    My hands-on work includes projects in malnutrition analytics, AI-powered hiring systems, and fraud detection, showcasing my ability to blend technical expertise with real-world impact. I am proficient in Python, Tableau, SQL, and cloud technologies, and passionate about leveraging data to drive business growth and innovation.
+  </p>
 </section>
 
 
-<!--EXPERIENCE SECTION -->
-<section id="experience">
-  <h2>Experience</h2>
-  <p> <!-- Work experience --> </p>
+<section id="career-summary" class="portfolio-section">
+  <h2>Career Summary</h2>
+  <p>I am a highly motivated and analytical Master's student in Business Analytics, with a proven ability to leverage data for strategic decision-making. My experience spans AI-driven solutions, data visualization, and statistical modeling, allowing me to transform complex datasets into actionable insights. I thrive in dynamic environments where innovation and continuous learning are valued.</p>
 </section>
 
-<!-- PROJECTS SECTION  -->
-<!-- ========== PROJECTS SECTION ========== -->
-<section id="projects" class="projects-section animate-fade">
-  <h2>Projects</h2>
+<section id="education" class="portfolio-section">
+  <h2>Education</h2>
+  <h3>Master of Science in Business Analytics | University of North Texas, Denton, TX</h3>
+  <p>Expected Graduation: May 2025</p>
+  <ul>
+    <li>Relevant Coursework: Advanced Predictive Analytics, Data Mining, Business Intelligence, Big Data Analytics, Cloud Computing for Business</li>
+    <li>Key Projects: Developed an AI-powered resume screening system, visualized global child malnutrition trends, designed an AI-driven fraud detection system.</li>
+  </ul>
+  <h3>Bachelor of Technology in Computer Science and Engineering | Jawaharlal Nehru Technological University, Kakinada, India</h3>
+  <p>Graduated: May 2022</p>
+  <ul>
+    <li>Relevant Coursework: Data Structures and Algorithms, Database Management Systems, Machine Learning, Web Technologies</li>
+    <li>Awarded for academic excellence (top 10% of class).</li>
+  </ul>
+</section>
 
-  <div class="project-flex">
-    <article class="project-block project-hiring">
-      <h3>1. Hiring Assistant AI – Agentic Resume Screening System (Academic Project)</h3>
-      <p>This intelligent hiring assistant was built to transform traditional recruitment by integrating agentic AI with Retrieval-Augmented Generation (RAG). It autonomously screens and ranks resumes, engages recruiters through dynamic chat, and evolves based on continuous feedback—all in a privacy-first, offline-ready architecture.</p>
-      <p><strong>Objective:</strong> To develop a lightweight, privacy-compliant, fully offline RAG-powered AI assistant that reduces hiring friction, enhances fairness, and adapts to evolving recruiter criteria in real-time.</p>
-      <p><strong>Core Features:</strong></p>
-      <ul>
-        <li>Resume Parsing: PyMuPDF-based extraction from PDFs (resumes & job descriptions)</li>
-        <li>Semantic Matching: SentenceTransformers embeddings + in-memory similarity for context-rich matching</li>
-        <li>Hybrid Scoring: Combines semantic similarity with rubric-based skill match using Pandas</li>
-        <li>Recruiter Interaction: Dynamic conversations powered by quantized Mistral-7B-Instruct model</li>
-        <li>Feedback Loop: Updates scoring logic and rubric based on recruiter input</li>
-      </ul>
-      <p><strong>Technologies:</strong></p>
-      <ul>
-        <li>Python 3.x for backend logic and processing</li>
-        <li>Streamlit: Interface for recruiter interaction</li>
-        <li>PyMuPDF: For text extraction</li>
-        <li>SentenceTransformers: all-MiniLM-L6-v2 embeddings</li>
-        <li>Pandas: Skill rubric matching & hybrid ranking</li>
-        <li>ctransformers: For local inference using quantized Mistral-7B-Instruct</li>
-        <li>RAG: Integrated retrieval + reasoning for enhanced explainability</li>
-        <li>Offline Mode: Fully local, secure, and cloud-free operation</li>
-      </ul>
-      <p><strong>Key Outcomes:</strong></p>
-      <ul>
-        <li>Efficiency: Reduced time-to-hire by automating resume triage and ranking</li>
-        <li>Transparency: Provided clear explanations behind matches and rankings</li>
-        <li>Adaptability: Evolved in real-time based on recruiter input and feedback</li>
-        <li>Privacy-Focused: Local inference ensured no external dependencies</li>
-      </ul>
-    </article>
-    <div class="gif-container">
-      <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" alt="Work Mood GIF" />
-    </div>
-  </div>
-
-  <div class="project-flex">
-    <article class="project-block project-malnutrition">
-      <h3>2. Visualizing Global Trends in Child Malnutrition (Academic Project)</h3>
-      <p>Leveraging global health datasets from WHO, UNICEF, and the World Bank, this project offered a deep dive into malnutrition trends—analyzing stunting, wasting, underweight, and overweight metrics across geography, gender, and age. By transforming complex raw data into interactive dashboards, the project empowered global stakeholders to make informed decisions targeting child health inequalities.</p>
-      <p><strong>Key Deliverables:</strong></p>
-      <ul>
-        <li>Malnutrition Severity Dashboard: Filterable by country, region, gender, and year—offering a 360° view of malnutrition prevalence</li>
-        <li>Child Patterns Dashboard: Trend analysis by age, visualized through scatter plots, time-series, box plots, and stacked area charts</li>
-        <li>Geospatial Heatmaps: Interactive mapping to highlight regional malnutrition disparities</li>
-      </ul>
-      <p><strong>Data Engineering & Insights:</strong></p>
-      <ul>
-        <li>Cleaned & standardized massive health datasets, resolving missing and inconsistent values</li>
-        <li>Mapped historical data (1970–2022) to expose evolving trends across urban-rural lines and genders</li>
-        <li>Identified critical hotspots like Papua New Guinea and Yemen demanding urgent intervention</li>
-      </ul>
-      <p><strong>Tools & Tech Stack:</strong></p>
-      <ul>
-        <li>Python (Pandas, NumPy): For data cleaning, transformation, and wrangling</li>
-        <li>Tableau / Power BI: To build interactive, high-impact dashboards</li>
-        <li>Excel / Google Sheets: Initial validation and exploration</li>
-        <li>Visualization Techniques: Geospatial mapping, trend & comparative analysis, interactive filters</li>
-      </ul>
-    </article>
-    <div class="gif-container">
-      <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" alt="Work Mood GIF" />
-    </div>
-  </div>
-
-  <div class="project-flex">
-    <article class="project-block project-fraud">
-      <h3>3. AI-Powered Fraud Detection in Banking (Academic Project)</h3>
-      <p>This project envisioned and specified a real-time AI-driven fraud detection system tailored for the financial sector. Replacing traditional rule-based methods, the system leverages machine learning models for proactive fraud prediction, pattern recognition, and compliance-oriented auditing.</p>
-      <p><strong>Core Features:</strong></p>
-      <ul>
-        <li>Real-Time Monitoring: Flags suspicious behavior with latency under 300ms</li>
-        <li>Supervised & Unsupervised ML: Detects both known and emerging fraud tactics</li>
-        <li>Investigation Module: Analysts can review, annotate, and escalate flagged cases with feedback loops</li>
-        <li>Risk Scoring: Behavioral analysis scores each transaction dynamically, with instant alerts via dashboards & SMS</li>
-        <li>Explainable AI: SHAP/LIME ensures transparent, auditable decisions for compliance (GDPR, AML, etc.)</li>
-      </ul>
-      <p><strong>Technical Highlights:</strong></p>
-      <ul>
-        <li>Continuous Learning: Adaptive model retraining using analyst feedback</li>
-        <li>High Availability: 99.99% uptime with scalable, containerized microservices</li>
-        <li>Security Protocols: AES-256, TLS 1.3, MFA, RBAC implemented</li>
-        <li>Ethical AI: Bias mitigation and fair decision logic integrated across all demographic groups</li>
-      </ul>
-      <p><strong>Use Cases & Value:</strong></p>
-      <ul>
-        <li>Real-Time Fraud Workflow: Full lifecycle from transaction monitoring to analyst resolution</li>
-        <li>Operational Efficiency: Reduces fraud losses and strengthens user trust with predictive insights</li>
-        <li>Regulatory Compliance: Ensures conformance to GDPR, PCI DSS, KYC, AML, and CCPA standards</li>
-      </ul>
-    </article>
-    <div class="gif-container">
-      <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" alt="Work Mood GIF" />
-    </div>
-  </div>
+<section id="skills" class="portfolio-section">
+  <h2>Technical & Analytical Skills</h2>
+  <div class="skills-container">
+    <div class="skill">
+      <span>Python</span>
+      <div class="progress"><div class="progress-bar" style="width: 90%;">90%</div></div>
+    </div>
+    <div class="skill">
+      <span>NumPy</span>
+      <div class="progress"><div class="progress-bar" style="width: 88%;">88%</div></div>
+    </div>
+    <div class="skill">
+      <span>Pandas</span>
+      <div class="progress"><div class="progress-bar" style="width: 89%;">89%</div></div>
+    </div>
+    <div class="skill">
+      <span>R</span>
+      <div class="progress"><div class="progress-bar" style="width: 85%;">85%</div></div>
+    </div>
+    <div class="skill">
+      <span>Power BI</span>
+      <div class="progress"><div class="progress-bar" style="width: 82%;">82%</div></div>
+    </div>
+    <div class="skill">
+      <span>Tableau</span>
+      <div class="progress"><div class="progress-bar" style="width: 87%;">87%</div></div>
+    </div>
+    <div class="skill">
+      <span>MySQL</span>
+      <div class="progress"><div class="progress-bar" style="width: 86%;">86%</div></div>
+    </div>
+    <div class="skill">
+      <span>MS Excel</span>
+      <div class="progress"><div class="progress-bar" style="width: 90%;">90%</div></div>
+    </div>
+    <div class="skill">
+      <span>Big Data</span>
+      <div class="progress"><div class="progress-bar" style="width: 75%;">75%</div></div>
+    </div>
+    <div class="skill">
+      <span>NoSQL</span>
+      <div class="progress"><div class="progress-bar" style="width: 78%;">78%</div></div>
+    </div>
+    <div class="skill">
+      <span>MongoDB</span>
+      <div class="progress"><div class="progress-bar" style="width: 80%;">80%</div></div>
+    </div>
+    <div class="skill">
+      <span>Google Cloud Platform (GCP)</span>
+      <div class="progress"><div class="progress-bar" style="width: 80%;">80%</div></div>
+    </div>
+  </div>
 </section>
 
 
-<!--LEADERSHIP SECTION-->
-<section id="leadership">
-  <h2>Leadership</h2>
-  <p> <!-- Leadership experience --> </p>
+<section id="experience" class="portfolio-section">
+  <h2>Experience</h2>
+  <h3>Data Analytics Intern | [Company Name], [City, State] | [Start Date] – [End Date]</h3>
+  <ul>
+    <li>Developed and maintained dashboards using Tableau to track key performance indicators, resulting in a [X]% increase in data accessibility for stakeholders.</li>
+    <li>Performed extensive data cleaning and manipulation using Python (Pandas, NumPy) to prepare datasets for analysis, improving data quality by [X]%.</li>
+    <li>Assisted in building predictive models to forecast market trends, contributing to [X]% more accurate sales projections.</li>
+    <li>Collaborated with cross-functional teams to gather requirements and deliver data-driven insights that informed business strategies.</li>
+  </ul>
+  <h3>Business Analyst | [Previous Company Name], [City, Country] | [Start Date] – [End Date]</h3>
+  <ul>
+    <li>Analyzed large datasets to identify business opportunities and efficiencies, leading to a [X]% cost reduction in operations.</li>
+    <li>Created detailed reports and presentations for senior management, translating complex data into clear and concise recommendations.</li>
+    <li>Implemented SQL queries to extract and transform data from relational databases, supporting various business intelligence initiatives.</li>
+    <li>Contributed to the development of a new data warehousing strategy, improving data retrieval times by [X]%.</li>
+  </ul>
 </section>
 
+<section id="projects" class="projects-section portfolio-section animate-fade">
+  <h2>Projects</h2>
+
+  <div class="project-flex">
+    <article class="project-block project-hiring">
+      <h3>1. Hiring Assistant AI – Agentic Resume Screening System (Academic Project)</h3>
+      <p>This intelligent hiring assistant was built to transform traditional recruitment by integrating agentic AI with Retrieval-Augmented Generation (RAG). It autonomously screens and ranks resumes, engages recruiters through dynamic chat, and evolves based on continuous feedback—all in a privacy-first, offline-ready architecture.</p>
+      <p><strong>Objective:</strong> To develop a lightweight, privacy-compliant, fully offline RAG-powered AI assistant that reduces hiring friction, enhances fairness, and adapts to evolving recruiter criteria in real-time.</p>
+      <p><strong>Core Features:</strong></p>
+      <ul>
+        <li>Resume Parsing: PyMuPDF-based extraction from PDFs (resumes & job descriptions)</li>
+        <li>Semantic Matching: SentenceTransformers embeddings + in-memory similarity for context-rich matching</li>
+        <li>Hybrid Scoring: Combines semantic similarity with rubric-based skill match using Pandas</li>
+        <li>Recruiter Interaction: Dynamic conversations powered by quantized Mistral-7B-Instruct model</li>
+        <li>Feedback Loop: Updates scoring logic and rubric based on recruiter input</li>
+      </ul>
+      <p><strong>Technologies:</strong></p>
+      <ul>
+        <li>Python 3.x for backend logic and processing</li>
+        <li>Streamlit: Interface for recruiter interaction</li>
+        <li>PyMuPDF: For text extraction</li>
+        <li>SentenceTransformers: all-MiniLM-L6-v2 embeddings</li>
+        <li>Pandas: Skill rubric matching & hybrid ranking</li>
+        <li>ctransformers: For local inference using quantized Mistral-7B-Instruct</li>
+        <li>RAG: Integrated retrieval + reasoning for enhanced explainability</li>
+        <li>Offline Mode: Fully local, secure, and cloud-free operation</li>
+      </ul>
+      <p><strong>Key Outcomes:</strong></p>
+      <ul>
+        <li>Efficiency: Reduced time-to-hire by automating resume triage and ranking</li>
+        <li>Transparency: Provided clear explanations behind matches and rankings</li>
+        <li>Adaptability: Evolved in real-time based on recruiter input and feedback</li>
+        <li>Privacy-Focused: Local inference ensured no external dependencies</li>
+      </ul>
+    </article>
+    <div class="gif-container">
+      <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" alt="Work Mood GIF" />
+    </div>
+  </div>
+
+  <div class="project-flex">
+    <article class="project-block project-malnutrition">
+      <h3>2. Visualizing Global Trends in Child Malnutrition (Academic Project)</h3>
+      <p>Leveraging global health datasets from WHO, UNICEF, and the World Bank, this project offered a deep dive into malnutrition trends—analyzing stunting, wasting, underweight, and overweight metrics across geography, gender, and age. By transforming complex raw data into interactive dashboards, the project empowered global stakeholders to make informed decisions targeting child health inequalities.</p>
+      <p><strong>Key Deliverables:</strong></p>
+      <ul>
+        <li>Malnutrition Severity Dashboard: Filterable by country, region, gender, and year—offering a 360° view of malnutrition prevalence</li>
+        <li>Child Patterns Dashboard: Trend analysis by age, visualized through scatter plots, time-series, box plots, and stacked area charts</li>
+        <li>Geospatial Heatmaps: Interactive mapping to highlight regional malnutrition disparities</li>
+      </ul>
+      <p><strong>Data Engineering & Insights:</strong></p>
+      <ul>
+        <li>Cleaned & standardized massive health datasets, resolving missing and inconsistent values</li>
+        <li>Mapped historical data (1970–2022) to expose evolving trends across urban-rural lines and genders</li>
+        <li>Identified critical hotspots like Papua New Guinea and Yemen demanding urgent intervention</li>
+      </ul>
+      <p><strong>Tools & Tech Stack:</strong></p>
+      <ul>
+        <li>Python (Pandas, NumPy): For data cleaning, transformation, and wrangling</li>
+        <li>Tableau / Power BI: To build interactive, high-impact dashboards</li>
+        <li>Excel / Google Sheets: Initial validation and exploration</li>
+        <li>Visualization Techniques: Geospatial mapping, trend & comparative analysis, interactive filters</li>
+      </ul>
+    </article>
+    <div class="gif-container">
+      <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" alt="Work Mood GIF" />
+    </div>
+  </div>
+
+  <div class="project-flex">
+    <article class="project-block project-fraud">
+      <h3>3. AI-Powered Fraud Detection in Banking (Academic Project)</h3>
+      <p>This project envisioned and specified a real-time AI-driven fraud detection system tailored for the financial sector. Replacing traditional rule-based methods, the system leverages machine learning models for proactive fraud prediction, pattern recognition, and compliance-oriented auditing.</p>
+      <p><strong>Core Features:</strong></p>
+      <ul>
+        <li>Real-Time Monitoring: Flags suspicious behavior with latency under 300ms</li>
+        <li>Supervised & Unsupervised ML: Detects both known and emerging fraud tactics</li>
+        <li>Investigation Module: Analysts can review, annotate, and escalate flagged cases with feedback loops</li>
+        <li>Risk Scoring: Behavioral analysis scores each transaction dynamically, with instant alerts via dashboards & SMS</li>
+        <li>Explainable AI: SHAP/LIME ensures transparent, auditable decisions for compliance (GDPR, AML, etc.)</li>
+      </ul>
+      <p><strong>Technical Highlights:</strong></p>
+      <ul>
+        <li>Continuous Learning: Adaptive model retraining using analyst feedback</li>
+        <li>High Availability: 99.99% uptime with scalable, containerized microservices</li>
+        <li>Security Protocols: AES-256, TLS 1.3, MFA, RBAC implemented</li>
+        <li>Ethical AI: Bias mitigation and fair decision logic integrated across all demographic groups</li>
+      </ul>
+      <p><strong>Use Cases & Value:</strong></p>
+      <ul>
+        <li>Real-Time Fraud Workflow: Full lifecycle from transaction monitoring to analyst resolution</li>
+        <li>Operational Efficiency: Reduces fraud losses and strengthens user trust with predictive insights</li>
+        <li>Regulatory Compliance: Ensures conformance to GDPR, PCI DSS, KYC, AML, and CCPA standards</li>
+      </ul>
+    </article>
+    <div class="gif-container">
+      <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" alt="Work Mood GIF" />
+    </div>
+  </div>
+</section>
+
+
+<section id="leadership" class="portfolio-section">
+  <h2>Leadership</h2>
+  <h3>Lead, Data Analytics Study Group | University of North Texas | Aug 2023 – Present</h3>
+  <ul>
+    <li>Organized and led weekly study sessions for 20+ peers, focusing on complex data analytics concepts and coding challenges in Python and R.</li>
+    <li>Mentored junior students in statistical modeling and data visualization techniques, resulting in improved understanding and project outcomes.</li>
+    <li>Facilitated collaborative projects, enhancing teamwork and problem-solving skills among group members.</li>
+  </ul>
+  <h3>Project Coordinator, Community Outreach Program | [Previous Organization Name], [City, Country] | [Start Date] – [End Date]</h3>
+  <ul>
+    <li>Managed a team of 10 volunteers to execute community development projects, impacting over 500 individuals.</li>
+    <li>Coordinated resources and logistics for various events, ensuring smooth operation and successful outcomes.</li>
+    <li>Developed communication strategies to engage stakeholders and promote program initiatives.</li>
+  </ul>
+</section>
 
 <script>
-  const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll("#navbar a");
+  document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('#navbar a');
+    const sections = document.querySelectorAll('.portfolio-section');
 
-window.addEventListener("scroll", () => {
-  let current = "";
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - 100;
-    if (pageYOffset >= sectionTop) {
-      current = section.getAttribute("id");
-    }
-  });
-  navLinks.forEach(link => {
-    link.classList.remove("active");
-    if (link.getAttribute("href") === `#${current}`) {
-      link.classList.add("active");
-    }
-  });
-});
+    function showSection(id) {
+      sections.forEach(section => {
+        section.classList.remove('active');
+        section.style.display = 'none'; // Ensure it's hidden
+      });
+      const targetSection = document.querySelector(id);
+      if (targetSection) {
+        targetSection.classList.add('active');
+        targetSection.style.display = 'block'; // Display the active section
+      }
+    }
 
+    function setActiveNavLink(clickedLink) {
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+      });
+      clickedLink.classList.add('active');
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent default anchor jump
+        const targetId = this.getAttribute('href');
+        showSection(targetId);
+        setActiveNavLink(this);
+      });
+    });
+
+    // Show the "Home" section by default when the page loads
+    showSection('#home');
+  });
 </script>
-
 
 </body>
 </html>
