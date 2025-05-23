@@ -7,9 +7,9 @@
   <style>
 
 /* =========================
-   GLOBAL STYLES
+BODY & HTML STYLES (GLOBAL STYLES)
 ========================= */
-body, html {
+html, body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -17,7 +17,15 @@ body, html {
   overflow-x: hidden;
   color: #eee;
   background: #233;
-  position: relative;
+  
+  /* Flexbox to structure layout and push footer down */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body > *:not(footer) {
+  flex: 1 0 auto; /* Main content grows to fill available space */
 }
 
 
@@ -379,6 +387,7 @@ footer {
   animation: fadeSlideUp 2s ease-in-out forwards;
   opacity: 0;
   transform: translateY(30px);
+  flex-shrink: 0; /* Prevent footer from shrinking */
 }
 
 @keyframes fadeSlideUp {
@@ -397,6 +406,7 @@ footer {
 #home {
   position: relative;
   min-height: 100vh; /* full viewport height */
+   width: 100vw;            /* full viewport width */
   background: url('https://cdn.dribbble.com/userupload/35540897/file/original-7b9335903fdfa34d29222e2b4faccd5b.gif') no-repeat center center / cover;
   overflow: hidden;
   z-index: 0;
