@@ -1,8 +1,6 @@
 # Harshitha Sreiya Palaparthi
 
 **Business Analyst Graduate | Financial Analyst**  
-📧 harshithasrieya@gmail.com  
-🔗 [LinkedIn](https://www.linkedin.com/in/harshitha-sreiya-palaparthi-4434b4340)
 
 ---
 
