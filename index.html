@@ -5,129 +5,228 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio</title>
   <style>
-    /* Reset */
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Times New Roman', Times, serif;
-      overflow-x: hidden;
-    }
-    /* Background GIF */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: url('https://cdn.dribbble.com/userupload/35540897/file/original-7b9335903fdfa34d29222e2b4faccd5b.gif') no-repeat center center/cover;
-      filter: brightness(0.35);
-      z-index: -2;
-      animation: bgFade 30s ease-in-out infinite alternate;
-    }
+   
+/* Reset */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Times New Roman', Times, serif;
+  overflow-x: hidden;
+  color: #eee;
+  background: #222;
+}
 
-    /* Optional slow fade animation on background */
-    @keyframes bgFade {
-      0% { filter: brightness(0.35); }
-      100% { filter: brightness(0.45); }
-    }
+/* Background GIF */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('https://cdn.dribbble.com/userupload/35540897/file/original-7b9335903fdfa34d29222e2b4faccd5b.gif') no-repeat center center/cover;
+  filter: brightness(0.35);
+  z-index: -2;
+  animation: bgFade 30s ease-in-out infinite alternate;
+}
 
-    /* Dark overlay for better text contrast */
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(0,0,0,0.4);
-      z-index: -1;
-    }
+/* Slow fade animation on background */
+@keyframes bgFade {
+  0% { filter: brightness(0.35); }
+  100% { filter: brightness(0.45); }
+}
 
-    /* Navigation styles from before */
-    nav#navbar {
-      display: flex;
-      justify-content: center;
-      gap: 35px;
-      background-color: rgba(31, 31, 46, 0.85);
-      padding: 15px 30px;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
+/* Dark overlay for better text contrast */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: -1;
+}
 
-    nav#navbar a {
-      color: #ccc;
-      text-decoration: none;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      position: relative;
-      padding: 8px;
-      transition: color 0.3s ease;
-    }
+/* Navigation Bar */
+nav#navbar {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  background-color: rgba(31, 31, 46, 0.85);
+  padding: 15px 30px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+}
 
-    nav#navbar a:hover {
-      color: #0fd8d8;
-    }
+nav#navbar a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  padding: 8px;
+  transition: color 0.3s ease;
+}
 
-    nav#navbar a.active::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 6px;
-      height: 6px;
-      background-color: #0fd8d8;
-      border-radius: 50%;
-      animation: pulse 1s infinite ease-in-out;
-    }
+nav#navbar a:hover {
+  color: #0fd8d8;
+}
 
-    @keyframes pulse {
-      0%, 100% {
-        transform: translateX(-50%) scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: translateX(-50%) scale(1.6);
-        opacity: 0.6;
-      }
-    }
+nav#navbar a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background-color: #0fd8d8;
+  border-radius: 50%;
+  animation: pulse 1s infinite ease-in-out;
+}
 
-    /* Content padding so content doesn't hide behind navbar */
-    .content {
-      padding-top: 80px;
-      color: white;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 80px 20px 40px;
-      text-align: center;
-    }
-/* General Reset & Base */
-/* GIF Container */
+@keyframes pulse {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-50%) scale(1.6);
+    opacity: 0.6;
+  }
+}
+
+/* Content Wrapper to avoid navbar overlap */
+.content {
+  padding-top: 80px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 20px 40px;
+  text-align: center;
+  animation: fadeIn 2s ease-in-out;
+  color: white;
+  font-family: 'Times New Roman', serif;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* Projects Section */
+.projects-section {
+  position: relative;
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 40px auto;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  color: #333;
+  font-family: 'Times New Roman', serif;
+  overflow: hidden;
+}
+
+.projects-section::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format') center center/cover no-repeat;
+  filter: blur(12px) brightness(0.8);
+  z-index: -1;
+}
+
+/* Project Flex container */
+.project-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+/* GIF container */
 .gif-container {
   flex: 1 1 400px;
   text-align: center;
-  padding: 20px;
 }
 
 .gif-container img {
   width: 100%;
   max-width: 400px;
   border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
 
-/* Project Section */
-/*.projects-section {
-  padding: 40px 20px;
-  max-width: 1000px;
-  margin: auto;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+/* Project Block */
+.project-block {
+  position: relative;
+  flex: 2 1 600px;
+  padding: 24px 32px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 0 16px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 40px;
 }
 
-/* Section Title */
-/*.projects-section h2 {
+.project-block::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px) brightness(0.7);
+  opacity: 0.3;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  border-radius: 16px;
+}
+
+.project-block:hover::before {
+  opacity: 0.45;
+}
+
+/* Individual project backgrounds */
+.project-hiring::before {
+  background-image: url('https://images.yourstory.com/cs/wordpress/2018/02/cv_scan_robo.gif');
+}
+
+.project-malnutrition::before {
+  background-image: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format');
+}
+
+.project-fraud::before {
+  background-image: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format');
+}
+
+/* Project text styling */
+.project-block h3 {
+  color: #004aad;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.project-block p,
+.project-block ul {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.project-block ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.project-block ul li {
+  margin-bottom: 6px;
+}
+
+/* Headings */
+.projects-section h2 {
   text-align: center;
   font-size: 2em;
   margin-bottom: 40px;
@@ -136,147 +235,7 @@
   padding-bottom: 10px;
 }
 
-/* Project Block */
-/*.project-block {
-  margin-bottom: 50px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid #eee;
-}
 
-.project-block h3 {
-  color: #004aad;
-  margin-bottom: 10px;
-}
-
-.project-block p {
-  line-height: 1.6;
-  margin-bottom: 10px;
-}
-
-.project-block ul {
-  list-style-type: disc;
-  padding-left: 20px;
-  margin-bottom: 10px;
-}
-
-.project-block ul li {
-  margin-bottom: 6px;
-}
-
-/*  .project-container {
-  background: linear-gradient(to right, #f0f4ff, #e4f1fb);
-  padding: 60px 30px;
-  border-radius: 20px;
-  margin: 40px auto;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  max-width: 1200px;
-  transition: transform 0.4s ease-in-out;
-}*/
-
-/*.project-container:hover {
-  transform: scale(1.01);
-} 
-*/
-     .project-container {
-    position: relative;
-    padding: 40px;
-    font-family: 'Times New Roman', serif;
-    color: #333;
-    max-width: 1200px;
-    margin: auto;
-  }
-
-  /* Overall section background */
-  .projects-section {
-    position: relative;
-    padding: 40px 20px;
-    overflow: hidden;
-    border-radius: 16px;
-    background: rgba(255,255,255,0.85);
-  }
-
-  .projects-section::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format') center center/cover no-repeat;
-    filter: blur(12px) brightness(0.8);
-    z-index: -1;
-  }
-
-  /* Flex container for GIF + content */
-  .project-flex {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    align-items: flex-start;
-    margin-bottom: 40px;
-  }
-
-  .gif-container {
-    flex: 1 1 400px;
-    text-align: center;
-  }
-
-  .gif-container img {
-    width: 100%;
-    max-width: 400px;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-  }
-
-  /* Each project block with individual blurred GIF background */
-  .project-block {
-    position: relative;
-    flex: 2 1 600px;
-    padding: 24px 32px;
-    margin-bottom: 40px;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 16px rgba(0,0,0,0.1);
-    overflow: hidden;
-  }
-
-  .project-block::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-size: cover;
-    background-position: center;
-    filter: blur(8px) brightness(0.7);
-    opacity: 0.3;
-    z-index: -1;
-    transition: opacity 0.3s ease;
-    border-radius: 16px;
-  }
-
-  /* Individual backgrounds for each project */
-  .project-hiring::before {
-    background-image: url('https://images.yourstory.com/cs/wordpress/2018/02/cv_scan_robo.gif');
-  }
-
-  .project-malnutrition::before {
-    background-image: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format');
-  }
-
-  .project-fraud::before {
-    /* You can replace this URL with a third gif URL if you want */
-    background-image: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format');
-  }
-
-  /* Optional: On hover, increase background opacity */
-  .project-block:hover::before {
-    opacity: 0.45;
-  }
-
-  h2 {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-
-  h3 {
-    margin-top: 0;
-  }
   </style>
 </head>
 <body>
@@ -306,41 +265,46 @@
       <div class="gif-container">
         <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" alt="Work Mood GIF" />
       </div>
-
-      <article class="project-block project-hiring animate-slide">
-        <h3>1. Hiring Assistant AI – Agentic Resume Screening System (Academic Project)</h3>
-        <p>This intelligent hiring assistant was built to transform traditional recruitment by integrating agentic AI with Retrieval-Augmented Generation (RAG). It autonomously screens and ranks resumes, engages recruiters through dynamic chat, and evolves based on continuous feedback—all in a privacy-first, offline-ready architecture.</p>
-        <p><strong>Objective:</strong> To develop a lightweight, privacy-compliant, fully offline RAG-powered AI assistant that reduces hiring friction, enhances fairness, and adapts to evolving recruiter criteria in real-time.</p>
-        <p><strong>Core Features:</strong></p>
-        <ul>
-          <li>Resume Parsing: PyMuPDF-based extraction from PDFs (resumes & job descriptions)</li>
-          <li>Semantic Matching: SentenceTransformers embeddings + in-memory similarity for context-rich matching</li>
-          <li>Hybrid Scoring: Combines semantic similarity with rubric-based skill match using Pandas</li>
-          <li>Recruiter Interaction: Dynamic conversations powered by quantized Mistral-7B-Instruct model</li>
-          <li>Feedback Loop: Updates scoring logic and rubric based on recruiter input</li>
-        </ul>
-        <p><strong>Technologies:</strong></p>
-        <ul>
-          <li>Python 3.x for backend logic and processing</li>
-          <li>Streamlit: Interface for recruiter interaction</li>
-          <li>PyMuPDF: For text extraction</li>
-          <li>SentenceTransformers: all-MiniLM-L6-v2 embeddings</li>
-          <li>Pandas: Skill rubric matching & hybrid ranking</li>
-          <li>ctransformers: For local inference using quantized Mistral-7B-Instruct</li>
-          <li>RAG: Integrated retrieval + reasoning for enhanced explainability</li>
-          <li>Offline Mode: Fully local, secure, and cloud-free operation</li>
-        </ul>
-        <p><strong>Key Outcomes:</strong></p>
-        <ul>
-          <li>Efficiency: Reduced time-to-hire by automating resume triage and ranking</li>
-          <li>Transparency: Provided clear explanations behind matches and rankings</li>
-          <li>Adaptability: Evolved in real-time based on recruiter input and feedback</li>
-          <li>Privacy-Focused: Local inference ensured no external dependencies</li>
-        </ul>
-      </article>
+<section id="projects" class="projects-section animate-fade">
+  <div class="project-flex">
+    <article class="project-block project-hiring">
+      <h3>1. Hiring Assistant AI – Agentic Resume Screening System (Academic Project)</h3>
+      <p>This intelligent hiring assistant was built to transform traditional recruitment by integrating agentic AI with Retrieval-Augmented Generation (RAG). It autonomously screens and ranks resumes, engages recruiters through dynamic chat, and evolves based on continuous feedback—all in a privacy-first, offline-ready architecture.</p>
+      <p><strong>Objective:</strong> To develop a lightweight, privacy-compliant, fully offline RAG-powered AI assistant that reduces hiring friction, enhances fairness, and adapts to evolving recruiter criteria in real-time.</p>
+      <p><strong>Core Features:</strong></p>
+      <ul>
+        <li>Resume Parsing: PyMuPDF-based extraction from PDFs (resumes & job descriptions)</li>
+        <li>Semantic Matching: SentenceTransformers embeddings + in-memory similarity for context-rich matching</li>
+        <li>Hybrid Scoring: Combines semantic similarity with rubric-based skill match using Pandas</li>
+        <li>Recruiter Interaction: Dynamic conversations powered by quantized Mistral-7B-Instruct model</li>
+        <li>Feedback Loop: Updates scoring logic and rubric based on recruiter input</li>
+      </ul>
+      <p><strong>Technologies:</strong></p>
+      <ul>
+        <li>Python 3.x for backend logic and processing</li>
+        <li>Streamlit: Interface for recruiter interaction</li>
+        <li>PyMuPDF: For text extraction</li>
+        <li>SentenceTransformers: all-MiniLM-L6-v2 embeddings</li>
+        <li>Pandas: Skill rubric matching & hybrid ranking</li>
+        <li>ctransformers: For local inference using quantized Mistral-7B-Instruct</li>
+        <li>RAG: Integrated retrieval + reasoning for enhanced explainability</li>
+        <li>Offline Mode: Fully local, secure, and cloud-free operation</li>
+      </ul>
+      <p><strong>Key Outcomes:</strong></p>
+      <ul>
+        <li>Efficiency: Reduced time-to-hire by automating resume triage and ranking</li>
+        <li>Transparency: Provided clear explanations behind matches and rankings</li>
+        <li>Adaptability: Evolved in real-time based on recruiter input and feedback</li>
+        <li>Privacy-Focused: Local inference ensured no external dependencies</li>
+      </ul>
+    </article>
+    <div class="gif-container">
+      <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" alt="Work Mood GIF" />
     </div>
+  </div>
 
-    <article class="project-block project-malnutrition animate-slide">
+  <div class="project-flex">
+    <article class="project-block project-malnutrition">
       <h3>2. Visualizing Global Trends in Child Malnutrition (Academic Project)</h3>
       <p>Leveraging global health datasets from WHO, UNICEF, and the World Bank, this project offered a deep dive into malnutrition trends—analyzing stunting, wasting, underweight, and overweight metrics across geography, gender, and age. By transforming complex raw data into interactive dashboards, the project empowered global stakeholders to make informed decisions targeting child health inequalities.</p>
       <p><strong>Key Deliverables:</strong></p>
@@ -363,8 +327,13 @@
         <li>Visualization Techniques: Geospatial mapping, trend & comparative analysis, interactive filters</li>
       </ul>
     </article>
+    <div class="gif-container">
+      <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" alt="Work Mood GIF" />
+    </div>
+  </div>
 
-    <article class="project-block project-fraud animate-slide">
+  <div class="project-flex">
+    <article class="project-block project-fraud">
       <h3>3. AI-Powered Fraud Detection in Banking (Academic Project)</h3>
       <p>This project envisioned and specified a real-time AI-driven fraud detection system tailored for the financial sector. Replacing traditional rule-based methods, the system leverages machine learning models for proactive fraud prediction, pattern recognition, and compliance-oriented auditing.</p>
       <p><strong>Core Features:</strong></p>
@@ -389,8 +358,11 @@
         <li>Regulatory Compliance: Ensures conformance to GDPR, PCI DSS, KYC, AML, and CCPA standards</li>
       </ul>
     </article>
-  </section>
-</div>
+    <div class="gif-container">
+      <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" alt="Work Mood GIF" />
+    </div>
+  </div>
+</section>
 
 
 </body>
