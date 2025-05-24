@@ -30,16 +30,19 @@ body > *:not(footer) {
 
 
 /* =========================
-   NAVIGATION BAR
+   NAVIGATION BAR STYLES
 ========================= */
 nav#navbar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 35px;
   background-color: rgba(31, 31, 46, 0.85);
   padding: 15px 30px;
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   z-index: 1000;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -56,7 +59,7 @@ nav#navbar a {
   text-transform: uppercase;
   letter-spacing: 1px;
   position: relative;
-  padding: 8px;
+  padding: 8px 12px;
   transition: color 0.3s ease;
 }
 
@@ -77,6 +80,7 @@ nav#navbar a.active::after {
   animation: pulse 1s ease-in-out infinite;
 }
 
+/* ========== KEYFRAMES ========== */
 @keyframes pulse {
   0%, 100% {
     transform: translateX(-50%) scale(1);
@@ -95,6 +99,7 @@ nav#navbar a.active::after {
   }
 }
 
+
 /* =========================
    CONTENT WRAPPER & SECTIONS
 ========================= */
@@ -111,7 +116,7 @@ nav#navbar a.active::after {
 .page-section {
   opacity: 0;
   visibility: hidden;
-  position: absolute;
+  position: relative;
   width: 100%;
   top: 0;
   transition: opacity 0.6s ease;
@@ -388,6 +393,7 @@ footer {
   opacity: 0;
   transform: translateY(30px);
   flex-shrink: 0; /* Prevent footer from shrinking */
+  margin-top: 0; /* remove space above footer */
 }
 
 @keyframes fadeSlideUp {
@@ -451,15 +457,15 @@ footer {
 </head>
 <body>
 <header>
-<nav id="navbar">
-  <a href="#home" class="active">Home</a>
-  <a href="#about">About Me</a>
-  <a href="#career-summary">Career Summary</a>
-  <a href="#education">Education</a>
-  <a href="#skills">Skills</a>
-  <a href="#experience">Experience</a>
-  <a href="#projects">Projects</a>
-  <a href="#leadership">Leadership</a>
+  <nav id="navbar">
+  <a href="#home" class="active" onclick="showSection('home')">Home</a>
+  <a href="#about" onclick="showSection('about')">About Me</a>
+  <a href="#career-summary" onclick="showSection('career-summary')">Career Summary</a>
+  <a href="#education" onclick="showSection('education')">Education</a>
+  <a href="#skills" onclick="showSection('skills')">Skills</a>
+  <a href="#experience" onclick="showSection('experience')">Experience</a>
+  <a href="#projects" onclick="showSection('projects')">Projects</a>
+  <a href="#leadership" onclick="showSection('leadership')">Leadership</a>
 </nav>
 </header>
 
@@ -697,54 +703,69 @@ footer {
   <p id="datetime" style="font-size: 0.85rem; color: #ccc;"></p>
 </footer>
 
+
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('#navbar a');
-    const sections = document.querySelectorAll('.portfolio-section');
+// ================================
+// DOM Ready - Initialize Navigation
+// ================================
+document.addEventListener('DOMContentLoaded', function () {
+  const navLinks = document.querySelectorAll('#navbar a'); // All navbar links
+  const sections = document.querySelectorAll('.page-section'); // All content sections
 
-    function showSection(id) {
-      sections.forEach(section => {
-        section.classList.remove('active');
-        section.style.display = 'none'; // Ensure it's hidden
-      });
-      const targetSection = document.querySelector(id);
-      if (targetSection) {
-        targetSection.classList.add('active');
-        targetSection.style.display = 'block'; // Display the active section
-      }
-    }
+  // ===== Function: Show Selected Section =====
+  function showSection(id) {
+    // Hide all sections
+    sections.forEach(section => {
+      section.classList.remove('active');
+      section.style.display = 'none';
+    });
 
-    function setActiveNavLink(clickedLink) {
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-      });
-      clickedLink.classList.add('active');
-    }
+    // Show target section if it exists
+    const target = document.getElementById(id);
+    if (target) {
+      target.classList.add('active');
+      target.style.display = 'block';
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault(); // Prevent default anchor jump
-        const targetId = this.getAttribute('href');
-        showSection(targetId);
-        setActiveNavLink(this);
-      });
-    });
+    // Update the active class on nav links
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+    });
+    const activeLink = document.querySelector(`#navbar a[href="#${id}"]`);
+    if (activeLink) activeLink.classList.add('active');
+  }
 
-    // Show the "Home" section by default when the page loads
-    showSection('#home');
-  });
+  // ===== Function: Attach click events to navbar links =====
+  navLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault(); // Prevent default anchor behavior
+      const targetId = this.getAttribute('href').substring(1); // Remove '#' from href
+      showSection(targetId); // Show the corresponding section
+    });
+  });
 
-//time , date
-  const dtElem = document.getElementById('datetime');
-  function updateDateTime() {
-    const now = new Date();
-    dtElem.textContent = now.toLocaleString();
-  }
-  updateDateTime();
-  setInterval(updateDateTime, 60000);
+  // ===== Show Home Section on Page Load =====
+  showSection('home');
+});
 
+// ================================
+// Time and Date Functionality
+// ================================
+const dtElem = document.getElementById('datetime'); // Element to display date/time
 
+// Function to update the datetime every minute
+function updateDateTime() {
+  const now = new Date();
+  if (dtElem) {
+    dtElem.textContent = now.toLocaleString(); // Show in local date/time format
+  }
+}
+
+// Initial call + update every 60 seconds
+updateDateTime();
+setInterval(updateDateTime, 60000);
+  
 </script>
-
 </body>
 </html>
