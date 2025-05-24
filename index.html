@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Times New Roman', serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -61,68 +61,43 @@
         background: #f9f9f9;
     }
 
-    /* Section Styling */
-    .page-section {
-        padding: 100px 5%;
-        min-height: 100vh;
-        display: none;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        opacity: 0;
-        transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
-        transform: translateY(20px);
-    }
+   /* Section Styling */
+.page-section {
+    padding: 100px 5%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box; /* Includes padding in height */
+    scroll-margin-top: 80px; /* Adjust based on your nav height */
+    scroll-behavior: smooth;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+    pointer-events: none; /* Prevent accidental interaction when hidden */
+}
 
-    .page-section.active {
-        display: flex;
-        opacity: 1;
-        transform: translateY(0);
-    }
+.page-section.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
 
-    .page-section h1, .page-section h2, .page-section h3 {
-        color: #0056b3;
-        margin-bottom: 20px;
-    }
+.page-section h1,
+.page-section h2,
+.page-section h3 {
+    color: #0056b3;
+    margin-bottom: 20px;
+}
 
-    .page-section p {
-        max-width: 800px;
-        margin: 0 auto 20px auto;
-        color: #555;
-    }
+.page-section p {
+    max-width: 800px;
+    margin: 0 auto 20px;
+    color: #555;
+}
 
-        /* Section Styling */
-        .page-section {
-            padding: 80px 5%; /* More padding for distinct sections */
-            min-height: 100vh; /* Ensure sections take at least full viewport height */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            box-sizing: border-box; /* Include padding in height calculation */
-            opacity: 0; /* Hidden by default */
-            transition: opacity 0.8s ease-in-out;
-            transform: translateY(20px); /* Slight lift effect */
-            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
-        }
-
-        .page-section.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .page-section h1, .page-section h2, .page-section h3 {
-            color: #0056b3; /* Consistent heading color */
-            margin-bottom: 20px;
-        }
-
-        .page-section p {
-            max-width: 800px;
-            margin: 0 auto 20px auto;
-            color: #555;
-        }
 
         /* Home Section Specific */
         #home {
@@ -879,11 +854,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const footer = document.querySelector('.footer');
     const yearSpan = document.getElementById('year');
     const datetimeDiv = document.getElementById('datetime');
+    const mobileNav = document.getElementById('navLinks');
 
     // Set current year in footer
     yearSpan.textContent = new Date().getFullYear();
 
-    // Update date and time in footer
+    // Live date & time update
     function updateDateTime() {
         const now = new Date();
         const options = {
@@ -902,18 +878,16 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDateTime();
     setInterval(updateDateTime, 1000);
 
-    // Show a section and scroll to it
+    // Animate and scroll to section
     function showSectionAndScroll(targetId) {
         sections.forEach(section => section.classList.remove('active'));
 
         const targetSection = document.getElementById(targetId);
         if (targetSection) {
             targetSection.classList.add('active');
-            setTimeout(() => {
-                targetSection.scrollIntoView({ behavior: 'smooth' });
-            }, 50);
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            // Skills animation
+            // Trigger skills bar animation
             if (targetId === 'skills') {
                 document.querySelectorAll('#skills .progress-bar').forEach(bar => {
                     const targetWidth = bar.style.getPropertyValue('--target-width');
@@ -924,47 +898,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // Show the footer
             footer.style.display = 'block';
         }
 
-        // Update active link
+        // Update active nav link
         navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${targetId}`) {
-                link.classList.add('active');
-            }
+            link.classList.toggle('active', link.getAttribute('href') === `#${targetId}`);
         });
+
+        // Close mobile nav if open
+        if (mobileNav) {
+            mobileNav.classList.remove('open');
+        }
     }
 
-    // Navigation click event
+    // Handle nav clicks
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            const targetId = e.target.getAttribute('href').substring(1);
+            const targetId = link.getAttribute('href').substring(1);
             showSectionAndScroll(targetId);
         });
     });
 
-    // Scroll-based nav highlighting
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.7
-    };
-
+    // Scroll-based section activation + nav highlight
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const currentSectionId = entry.target.id;
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${currentSectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
+                const currentId = entry.target.id;
 
-                if (currentSectionId === 'skills') {
+                // Animate skills on scroll into view
+                if (currentId === 'skills') {
                     document.querySelectorAll('#skills .progress-bar').forEach(bar => {
                         const targetWidth = bar.style.getPropertyValue('--target-width');
                         bar.style.width = '0%';
@@ -974,24 +938,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
 
-                // Show the footer on scroll into a new section
+                // Highlight current nav link
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+                });
+
                 footer.style.display = 'block';
             }
         });
-    }, observerOptions);
+    }, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.6
+    });
 
     sections.forEach(section => observer.observe(section));
 
-    // Initial page load logic
+    // Initial load handler
     window.addEventListener('load', () => {
-        let initialHash = window.location.hash.substring(1);
-        if (!initialHash || initialHash === 'home') {
-            initialHash = 'home';
-        }
-        showSectionAndScroll(initialHash);
+        let initial = window.location.hash.replace('#', '') || 'home';
+        showSectionAndScroll(initial);
     });
 });
 </script>
-
 </body>
 </html>
