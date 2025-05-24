@@ -38,9 +38,9 @@ body > *:not(footer) {
   width: 100%;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  background: rgba(0, 30, 40, 0.7); /* Improved contrast */
-  box-shadow: 0 8px 32px rgba(0, 245, 212, 0.3);
-  border-bottom: 1px solid rgba(0, 245, 212, 0.4);
+  background: rgba(150, 130, 230, 0.7); /* Light violet transparent */
+  box-shadow: 0 8px 32px rgba(150, 130, 230, 0.3);
+  border-bottom: 1px solid rgba(150, 130, 230, 0.4);
   z-index: 9999;
   padding: 15px 40px;
   display: flex;
@@ -54,7 +54,7 @@ body > *:not(footer) {
   text-decoration: none;
   font-weight: 600;
   font-size: 1.1em;
-  color: #ffffff;
+  color: #f0e9ff; /* lighter violet-ish text */
   padding: 10px 18px;
   border-radius: 8px;
   position: relative;
@@ -85,9 +85,9 @@ body > *:not(footer) {
   position: absolute;
   top: -6px; left: -6px; right: -6px; bottom: -6px;
   border-radius: 12px;
-  filter: blur(6px);
+  filter: blur(8px);
   opacity: 0;
-  background: linear-gradient(45deg, #00f5d4, #00d8b0, #00f5d4);
+  background: linear-gradient(45deg, #b7a3f5, #9c7ae8, #b7a3f5); /* light violet glow */
   transition: opacity 0.3s ease;
   z-index: -1;
 }
@@ -95,9 +95,9 @@ body > *:not(footer) {
 /* HOVER: Color Shift + Glow */
 .glass-nav a:hover,
 .glass-nav a:focus {
-  color: #000;
-  background: linear-gradient(45deg, #00f5d4, #00d8b0);
-  box-shadow: 0 0 15px #00f5d4, 0 0 25px #00d8b0;
+  color: #2c0d72; /* dark violet text on hover */
+  background: linear-gradient(45deg, #b7a3f5, #9c7ae8);
+  box-shadow: 0 0 15px #b7a3f5, 0 0 25px #9c7ae8;
   transform: translateY(-3px);
 }
 
@@ -131,6 +131,7 @@ body > *:not(footer) {
 }
 
 
+
 /* =========================
    CONTENT WRAPPER & SECTIONS
 ========================= */
@@ -150,14 +151,22 @@ body > *:not(footer) {
   position: relative;
   width: 100%;
   top: 0;
-  transition: opacity 0.6s ease;
+  height: 0;              /* Hide the section by collapsing height */
+  overflow: hidden;       /* Prevent content from showing when hidden */
+  transition:
+    opacity 0.6s ease,
+    visibility 0.6s ease,
+    height 0.6s ease,
+    transform 0.6s ease;
+  transform: translateY(20px); /* Slide down effect when hidden */
   z-index: 0;
 }
 
 .page-section.active {
   opacity: 1;
   visibility: visible;
-  position: relative;
+  height: auto;           /* Let the section expand to fit content */
+  transform: translateY(0); /* Reset transform to original */
   z-index: 1;
 }
 
@@ -740,79 +749,85 @@ Child Elements
 
 .certifications-section {
   padding: 60px 5%;
-  background: linear-gradient(to right, #e3f2fd, #fce4ec);
+  background: linear-gradient(to right, #f3e8ff, #ede9fe);
   border-radius: 12px;
   margin: 60px auto;
-  max-width: 1200px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  max-width: 900px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
 }
 
 .certifications-section h2 {
   text-align: center;
-  font-size: 2.5em;
-  color: #333;
+  font-size: 2.4em;
+  color: #4c1d95;
   margin-bottom: 40px;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.certification-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
+/* Timeline container */
+.certification-timeline {
+  position: relative;
+  padding-left: 40px;
+  border-left: 3px solid #a78bfa;
 }
 
+/* Certification card */
 .cert-card {
-  background-color: #ffffff;
-  border-left: 5px solid #673ab7; /* Purple border for consistency */
+  position: relative;
+  background: #fff;
+  margin-bottom: 40px;
+  padding: 20px 25px;
   border-radius: 10px;
-  padding: 20px;
-  max-width: 350px;
-  flex: 1;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.1);
+  transform: translateX(-40px);
+  opacity: 0;
+  transition: all 0.8s ease;
 }
 
-.cert-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+.cert-card.visible {
+  transform: translateX(0);
+  opacity: 1;
 }
 
+/* Timeline Dot */
+.cert-card::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -45px;
+  width: 14px;
+  height: 14px;
+  background: #7c3aed;
+  border: 3px solid #f3e8ff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
+}
+
+/* Text Styling */
 .cert-card h3 {
   font-size: 1.3em;
-  color: #512da8;
-  margin-bottom: 10px;
+  color: #5b21b6;
+  margin-bottom: 8px;
 }
 
 .cert-card p {
-  font-size: 0.95em;
+  margin: 6px 0;
   color: #444;
-  margin: 5px 0;
+  font-size: 0.95em;
+  line-height: 1.5;
 }
 
-.cert-link {
-  display: inline-block;
-  margin-top: 10px;
-  color: #1976d2;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.cert-link:hover {
-  text-decoration: underline;
-  color: #0d47a1;
-}
-
-/* Responsive behavior */
+/* Responsive */
 @media (max-width: 768px) {
-  .certification-cards {
-    flex-direction: column;
-    align-items: center;
+  .certification-timeline {
+    padding-left: 20px;
   }
 
-  .cert-card {
-    max-width: 90%;
+  .cert-card::before {
+    left: -30px;
   }
 }
+
 
 /* ===== Career Summary Styling ===== */
 .career-summary {
@@ -1114,18 +1129,9 @@ Child Elements
   </div>
 </section>
 
-<section id="leadership" class="page-section">
-  <h3>Leadership & Extracurriculars</h3>
-  <ul>
-    <li>President, Data Science Club at University of North Texas – Organized workshops, guest lectures, and hackathons.</li>
-    <li>Volunteer, Local Community Tech Education Program – Mentored underrepresented youth in coding and data literacy.</li>
-    <li>Team Lead, Capstone Project on AI Resume Screening – Coordinated a team of 5 members to deliver a working prototype within 4 months.</li>
-  </ul>
-</section>
-  
-  <section id="certifications" class="page-section certifications-section">
+<section id="certifications" class="page-section certifications-section">
   <h2>Certifications & Workshops</h2>
-  <div class="certification-cards">
+  <div class="certification-timeline">
 
     <div class="cert-card">
       <h3>Entrepreneurship Orientation Program</h3>
@@ -1140,6 +1146,7 @@ Child Elements
 
   </div>
 </section>
+
 
   <!-- Footer -->
 <footer class="footer">
@@ -1221,6 +1228,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
   updateDateTime();
   setInterval(updateDateTime, 60000);
+
+  // ==============================
+// Show Section Function
+// Controls visibility of page sections based on clicked nav item
+// Also updates active navigation link styling
+// ==============================
+function showSection(sectionId) {
+  // Get all sections
+  const sections = document.querySelectorAll('.page-section');
+  sections.forEach(section => {
+    if(section.id === sectionId) {
+      section.classList.add('active');
+    } else {
+      section.classList.remove('active');
+    }
+  });
+
+  // Optionally update active nav styling
+  const navLinks = document.querySelectorAll('.glass-nav a');
+  navLinks.forEach(link => {
+    if (link.getAttribute('href') === `#${sectionId}`) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+}
+  //========================================
+// JS: Animate Certification Timeline Cards  On Scroll Into View
+//========================================
+  const certCards = document.querySelectorAll('.cert-card');
+
+  function showVisibleCerts() {
+    certCards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 50) {
+        card.classList.add('visible');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', showVisibleCerts);
+  window.addEventListener('load', showVisibleCerts);
+
+
   
 </script>
 </body>
