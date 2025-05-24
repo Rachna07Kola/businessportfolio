@@ -33,6 +33,9 @@ body > *:not(footer) {
 /* =========================
    NAVIGATION BAR STYLES
 ========================= */
+/* ==============================
+   Glass Navigation Bar Styles
+============================== */
 .glass-nav {
   position: fixed;
   top: 0;
@@ -50,16 +53,16 @@ body > *:not(footer) {
   flex-wrap: wrap;
 }
 
-/* Navigation links */
+/* Navigation Links */
 .glass-nav a {
   text-decoration: none;
   font-weight: 600;
   font-size: 1.1em;
-  color: #f0e9ff; /* lighter violet-ish text */
+  color: #f0e9ff;
   padding: 10px 18px;
   border-radius: 8px;
   position: relative;
-  transition: 
+  transition:
     color 0.6s ease,
     background 0.6s ease,
     box-shadow 0.3s ease,
@@ -69,18 +72,22 @@ body > *:not(footer) {
   animation: fadeInUp 0.5s forwards;
 }
 
-/* Staggered animation delays */
-.glass-nav a:nth-child(1) { animation-delay: 0.2s; }
-.glass-nav a:nth-child(2) { animation-delay: 0.4s; }
-.glass-nav a:nth-child(3) { animation-delay: 0.6s; }
-.glass-nav a:nth-child(4) { animation-delay: 0.8s; }
-.glass-nav a:nth-child(5) { animation-delay: 1.0s; }
-.glass-nav a:nth-child(6) { animation-delay: 1.2s; }
-.glass-nav a:nth-child(7) { animation-delay: 1.4s; }
-.glass-nav a:nth-child(8) { animation-delay: 1.6s; }
-.glass-nav a:nth-child(9) { animation-delay: 1.8s; }
+/* Active Link Styling */
+.glass-nav a.active {
+  color: #2c0d72;
+  border-bottom: 2px solid #2c0d72;
+}
 
-/* Glow effect base */
+/* Hover Effects */
+.glass-nav a:hover,
+.glass-nav a:focus {
+  color: #2c0d72;
+  background: linear-gradient(45deg, #b7a3f5, #9c7ae8);
+  box-shadow: 0 0 15px #b7a3f5, 0 0 25px #9c7ae8;
+  transform: translateY(-3px);
+}
+
+/* Glow Effect */
 .glass-nav a::before {
   content: "";
   position: absolute;
@@ -88,18 +95,9 @@ body > *:not(footer) {
   border-radius: 12px;
   filter: blur(8px);
   opacity: 0;
-  background: linear-gradient(45deg, #b7a3f5, #9c7ae8, #b7a3f5); /* light violet glow */
+  background: linear-gradient(45deg, #b7a3f5, #9c7ae8, #b7a3f5);
   transition: opacity 0.3s ease;
   z-index: -1;
-}
-
-/* HOVER: Color Shift + Glow */
-.glass-nav a:hover,
-.glass-nav a:focus {
-  color: #2c0d72; /* dark violet text on hover */
-  background: linear-gradient(45deg, #b7a3f5, #9c7ae8);
-  box-shadow: 0 0 15px #b7a3f5, 0 0 25px #9c7ae8;
-  transform: translateY(-3px);
 }
 
 .glass-nav a:hover::before,
@@ -107,7 +105,7 @@ body > *:not(footer) {
   opacity: 1;
 }
 
-/* Fade-in and slide-up animation */
+/* Fade-in + Slide-up Animation */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -119,12 +117,44 @@ body > *:not(footer) {
   }
 }
 
-/* Responsive styles for small screens */
+/* Staggered Animation Delays */
+.glass-nav a:nth-child(1) { animation-delay: 0.2s; }
+.glass-nav a:nth-child(2) { animation-delay: 0.4s; }
+.glass-nav a:nth-child(3) { animation-delay: 0.6s; }
+.glass-nav a:nth-child(4) { animation-delay: 0.8s; }
+.glass-nav a:nth-child(5) { animation-delay: 1.0s; }
+.glass-nav a:nth-child(6) { animation-delay: 1.2s; }
+.glass-nav a:nth-child(7) { animation-delay: 1.4s; }
+.glass-nav a:nth-child(8) { animation-delay: 1.6s; }
+.glass-nav a:nth-child(9) { animation-delay: 1.8s; }
+
+/* ==============================
+   Page Section Styles
+============================== */
+.page-section {
+  display: none;
+  padding: 80px 20px;
+}
+
+.page-section.active {
+  display: block;
+}
+
+/* Ensure home is shown by default if active */
+#home.active {
+  display: block;
+}
+
+/* ==============================
+   Responsive Adjustments
+============================== */
 @media (max-width: 768px) {
   .glass-nav {
+    flex-direction: column;
     padding: 15px 20px;
     gap: 10px;
   }
+
   .glass-nav a {
     font-size: 1em;
     padding: 6px 10px;
@@ -197,123 +227,155 @@ body > *:not(footer) {
 /* =========================
    PROJECTS SECTION
 ========================= */
-.projects-section {
-  position: relative;
-  padding: 40px 20px;
-  max-width: 1000px;
-  margin: 40px auto;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
-  color: #333;
-  font-family: 'Times New Roman', serif;
-  overflow: hidden;
-}
+  /* ======= Projects Section Styles ======= */
+  .projects-section {
+    position: relative;
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 40px auto;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    color: #333;
+    font-family: 'Times New Roman', serif;
+    overflow: hidden;
+  }
 
-.projects-section::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format') center center/cover no-repeat;
-  filter: blur(12px) brightness(0.8);
-  z-index: -1;
-}
+  /* Removed background image from projects-section */
 
-.project-flex {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  align-items: flex-start;
-  margin-bottom: 40px;
-}
+  .project-flex {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
 
-.gif-container {
-  width: 100%;
-  margin-top: 1rem;
-  flex: 1 1 400px;
-  text-align: center;
-}
+  .gif-container {
+    flex: 1 1 300px;
+    max-width: 300px;
+    margin-top: 0;
+    text-align: center;
+    animation: floatUpDown 4s ease-in-out infinite;
+  }
 
-.gif-container img {
-  width: 100%;
-  max-width: 400px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-  height: auto;
-  display: inline-block;
-  image-rendering: auto;
-}
+  .gif-container img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    height: auto;
+    display: inline-block;
+    image-rendering: auto;
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
 
-.project-block {
-  position: relative;
-  flex: 2 1 600px;education
-  padding: 24px 32px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.8);
-  box-shadow: 0 0 16px rgba(0,0,0,0.1);
-  overflow: hidden;
-  margin-bottom: 40px;
-}
+  .project-block {
+    position: relative;
+    flex: 2 1 600px;
+    padding: 24px 32px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 16px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
 
-.project-block::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-size: cover;
-  background-position: center;
-  filter: blur(8px) brightness(0.7);
-  opacity: 0.3;
-  z-index: -1;
-  transition: opacity 0.3s ease;
-  border-radius: 16px;
-}
+  .project-block::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px) brightness(0.7);
+    opacity: 0.3;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    border-radius: 16px;
+  }
 
-.project-block:hover::before {
-  opacity: 0.45;
-}
+  .project-block:hover::before {
+    opacity: 0.45;
+  }
 
-/* Individual project backgrounds */
-.project-hiring::before {
-  background-image: url('https://images.yourstory.com/cs/wordpress/2018/02/cv_scan_robo.gif');
-}
+  .project-hiring::before {
+    background-image: url('https://images.yourstory.com/cs/wordpress/2018/02/cv_scan_robo.gif');
+  }
 
-.project-malnutrition::before,
-.project-fraud::before {
-  background-image: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format');
-}
+  .project-malnutrition::before,
+  .project-fraud::before {
+    background-image: url('https://images.prismic.io/smarttask/ac06bafa-57b9-4cc3-8564-cbf21a251ea4_project+objectives.gif?auto=compress,format');
+  }
 
-.project-block h3 {
-  color: #004aad;
-  margin-bottom: 10px;
-  font-size: 20px;
-}
+  .project-block h3 {
+    color: #004aad;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
 
-.project-block p,
-.project-block ul {
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 10px;
-  color: #222;
-}
+  .project-block p,
+  .project-block ul {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    color: #222;
+  }
 
-.project-block ul {
-  list-style-type: disc;
-  padding-left: 20px;
-}
+  .project-block ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
 
-.project-block ul li {
-  margin-bottom: 6px;
-}
+  .project-block ul li {
+    margin-bottom: 6px;
+  }
 
-.projects-section h2 {
-  text-align: center;
-  font-size: 2em;
-  margin-bottom: 40px;
-  color: #222;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 10px;
-}
+  .projects-section h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 40px;
+    color: #222;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+  }
 
+  /* Animations */
+  @keyframes floatUpDown {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% {
+      filter: drop-shadow(0 0 5px rgba(183, 163, 245, 0.5));
+    }
+    50% {
+      filter: drop-shadow(0 0 15px rgba(183, 163, 245, 1));
+    }
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    .project-flex {
+      flex-wrap: wrap;
+      flex-direction: column;
+    }
+    .gif-container {
+      max-width: 100%;
+      margin: 20px 0 0 0;
+      animation: none;
+    }
+    .gif-container img {
+      animation: none;
+    }
+    .project-block {
+      margin-bottom: 20px;
+    }
+  }
 /* =========================
    ABOUT ME SECTION
 ========================= */
@@ -1058,98 +1120,111 @@ Responsive
   </ul>
 </section>
 
+
+  
 <section id="projects" class="projects-section page-section animate-fade">
-  <h2>Projects</h2>
+  <h2>Projects</h2>
 
-  <div class="project-flex">
-    <article class="project-block project-hiring">
-      <h3>1. Hiring Assistant AI – Agentic Resume Screening System (Academic Project)</h3>
-      <p>This intelligent hiring assistant was built to transform traditional recruitment by integrating agentic AI with Retrieval-Augmented Generation (RAG). It autonomously screens and ranks resumes, engages recruiters through dynamic chat, and evolves based on continuous feedback—all in a privacy-first, offline-ready architecture.</p>
-      <p><strong>Objective:</strong> To develop a lightweight, privacy-compliant, fully offline RAG-powered AI assistant that reduces hiring friction, enhances fairness, and adapts to evolving recruiter criteria in real-time.</p>
-      <p><strong>Core Features:</strong></p>
-      <ul>
-        <li>Resume Parsing: PyMuPDF-based extraction from PDFs (resumes & job descriptions)</li>
-        <li>Semantic Matching: SentenceTransformers embeddings + in-memory similarity for context-rich matching</li>
-        <li>Hybrid Scoring: Combines semantic similarity with rubric-based skill match using Pandas</li>
-        <li>Recruiter Interaction: Dynamic conversations powered by quantized Mistral-7B-Instruct model</li>
-        <li>Feedback Loop: Updates scoring logic and rubric based on recruiter input</li>
-      </ul>
-      <p><strong>Technologies:</strong></p>
-      <ul>
-        <li>Python 3.x for backend logic and processing</li>
-        <li>Streamlit: Interface for recruiter interaction</li>
-        <li>PyMuPDF: For text extraction</li>
-        <li>SentenceTransformers: all-MiniLM-L6-v2 embeddings</li>
-        <li>Pandas: Skill rubric matching & hybrid ranking</li>
-        <li>ctransformers: For local inference using quantized Mistral-7B-Instruct</li>
-        <li>RAG: Integrated retrieval + reasoning for enhanced explainability</li>
-        <li>Offline Mode: Fully local, secure, and cloud-free operation</li>
-      </ul>
-      <p><strong>Key Outcomes:</strong></p>
-      <ul>
-        <li>Efficiency: Reduced time-to-hire by automating resume triage and ranking</li>
-        <li>Transparency: Provided clear explanations behind matches and rankings</li>
-        <li>Adaptability: Evolved in real-time based on recruiter input and feedback</li>
-        <li>Privacy-Focused: Local inference ensured no external dependencies</li>
-      </ul>
-    </article>
-    <div class="gif-container">
-      <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" alt="Work Mood GIF" />
-    </div>
-  </div>
+  <div class="project-flex">
+    <article class="project-block project-hiring">
+      <h3>1. Hiring Assistant AI – Agentic Resume Screening System (Academic Project)</h3>
+      <p>This intelligent hiring assistant was built to transform traditional recruitment by integrating agentic AI with Retrieval-Augmented Generation (RAG). It autonomously screens and ranks resumes, engages recruiters through dynamic chat, and evolves based on continuous feedback—all in a privacy-first, offline-ready architecture.</p>
+      <p><strong>Objective:</strong> To develop a lightweight, privacy-compliant, fully offline RAG-powered AI assistant that reduces hiring friction, enhances fairness, and adapts to evolving recruiter criteria in real-time.</p>
+      <p><strong>Core Features:</strong></p>
+      <ul>
+        <li>Resume Parsing: PyMuPDF-based extraction from PDFs (resumes & job descriptions)</li>
+        <li>Semantic Matching: SentenceTransformers embeddings + in-memory similarity for context-rich matching</li>
+        <li>Hybrid Scoring: Combines semantic similarity with rubric-based skill match using Pandas</li>
+        <li>Recruiter Interaction: Dynamic conversations powered by quantized Mistral-7B-Instruct model</li>
+        <li>Feedback Loop: Updates scoring logic and rubric based on recruiter input</li>
+      </ul>
+      <p><strong>Technologies:</strong></p>
+      <ul>
+        <li>Python 3.x for backend logic and processing</li>
+        <li>Streamlit: Interface for recruiter interaction</li>
+        <li>PyMuPDF: For text extraction</li>
+        <li>SentenceTransformers: all-MiniLM-L6-v2 embeddings</li>
+        <li>Pandas: Skill rubric matching & hybrid ranking</li>
+        <li>ctransformers: For local inference using quantized Mistral-7B-Instruct</li>
+        <li>RAG: Integrated retrieval + reasoning for enhanced explainability</li>
+        <li>Offline Mode: Fully local, secure, and cloud-free operation</li>
+      </ul>
+      <p><strong>Key Outcomes:</strong></p>
+      <ul>
+        <li>Efficiency: Reduced time-to-hire by automating resume triage and ranking</li>
+        <li>Transparency: Provided clear explanations behind matches and rankings</li>
+        <li>Adaptability: Evolved in real-time based on recruiter input and feedback</li>
+        <li>Privacy-Focused: Local inference ensured no external dependencies</li>
+      </ul>
+    </article>
+    <div class="gif-container">
+      <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" alt="Work Mood GIF" />
+    </div>
+  </div>
 
-  <div class="project-flex">
-    <article class="project-block project-malnutrition">
-      <h3>2. Visualizing Global Trends in Child Malnutrition (Academic Project)</h3>
-      <p>Leveraging global health datasets from WHO, UNICEF, and the World Bank, this project offered a deep dive into malnutrition trends—analyzing stunting, wasting, underweight, and overweight metrics across geography, gender, and age. By transforming complex raw data into interactive dashboards, the project empowered global stakeholders to make informed decisions targeting child health inequalities.</p>
-      <p><strong>Key Deliverables:</strong></p>
-      <ul>
-        <li>Malnutrition Severity Dashboard: Filterable by country, region, gender, and year—offering a 360° view of malnutrition prevalence</li>
-        <li>Child Patterns Dashboard: Trend analysis by age, visualized through scatter plots, time-series, box plots, and stacked area charts</li>
-        <li>Geospatial Heatmaps: Interactive mapping to highlight regional malnutrition disparities</li>
-      </ul>
-      <p><strong>Data Engineering & Insights:</strong></p>
-      <ul>
-        <li>Cleaned & standardized massive health datasets, resolving missing and inconsistent values</li>
-        <li>Mapped historical data (1970–2022) to expose evolving trends across urban-rural lines and genders</li>
-        <li>Identified critical hotspots like Papua New Guinea and Yemen demanding urgent intervention</li>
-      </ul>
-      <p><strong>Tools & Tech Stack:</strong></p>
-      <ul>
-        <li>Python (Pandas, NumPy): For data cleaning, transformation, and wrangling</li>
-        <li>Tableau / Power BI: To build interactive, high-impact dashboards</li>
-        <li>Excel / Google Sheets: Initial validation and exploration</li>
-        <li>Visualization Techniques: Geospatial mapping, trend & comparative analysis, interactive filters</li>
-      </ul>
-    </article>
-    <div class="gif-container">
-      <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" alt="Work Mood GIF" />
-    </div>
-  </div>
+  <div class="project-flex">
+    <article class="project-block project-malnutrition">
+      <h3>2. Visualizing Global Trends in Child Malnutrition (Academic Project)</h3>
+      <p>Leveraging global health datasets from WHO, UNICEF, and the World Bank, this project offered a deep dive into malnutrition trends—analyzing stunting, wasting, underweight, and overweight metrics across geography, gender, and age. By transforming complex raw data into interactive dashboards, the project empowered global stakeholders to make informed decisions targeting child health inequalities.</p>
+      <p><strong>Key Deliverables:</strong></p>
+      <ul>
+        <li>Malnutrition Severity Dashboard: Filterable by country, region, gender, and year—offering a 360° view of malnutrition prevalence</li>
+        <li>Child Patterns Dashboard: Trend analysis by age, visualized through scatter plots, time-series, box plots, and stacked area charts</li>
+        <li>Geospatial Heatmaps: Interactive mapping to highlight regional malnutrition disparities</li>
+      </ul>
+      <p><strong>Data Engineering & Insights:</strong></p>
+      <ul>
+        <li>Cleaned & standardized massive health datasets, resolving missing and inconsistent values</li>
+        <li>Mapped historical data (1970–2022) to expose evolving trends across urban-rural lines and genders</li>
+        <li>Identified critical hotspots like Papua New Guinea and Yemen demanding urgent intervention</li>
+      </ul>
+      <p><strong>Tools & Tech Stack:</strong></p>
+      <ul>
+        <li>Python (Pandas, NumPy): For data cleaning, transformation, and wrangling</li>
+        <li>Tableau / Power BI: To build interactive, high-impact dashboards</li>
+        <li>Excel / Google Sheets: Initial validation and exploration</li>
+        <li>Visualization Techniques: Geospatial mapping, trend & comparative analysis, interactive filters</li>
+      </ul>
+    </article>
+    <div class="gif-container">
+      <img src="https://cdn.dribbble.com/users/19455/screenshots/5808898/loader.gif" alt="Dashboard Loading GIF" />
+    </div>
+  </div>
 
-  <div class="project-flex">
-    <article class="project-block project-fraud">
-      <h3>3. AI-Driven Fraud Detection System (Academic Project)</h3>
-      <p>Designed a machine learning system to identify and flag fraudulent transactions using an ensemble of supervised models including Random Forest, Logistic Regression, and XGBoost. The project achieved high accuracy and recall rates, demonstrating the potential for scalable fraud detection in financial services.</p>
-      <p><strong>Key Features:</strong></p>
-      <ul>
-        <li>Feature Engineering: Created new features from transaction metadata to improve model performance</li>
-        <li>Model Selection & Tuning: Compared multiple algorithms to select the best performer based on F1-score</li>
-        <li>Imbalanced Data Handling: Applied SMOTE and undersampling techniques to balance classes</li>
-        <li>Deployment: Created a REST API to serve the model predictions</li>
-      </ul>
-      <p><strong>Technologies Used:</strong></p>
-      <ul>
-        <li>Python (Scikit-learn, XGBoost, Pandas, NumPy)</li>
-        <li>Flask: API development for real-time prediction</li>
-        <li>Docker: Containerization for deployment</li>
-        <li>Git & GitHub: Version control</li>
-      </ul>
-    </article>
-    <div class="gif-container">
-      <img src="https://i.pinimg.com/originals/12/b7/87/12b7877ea50bc630d3c2367553a4e1a3.gif" alt="Work Mood GIF" />
-    </div>
-  </div>
+  <div class="project-flex">
+    <article class="project-block project-fraud">
+      <h3>3. Financial Fraud Detection — Machine Learning Model (Academic Project)</h3>
+      <p>This project addressed the escalating challenge of financial fraud using supervised machine learning. By applying multiple models on a labeled dataset, the system aimed to detect suspicious transactions effectively, prioritizing recall to minimize undetected fraud and integrating fairness metrics to reduce bias.</p>
+      <p><strong>Approach & Methodology:</strong></p>
+      <ul>
+        <li>Dataset: Publicly available transaction data with fraud labels</li>
+        <li>Preprocessing: Balanced classes using SMOTE, handled missing values, feature scaling</li>
+        <li>Models Trained: Logistic Regression, Random Forest, XGBoost, Neural Networks</li>
+        <li>Evaluation Metrics: Precision, Recall, F1-score, ROC-AUC, with focus on minimizing false negatives</li>
+        <li>Fairness Checks: Monitored model bias across demographics</li>
+      </ul>
+      <p><strong>Tools & Technologies:</strong></p>
+      <ul>
+        <li>Python (scikit-learn, imbalanced-learn)</li>
+        <li>Jupyter Notebook for exploratory data analysis and prototyping</li>
+        <li>Matplotlib & Seaborn for visualization</li>
+      </ul>
+      <p><strong>Outcomes:</strong></p>
+      <ul>
+        <li>Achieved high recall (>0.9) with acceptable precision</li>
+        <li>Reduced false negatives by 15% compared to baseline models</li>
+        <li>Implemented fairness-aware model evaluation to ensure equitable detection</li>
+      </ul>
+    </article>
+    <div class="gif-container">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Lightning-movie.gif" alt="Lightning Animation GIF" />
+    </div>
+  </div>
+</section>
+  
+  <section id="leadership" class="page-section">
+  <h2>Leadership</h2>
+  <p>Coming Soon or Add content here.</p>
 </section>
 
 <section id="certifications" class="certifications-section">
@@ -1203,170 +1278,121 @@ Responsive
   <p id="datetime">© 2025 Harshitha. All rights reserved.</p>
 </footer>
 
-<script>
-  // Update date and time dynamically
-  const datetime = document.getElementById("datetime");
-  const now = new Date();
-  datetime.innerHTML = `© ${now.getFullYear()} Harshitha. All rights reserved.`;
-</script>
-
-
 
 <script>
-// ================================
-// DOM Ready - Initialize Navigation
-// ================================
-document.addEventListener('DOMContentLoaded', function () {
-  const navLinks = document.querySelectorAll('#navbar a'); // All navbar links
-  const sections = document.querySelectorAll('.page-section'); // All content sections
+  document.addEventListener('DOMContentLoaded', () => {
+    // ===== Section Navigation =====
+    const navLinks = document.querySelectorAll('#navbar a, .glass-nav a');
+    const sections = document.querySelectorAll('.page-section');
 
-  // ===== Function: Show Selected Section =====
-  function showSection(id) {
-    // Hide all sections
-    sections.forEach(section => {
-      section.classList.remove('active');
-      section.style.display = 'none';
-    });
+    function showSection(sectionId) {
+      // Hide all sections
+      sections.forEach(section => {
+        section.classList.remove('active');
+        section.style.display = 'none';
+      });
 
-    // Show target section if it exists
-    const target = document.getElementById(id);
-    if (target) {
-      target.classList.add('active');
-      target.style.display = 'block';
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Update the active class on nav links
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-    });
-    const activeLink = document.querySelector(`#navbar a[href="#${id}"]`);
-    if (activeLink) activeLink.classList.add('active');
-  }
-
-  // ===== Function: Attach click events to navbar links =====
-  navLinks.forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault(); // Prevent default anchor behavior
-      const targetId = this.getAttribute('href').substring(1); // Remove '#' from href
-      showSection(targetId); // Show the corresponding section
-    });
-  });
-
-  // ===== Show Home Section on Page Load =====
-  showSection('home');
-});
-
-// ================================
-// Time and Date Functionality
-// ================================
-const copyrightElem = document.getElementById("copyright");
-const datetimeElem = document.getElementById("datetime");
-
-function updateDateTime() {
-  const now = new Date();
-
-  // Format current date and time with full month name etc.
-  const options = {
-    weekday: 'long',      // Friday
-    year: 'numeric',      // 2025
-    month: 'long',        // May
-    day: 'numeric',       // 23
-    hour: '2-digit',      // 04
-    minute: '2-digit',    // 30
-    hour12: true          // AM/PM
-  };
-  const formattedDate = now.toLocaleString('en-US', options);
-
-  if (datetimeElem) {
-    datetimeElem.textContent = `Current date & time: ${formattedDate}`;
-  }
-}
-
-// Set copyright year dynamically once (year only)
-function updateCopyright() {
-  const year = new Date().getFullYear();
-  if (copyrightElem) {
-    copyrightElem.textContent = `© ${year} Harshitha. All rights reserved.`;
-  }
-}
-
-updateCopyright();
-updateDateTime();
-setInterval(updateDateTime, 60000); // update time every minute
-
-
-  // ==============================
-// Show Section Function
-// Controls visibility of page sections based on clicked nav item
-// Also updates active navigation link styling
-// ==============================
-function showSection(sectionId) {
-  // Get all sections
-  const sections = document.querySelectorAll('.page-section');
-  sections.forEach(section => {
-    if(section.id === sectionId) {
-      section.classList.add('active');
-    } else {
-      section.classList.remove('active');
-    }
-  });
-
-  // Optionally update active nav styling
-  const navLinks = document.querySelectorAll('.glass-nav a');
-  navLinks.forEach(link => {
-    if (link.getAttribute('href') === `#${sectionId}`) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
-  });
-}
-  //========================================
-// JS: Animate Certification Timeline Cards  On Scroll Into View
-//========================================
-  const certCards = document.querySelectorAll('.cert-card');
-
-  function showVisibleCerts() {
-    certCards.forEach(card => {
-      const rect = card.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 50) {
-        card.classList.add('visible');
+      // Show the selected section
+      const target = document.getElementById(sectionId);
+      if (target) {
+        target.classList.add('active');
+        target.style.display = 'block';
+        target.scrollIntoView({ behavior: 'smooth' });
       }
+
+      // Update active link classes
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === `#${sectionId}`) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+
+    // Attach click events to nav links
+    navLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        showSection(targetId);
+      });
     });
-  }
 
-  window.addEventListener('scroll', showVisibleCerts);
-  window.addEventListener('load', showVisibleCerts);
+    // Show Home on Load
+    showSection('home');
 
-// ================================
-   //MASONRY GRID ITEM RESIZING SCRIPT Dynamically adjusts the grid row spans for masonry-style layout based on item height
-//=================================
-function resizeMasonryItems() {
-  const grid = document.querySelector('.certification-cards');
-  if (!grid) return; // Exit if the grid is not found
+    // ===== Date and Time Handling =====
+    const datetimeElem = document.getElementById("datetime");
+    const copyright =
+      document.getElementById("copyright");
 
-  const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'), 10);
-  const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('gap'), 10);
-  const items = grid.querySelectorAll('.cert-card');
+    function updateDateTime() {
+      const now = new Date();
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      };
+      const formatted = now.toLocaleString('en-US', options);
+      if (datetimeElem) {
+        datetimeElem.textContent = `Current date & time: ${formatted}`;
+      }
+    }
 
-  items.forEach(item => {
-    // Temporarily unset height for proper measurement
-    item.style.gridRowEnd = "span 1";
-    const contentHeight = item.scrollHeight;
-    const rowSpan = Math.ceil((contentHeight + rowGap) / (rowHeight + rowGap));
-    item.style.gridRowEnd = `span ${rowSpan}`;
+    function updateCopyright() {
+      const year = new Date().getFullYear();
+      if (copyright) {
+        copyright.textContent = `© ${year} Harshitha. All rights reserved.`;
+      }
+    }
+
+    updateDateTime();
+    updateCopyright();
+    setInterval(updateDateTime, 60000); // Update every minute
+
+    // ===== Animate Certification Cards on Scroll =====
+    const certCards = document.querySelectorAll('.cert-card');
+
+    function showVisibleCerts() {
+      certCards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          card.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', showVisibleCerts);
+    window.addEventListener('load', showVisibleCerts);
+
+    // ===== Masonry Grid Resize =====
+    function resizeMasonryItems() {
+      const grid = document.querySelector('.certification-cards');
+      if (!grid) return;
+
+      const rowHeight = parseInt(getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+      const rowGap = parseInt(getComputedStyle(grid).getPropertyValue('gap'));
+      const items = grid.querySelectorAll('.cert-card');
+
+      items.forEach(item => {
+        item.style.gridRowEnd = "span 1";
+        const contentHeight = item.scrollHeight;
+        const rowSpan = Math.ceil((contentHeight + rowGap) / (rowHeight + rowGap));
+        item.style.gridRowEnd = `span ${rowSpan}`;
+      });
+    }
+
+    window.addEventListener('load', resizeMasonryItems);
+    window.addEventListener('resize', resizeMasonryItems);
+
+    setTimeout(resizeMasonryItems, 100); // Ensure content is fully rendered
   });
-}
-
-// Recalculate on load and resize
-window.addEventListener('load', resizeMasonryItems);
-window.addEventListener('resize', resizeMasonryItems);
-
-// Optional: Also resize after fonts/images load
-window.addEventListener('DOMContentLoaded', () => {
-  setTimeout(resizeMasonryItems, 100); // Delay ensures all content is rendered
-});
 
   
 </script>
