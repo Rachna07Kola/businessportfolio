@@ -22,38 +22,75 @@
             overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
-        /* Glass Navigation Bar */
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.15); /* Slightly more opaque for readability */
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            padding: 15px 0;
-            z-index: 1000;
-            transition: top 0.3s; /* Smooth hide/show on scroll */
-        }
+     /* Glass Navigation Bar */
+    .glass-nav {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        padding: 15px 0;
+        z-index: 1000;
+        transition: top 0.3s;
+    }
 
-        .glass-nav a {
-            color: #333; /* Darker text for better contrast */
-            text-decoration: none;
-            padding: 10px 20px;
-            margin: 0 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-            font-weight: bold;
-        }
+    .glass-nav a {
+        color: #333;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    }
 
-        .glass-nav a:hover,
-        .glass-nav a.active {
-            background-color: rgba(0, 123, 255, 0.8); /* A vibrant blue */
-            color: #fff;
-            transform: translateY(-2px);
-        }
+    .glass-nav a:hover,
+    .glass-nav a.active {
+        background-color: rgba(0, 123, 255, 0.8);
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f9f9f9;
+    }
+
+    /* Section Styling */
+    .page-section {
+        padding: 100px 5%;
+        min-height: 100vh;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        transform: translateY(20px);
+    }
+
+    .page-section.active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .page-section h1, .page-section h2, .page-section h3 {
+        color: #0056b3;
+        margin-bottom: 20px;
+    }
+
+    .page-section p {
+        max-width: 800px;
+        margin: 0 auto 20px auto;
+        color: #555;
+    }
 
         /* Section Styling */
         .page-section {
@@ -499,18 +536,7 @@
 
 
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .glass-nav {
-                flex-wrap: wrap;
-                padding: 10px 0;
-            }
 
-            .glass-nav a {
-                padding: 8px 12px;
-                margin: 5px;
-                font-size: 0.9em;
-            }
 
             .page-section {
                 padding: 60px 3%;
@@ -559,18 +585,18 @@
 </head>
 <body>
     <header>
-        <nav id="navbar" class="glass-nav">
-            <a href="#home">Home</a>
-            <a href="#about">About Me</a>
-            <a href="#career-summary">Career Summary</a>
-            <a href="#education">Education</a>
-            <a href="#skills">Skills</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#leadership">Leadership</a>
-            <a href="#certifications">Certifications</a>
-        </nav>
-    </header>
+  <nav id="navbar" class="glass-nav">
+    <a href="#home" data-target="home">Home</a>
+    <a href="#about" data-target="about">About Me</a>
+    <a href="#career-summary" data-target="career-summary">Career Summary</a>
+    <a href="#education" data-target="education">Education</a>
+    <a href="#skills" data-target="skills">Skills</a>
+    <a href="#experience" data-target="experience">Experience</a>
+    <a href="#projects" data-target="projects">Projects</a>
+    <a href="#leadership" data-target="leadership">Leadership</a>
+    <a href="#certifications" data-target="certifications">Certifications</a>
+  </nav>
+</header>
 
     <section id="home" class="content page-section">
         <div class="text-block">
