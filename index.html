@@ -32,43 +32,46 @@ body > *:not(footer) {
 /* =========================
    NAVIGATION BAR STYLES
 ========================= */
-.glass-nav { 
+/* =========================
+   NAVIGATION BAR STYLES
+========================= */
+.glass-nav {
   position: fixed;
   top: 0;
   width: 100%;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  background: rgba(255, 255, 255, 0.1); /* Light transparent */
-  box-shadow: 0 8px 32px rgba(0, 245, 212, 0.1);
-  border-bottom: 1px solid rgba(0, 245, 212, 0.2);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  background: rgba(0, 30, 40, 0.7); /* Improved contrast */
+  box-shadow: 0 8px 32px rgba(0, 245, 212, 0.3);
+  border-bottom: 1px solid rgba(0, 245, 212, 0.4);
   z-index: 9999;
   padding: 15px 40px;
   display: flex;
   justify-content: center;
   gap: 20px;
-  /* Center links horizontally */
-  flex-wrap: wrap; /* For smaller screens */
+  flex-wrap: wrap;
 }
 
-/* Remove ul styles because your nav uses direct <a> children */
+/* Navigation links */
 .glass-nav a {
   text-decoration: none;
   font-weight: 600;
   font-size: 1.1em;
-  color: #c0f9f3;
-  padding: 8px 15px;
+  color: #ffffff;
+  padding: 10px 18px;
   border-radius: 8px;
   position: relative;
   transition: 
-    color 0.3s ease, 
+    color 0.6s ease,
+    background 0.6s ease,
     box-shadow 0.3s ease,
     transform 0.3s ease,
     opacity 0.6s ease;
-  opacity: 0;  /* Start hidden for animation */
+  opacity: 0;
   animation: fadeInUp 0.5s forwards;
 }
 
-/* Stagger animation delays for each nav item */
+/* Staggered animation delays */
 .glass-nav a:nth-child(1) { animation-delay: 0.2s; }
 .glass-nav a:nth-child(2) { animation-delay: 0.4s; }
 .glass-nav a:nth-child(3) { animation-delay: 0.6s; }
@@ -77,7 +80,9 @@ body > *:not(footer) {
 .glass-nav a:nth-child(6) { animation-delay: 1.2s; }
 .glass-nav a:nth-child(7) { animation-delay: 1.4s; }
 .glass-nav a:nth-child(8) { animation-delay: 1.6s; }
+.glass-nav a:nth-child(9) { animation-delay: 1.8s; }
 
+/* Glow effect base */
 .glass-nav a::before {
   content: "";
   position: absolute;
@@ -90,9 +95,11 @@ body > *:not(footer) {
   z-index: -1;
 }
 
+/* HOVER: Color Shift + Glow */
 .glass-nav a:hover,
 .glass-nav a:focus {
-  color: #00f5d4;
+  color: #000;
+  background: linear-gradient(45deg, #00f5d4, #00d8b0);
   box-shadow: 0 0 15px #00f5d4, 0 0 25px #00d8b0;
   transform: translateY(-3px);
 }
@@ -102,7 +109,7 @@ body > *:not(footer) {
   opacity: 1;
 }
 
-/* Fade in and slide up animation */
+/* Fade-in and slide-up animation */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -114,12 +121,10 @@ body > *:not(footer) {
   }
 }
 
-/* Responsive: stack nav links on smaller screens */
+/* Responsive styles for small screens */
 @media (max-width: 768px) {
   .glass-nav {
     padding: 15px 20px;
-    flex-wrap: wrap;
-    justify-content: center;
     gap: 10px;
   }
   .glass-nav a {
@@ -127,6 +132,7 @@ body > *:not(footer) {
     padding: 6px 10px;
   }
 }
+
 
 /* =========================
    CONTENT WRAPPER & SECTIONS
