@@ -203,7 +203,7 @@ nav#navbar a.active::after {
 
 .project-block {
   position: relative;
-  flex: 2 1 600px;
+  flex: 2 1 600px;education
   padding: 24px 32px;
   border-radius: 16px;
   background: rgba(255,255,255,0.8);
@@ -274,53 +274,188 @@ nav#navbar a.active::after {
 /* =========================
    ABOUT ME SECTION
 ========================= */
-#about {
-  padding: 60px 20px;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: #f0f8ff;
-  font-family: 'Segoe UI', sans-serif;
-  text-align: center;
-  border-radius: 12px;
-  max-width: 900px;
-  margin: 60px auto;
-  animation: fadeInGlow 2s ease-in-out forwards;
-  opacity: 0;
-  transform: translateY(40px);
-  box-shadow: 0 0 15px rgba(173, 216, 230, 0.3);
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
+    line-height: 1.6;
 }
 
-@keyframes fadeInGlow {
+/* =========================
+ABOUT ME SECTION - Main Container
+========================= */
+#about {
+  display: flex; /* Inherited from .about-me-section */
+  align-items: center; /* Inherited from .about-me-section */
+  justify-content: center; /* Inherited from .about-me-section */
+  gap: 50px; /* Inherited from .about-me-section */
+
+  padding: 80px 5%; /* Adjusted for consistency with previous .about-me-section padding */
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #f0f8ff;
+  font-family: 'Times New Roman', Times, serif; /* Specific to this section */
+  text-align: center;
+  border-radius: 12px;
+  max-width: 1200px; /* Max width from .about-me-section, typically wider than 900px for flex */
+  margin: 60px auto;
+
+  /* Main container animation */
+  animation: containerFadeIn 1s ease-out forwards;
+  opacity: 0; /* Initial state */
+  transform: scale(0.95); /* Start slightly smaller */
+  box-shadow: 0 0 15px rgba(173, 216, 230, 0.3);
+  overflow: hidden; /* Important for child animations to not show before main container appears */
+}
+
+@keyframes containerFadeIn {
   0% {
     opacity: 0;
-    transform: translateY(40px);
+    transform: scale(0.95);
     box-shadow: 0 0 0px rgba(173, 216, 230, 0);
-  }
-  50% {
-    opacity: 0.8;
-    box-shadow: 0 0 15px rgba(173, 216, 230, 0.6);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
     box-shadow: 0 0 25px rgba(173, 216, 230, 0.7);
   }
 }
 
-#about h2 {
+/* --- Child Element Animations --- */
+.image-container {
+    flex-shrink: 0;
+    opacity: 0; /* Initial state for animation */
+    transform: translateY(20px); /* Start below */
+    animation: fadeInSlideUp 0.8s ease-out forwards 0.5s; /* 0.5s delay after containerFadeIn */
+}
+
+.image-container img {
+    width: 350px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.content-container {
+    max-width: 600px;
+}
+
+/* Common animation for text elements within content-container */
+.content-container h1,
+.content-container p,
+.content-container .connect-text,
+.call-to-action-button {
+    opacity: 0; /* Initial state for animation */
+    transform: translateY(20px); /* Start below */
+    animation: fadeInSlideUp 0.8s ease-out forwards;
+}
+
+/* Staggered delays for content */
+.content-container h1 {
+    animation-delay: 0.7s; /* Delay after main container animates */
+}
+.content-container p:nth-of-type(1) { /* First paragraph */
+    animation-delay: 0.9s;
+}
+.content-container p:nth-of-type(2) { /* Second paragraph (the long one) */
+    animation-delay: 1.1s;
+}
+.content-container p:nth-of-type(3) { /* Third paragraph (the second long one) */
+    animation-delay: 1.3s;
+}
+.content-container .connect-text {
+    animation-delay: 1.5s;
+}
+.call-to-action-button {
+    animation-delay: 1.7s;
+}
+
+
+@keyframes fadeInSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Existing Styles for elements within the section (keep these) --- */
+#about h2 { /* Note: your HTML uses H1, so this H2 style won't apply directly to "Hi 👋 I'm Brenda!" unless you change the HTML */
   font-size: 36px;
   color: #00f5d4;
   text-shadow: 0 0 10px rgba(0, 245, 212, 0.6);
   margin-bottom: 20px;
 }
 
-#about p {
-  font-size: 18px;
-  line-height: 1.8;
-  color: #e0f7fa;
-  max-width: 800px;
+/* Adjust h1 style for the "Hi, I'm Brenda!" */
+.content-container h1 {
+  font-size: 3.5em; /* Large heading */
+  font-weight: 600;
+  color: #00f5d4; /* Changed to match h2 glow color */
+  text-shadow: 0 0 10px rgba(0, 245, 212, 0.6); /* Added glow to h1 */
+  margin-bottom: 20px;
+}
+.content-container p {
+  font-size: 1.2em;
+  line-height: 1.8; /* Added line-height from #about p for consistency */
+  color: #e0f7fa; /* Lightened for contrast against dark background */
+  max-width: 800px; /* Applied to p within content-container */
   margin: 0 auto 20px;
 }
+.content-container .connect-text {
+    font-size: 1.3em;
+    font-weight: 500;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: #00f5d4; /* Made glowy for connection */
+    text-shadow: 0 0 5px rgba(0, 245, 212, 0.4);
+}
 
+.call-to-action-button {
+    background-color: #00f5d4; /* Changed to a vibrant accent color */
+    color: #0f2027; /* Dark text for contrast */
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 245, 212, 0.4); /* Glow effect */
+}
+
+.call-to-action-button:hover {
+    background-color: #00e0c0; /* Slightly darker on hover */
+    transform: translateY(-3px); /* More pronounced lift */
+    box-shadow: 0 0 15px rgba(0, 245, 212, 0.7); /* More pronounced glow */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #about { /* Apply to the main section */
+        flex-direction: column;
+        text-align: center;
+        padding: 50px 3%;
+        gap: 30px;
+    }
+
+    .image-container img {
+        width: 250px;
+        height: 250px;
+    }
+
+    .content-container h1 {
+        font-size: 2.5em;
+    }
+
+    .content-container p {
+        font-size: 1em;
+    }
+}
 /* =========================
    SKILLS SECTION
 ========================= */
@@ -407,36 +542,51 @@ footer {
     transform: translateY(0);
   }
 }
-/* =========================
-   HOME SECTION
-========================= */
+
+ /* ============================
+   HOME SECTION BACKGROUND
+============================ */
 #home {
   position: relative;
-  min-height: 100vh; /* full viewport height */
-   width: 100vw;            /* full viewport width */
-  background: url('https://cdn.dribbble.com/userupload/35540897/file/original-7b9335903fdfa34d29222e2b4faccd5b.gif') no-repeat center center / cover;
+  min-height: 100vh;       /* Full viewport height */
+  width: 100vw;            /* Full viewport width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
   overflow: hidden;
   z-index: 0;
+
+  /* Background GIF applied here only */
+  background: url('https://cdn.dribbble.com/userupload/35540897/file/original-7b9335903fdfa34d29222e2b4faccd5b.gif') no-repeat center center;
+  background-size: cover;
+  background-attachment: scroll; /* Keeps it within the section */
 }
 
+/* Optional overlay for contrast */
 #home::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.35); /* dark overlay for contrast */
+  background: rgba(0, 0, 0, 0.35); /* Optional dark overlay */
   z-index: 1;
 }
 
-#home .text-block { 
-  background: rgba(255, 255, 255, 0.15); /* very light transparent white */
+/* ============================
+   HOME SECTION TEXT BLOCK
+============================ */
+#home .text-block {
+  background: rgba(255, 255, 255, 0.15); /* Light transparent white */
   color: #eee;
-  padding: 20px;
+  padding: 20px 30px;
   border-radius: 12px;
   position: relative;
   z-index: 2;
+  animation: fadeIn 2s ease-in-out forwards;
+  opacity: 0; /* Start hidden for animation */
 }
 
-/* Animation for home section text fade-in and slide-up */
+/* Text fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -448,11 +598,52 @@ footer {
   }
 }
 
-/* Apply animation to home section text block */
-#home .text-block {
-  animation: fadeIn 2s ease-in-out forwards;
-  opacity: 0; /* start hidden for animation */
+/* ================================
+   EDUCATION SECTION CARD STYLES
+================================ */
+
+/* Container for all education cards - uses Flexbox for layout */
+.card-grid {
+  display: flex;               /* Arrange cards in a row */
+  gap: 20px;                   /* Space between cards */
+  flex-wrap: wrap;            /* Wrap to next line if needed */
+  justify-content: center;    /* Center all cards horizontally */
 }
+
+/* General card styling */
+.card {
+  border-radius: 10px;         /* Rounded corners */
+  padding: 20px;               /* Internal spacing */
+  width: 280px;                /* Fixed width for uniformity */
+  color: white;                /* Text color */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);  /* Subtle shadow for depth */
+  transition: transform 0.3s ease;        /* Smooth animation on hover */
+}
+
+/* Hover effect - lift card slightly */
+.card:hover {
+  transform: translateY(-8px);
+}
+
+/* ================================
+   CARD COLOR THEMES (GRADIENTS)
+================================ */
+
+/* Purple-Blue gradient card (e.g., UNT) */
+.purple-card {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
+
+/* Light Blue gradient card (e.g., Osmania) */
+.blue-card {
+  background: linear-gradient(135deg, #2193b0, #6dd5ed);
+}
+
+/* Orange gradient card (optional for other content) */
+.orange-card {
+  background: linear-gradient(135deg, #ff8008, #ffc837);
+}
+
 
   </style>
 </head>
@@ -481,20 +672,38 @@ footer {
    </div>
 </section>
 
-<section id="about" class="page-section">
+<!-- <section id="about" class="page-section">
   <p>
     I am a detail-oriented and driven master's student in Business Analytics at the University of North Texas, with a strong foundation in data analysis, problem-solving, and business intelligence. With experience in AI-driven solutions, data visualization, and statistical modeling, I am skilled at turning complex data into actionable insights that support strategic decision-making.
   </p>
   <p>
     My hands-on work includes projects in malnutrition analytics, AI-powered hiring systems, and fraud detection, showcasing my ability to blend technical expertise with real-world impact. I am proficient in Python, Tableau, SQL, and cloud technologies, and passionate about leveraging data to drive business growth and innovation.
   </p>
+</section> -->
+
+
+  <!-- ABOUT SECTION -->
+<section id="about" class="page-section about-me-section">
+  <div class="image-container">
+    <img src="https://img.freepik.com/premium-vector/professional-cute-girl-vector-illustration-portfolio_1322206-31078.jpg" alt="Brenda">
+  </div>
+  <div class="content-container">
+    <h1>Hi 👋 I'm Harshitha!</h1>
+    <p>
+      I am a detail-oriented and driven master's student in Business Analytics at the University of North Texas, with a strong foundation in data analysis, problem-solving, and business intelligence. With experience in AI-driven solutions, data visualization, and statistical modeling, I am skilled at turning complex data into actionable insights that support strategic decision-making.
+    </p>
+    <p>
+      My hands-on work includes projects in malnutrition analytics, AI-powered hiring systems, and fraud detection, showcasing my ability to blend technical expertise with real-world impact. I am proficient in Python, Tableau, SQL, and cloud technologies, and passionate about leveraging data to drive business growth and innovation.
+    </p>
+  </div>
 </section>
+
 
 <section id="career-summary" class="page-section">
   <p>I am a highly motivated and analytical Master's student in Business Analytics, with a proven ability to leverage data for strategic decision-making. My experience spans AI-driven solutions, data visualization, and statistical modeling, allowing me to transform complex datasets into actionable insights. I thrive in dynamic environments where innovation and continuous learning are valued.</p>
 </section>
 
-<section id="education" class="page-section">
+<!--<section id="education" class="page-section">
   <h3>Master of Science in Business Analytics | University of North Texas, Denton, TX</h3>
   <p>Expected Graduation: May 2025</p>
   <ul>
@@ -507,7 +716,30 @@ footer {
     <li>Relevant Coursework: Data Structures and Algorithms, Database Management Systems, Machine Learning, Web Technologies</li>
     <li>Awarded for academic excellence (top 10% of class).</li>
   </ul>
+</section> -->
+
+
+  <section id="education" class="page-section">
+  <h2>Education</h2>
+  <div class="card-grid">
+    <div class="card purple-card">
+      <h3>University of North Texas</h3>
+      <p><strong>Degree:</strong> M.S. Business Analytics</p>
+      <p><strong>Expected Graduation:</strong> Dec 2025</p>
+      <p><strong>GPA:</strong> 3.5 / 4.0</p>
+      <p><strong>Coursework:</strong> Data Visualization, Data Mining, Predictive Analysis, Business Statistics</p>
+      <p><strong>Capstone:</strong> Improved sales forecasts by 15% using ML models</p>
+    </div>
+    <div class="card blue-card">
+      <h3>Osmania University</h3>
+      <p><strong>Degree:</strong> Bachelor of Commerce (Computer Applications)</p>
+      <p><strong>Duration:</strong> June 2020 – April 2023</p>
+      <p><strong>GPA:</strong> 4.0 / 4.0</p>
+      <p><strong>Coursework:</strong> Database Management Systems, Business Statistics, Management Information Systems, Financial Accounting</p>
+    </div>
+  </div>
 </section>
+
 
 <section id="skills" class="page-section">
   <div class="skills-container">
