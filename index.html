@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio</title>
+  <title>Business Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
 
 /* =========================
@@ -326,22 +327,22 @@ body {
 /* =========================
 ABOUT ME SECTION - Main Container
 ========================= */
+/* =========================
+ABOUT ME SECTION - Main Container
+========================= */
 #about {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Image on the right */
+  justify-content: space-between;
   gap: 50px;
   flex-wrap: wrap;
-
   padding: 80px 5%;
-  background: linear-gradient(135deg, #cce5f6, #e8f0fc); /* Lighter blue gradient */
+  background: linear-gradient(135deg, #cce5f6, #e8f0fc);
   color: #0f2027;
   font-family: 'Times New Roman', Times, serif;
   border-radius: 12px;
   max-width: 1200px;
   margin: 60px auto;
-  text-align: left;
-
   animation: containerFadeIn 1s ease-out forwards;
   opacity: 0;
   transform: scale(0.95);
@@ -361,8 +362,13 @@ ABOUT ME SECTION - Main Container
 }
 
 /* =========================
-Child Elements
+Content and Image Styling
 ========================= */
+.content-container {
+  max-width: 600px;
+  flex: 1;
+}
+
 .image-container {
   flex-shrink: 0;
   opacity: 0;
@@ -376,23 +382,19 @@ Child Elements
   object-fit: cover;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-
-  animation: floatImage 5s ease-in-out infinite alternate;
+  animation: floatImage 4s ease-in-out infinite alternate;
 }
 
 @keyframes floatImage {
-  0% { transform: translateY(0px); }
-  100% { transform: translateY(-8px); }
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
 }
 
-.content-container {
-  max-width: 600px;
-}
-
+/* =========================
+Typography Animations
+========================= */
 .content-container h1,
-.content-container p,
-.content-container .connect-text,
-.call-to-action-button {
+.content-container p {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInSlideUp 0.8s ease-out forwards;
@@ -402,8 +404,6 @@ Child Elements
 .content-container p:nth-of-type(1) { animation-delay: 0.9s; }
 .content-container p:nth-of-type(2) { animation-delay: 1.1s; }
 .content-container p:nth-of-type(3) { animation-delay: 1.3s; }
-.content-container .connect-text { animation-delay: 1.5s; }
-.call-to-action-button { animation-delay: 1.7s; }
 
 @keyframes fadeInSlideUp {
   from {
@@ -416,6 +416,9 @@ Child Elements
   }
 }
 
+/* =========================
+Text Styles
+========================= */
 .content-container h1 {
   font-size: 3.5em;
   font-weight: 600;
@@ -428,39 +431,15 @@ Child Elements
   font-size: 1.2em;
   line-height: 1.8;
   color: #333;
-  margin: 0 auto 20px;
+  margin-bottom: 20px;
 }
 
-.content-container .connect-text {
-  font-size: 1.3em;
-  font-weight: 500;
-  margin-top: 30px;
-  color: #005f73;
-  text-shadow: 0 0 5px rgba(0, 95, 115, 0.3);
-}
-
-.call-to-action-button {
-  background-color: #0077b6;
-  color: #fff;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.1em;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 119, 182, 0.4);
-}
-
-.call-to-action-button:hover {
-  background-color: #005f73;
-  transform: translateY(-3px);
-  box-shadow: 0 0 15px rgba(0, 119, 182, 0.7);
-}
-
-/* Responsive adjustments */
+/* =========================
+Responsive
+========================= */
 @media (max-width: 768px) {
   #about {
-    flex-direction: column-reverse; /* Image below text on mobile */
+    flex-direction: column-reverse;
     text-align: center;
     padding: 50px 3%;
   }
@@ -544,54 +523,55 @@ Child Elements
    FOOTER
 ========================= */
 
-  main {
-    flex: 1; /* Let content grow and push footer down */
-  }
+/* ========== FOOTER STYLES ========== */
+.footer {
+  background: linear-gradient(135deg, #e9d5ff, #c084fc); /* Light purple gradient */
+  color: #2d0353;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 1em;
+  animation: fadeSlideUp 2s ease forwards;
+  opacity: 0;
+  transform: translateY(40px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 40px;
+}
 
-  .footer {
-    background: linear-gradient(135deg, #e9d5ff, #c084fc); /* Light purple gradient */
-    color: #2d0353;
-    text-align: center;
-    padding: 1.5rem 1rem;
-    font-size: 1em;
-    animation: fadeSlideUp 2s ease forwards;
+.footer .social-icons {
+  margin-top: 10px;
+  font-size: 1.8rem;
+}
+
+.footer .social-icons a {
+  margin: 0 0.75rem;
+  font-size: 1.5rem;
+  color: #2d0353;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer .social-icons a:hover {
+  color: #6b21a8;
+  transform: scale(1.2) rotate(3deg);
+}
+
+#datetime {
+  font-size: 0.85rem;
+  color: #4c1d95;
+  margin-top: 0.25rem;
+}
+
+/* ========== Footer Animation Keyframes ========== */
+@keyframes fadeSlideUp {
+  from {
     opacity: 0;
     transform: translateY(40px);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  .social-icons {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .social-icons a {
-    color: #2d0353;
-    margin: 0 0.75rem;
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
-
-  .social-icons a:hover {
-    color: #6b21a8;
-    transform: scale(1.2) rotate(3deg);
-  }
-
-  #datetime {
-    font-size: 0.85rem;
-    color: #4c1d95;
-    margin-top: 0.25rem;
-  }
-
-  @keyframes fadeSlideUp {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
  /* ============================
    HOME SECTION BACKGROUND
 ============================ */
@@ -909,10 +889,12 @@ Child Elements
     <p>
       My hands-on work includes impactful projects like malnutrition analytics, AI-powered hiring systems, and fraud detection—blending technical expertise with real-world application.
     </p>
+  </div>
   <div class="image-container">
     <img src="https://img.freepik.com/premium-vector/professional-cute-girl-vector-illustration-portfolio_1322206-31078.jpg" alt="Harshitha - Professional Illustration">
   </div>
 </section>
+
 
 
 <!-- ===========================
@@ -1149,7 +1131,10 @@ Child Elements
 
 
   <!-- Footer -->
-<footer class="footer">
+<<footer class="footer">
+  <!-- Heading -->
+  <p>Connect with me</p>
+
   <!-- Social Icons -->
   <div class="social-icons">
     <a href="https://www.linkedin.com/in/harshitha-sreiya-palaparthi-4434b4340" target="_blank" title="LinkedIn">
@@ -1158,14 +1143,24 @@ Child Elements
     <a href="mailto:harshithasrieya@gmail.com" title="Email">
       <i class="fas fa-envelope"></i>
     </a>
+    <a href="https://github.com/" target="_blank" title="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
   </div>
 
   <!-- Footer Text -->
-  <p>Made with Github <igo class="fab fa-github"></i> by Harshitha</p>
+  <p>Designed on github<i class="fab fa-github"></i> by Harshitha</p>
 
   <!-- Dynamic Date and Time -->
-  <p id="datetime"></p>
+  <p id="datetime">© 2025 Harshitha. All rights reserved.</p>
 </footer>
+
+<script>
+  // Update date and time dynamically
+  const datetime = document.getElementById("datetime");
+  const now = new Date();
+  datetime.innerHTML = `© ${now.getFullYear()} Harshitha. All rights reserved.`;
+</script>
 
 
 
@@ -1217,17 +1212,41 @@ document.addEventListener('DOMContentLoaded', function () {
 // ================================
 // Time and Date Functionality
 // ================================
- const dtElem = document.getElementById('datetime');
+const copyrightElem = document.getElementById("copyright");
+const datetimeElem = document.getElementById("datetime");
 
-  function updateDateTime() {
-    const now = new Date();
-    if (dtElem) {
-      dtElem.textContent = now.toLocaleString();
-    }
+function updateDateTime() {
+  const now = new Date();
+
+  // Format current date and time with full month name etc.
+  const options = {
+    weekday: 'long',      // Friday
+    year: 'numeric',      // 2025
+    month: 'long',        // May
+    day: 'numeric',       // 23
+    hour: '2-digit',      // 04
+    minute: '2-digit',    // 30
+    hour12: true          // AM/PM
+  };
+  const formattedDate = now.toLocaleString('en-US', options);
+
+  if (datetimeElem) {
+    datetimeElem.textContent = `Current date & time: ${formattedDate}`;
   }
+}
 
-  updateDateTime();
-  setInterval(updateDateTime, 60000);
+// Set copyright year dynamically once (year only)
+function updateCopyright() {
+  const year = new Date().getFullYear();
+  if (copyrightElem) {
+    copyrightElem.textContent = `© ${year} Harshitha. All rights reserved.`;
+  }
+}
+
+updateCopyright();
+updateDateTime();
+setInterval(updateDateTime, 60000); // update time every minute
+
 
   // ==============================
 // Show Section Function
