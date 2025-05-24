@@ -161,10 +161,12 @@ body > *:not(footer) {
     transform 0.6s ease;
   transform: translateY(20px); /* Slide down effect when hidden */
   z-index: 0;
+  display: none;
 }
 
 .page-section.active {
-  opacity: 1;
+  opacity: 0;
+  display: block;
   visibility: visible;
   height: auto;           /* Let the section expand to fit content */
   transform: translateY(0); /* Reset transform to original */
@@ -191,16 +193,6 @@ body > *:not(footer) {
   }
 }
     
-.page-section {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.page-section.active {
-  display: block;
-  opacity: 1;
-}
 
 /* =========================
    PROJECTS SECTION
@@ -771,13 +763,16 @@ Responsive
    Certifications Section Styles
    ================================ */
 
+/* ===============================
+   CERTIFICATIONS SECTION - MASONRY STYLE
+================================= */
 .certifications-section {
   padding: 60px 5%;
   max-width: 1000px;
   margin: 60px auto;
   background: linear-gradient(to right, #f3e8ff, #ede9fe);
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -788,22 +783,26 @@ Responsive
   margin-bottom: 40px;
 }
 
-/* Masonry grid container */
+/* Masonry Grid Container */
 .certification-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  grid-auto-rows: 12px;  /* controls the base row height */
+  grid-auto-rows: 12px;  /* Base row height for dynamic spanning */
   gap: 24px;
 }
 
-/* Cards */
+/* ===============================
+   CERTIFICATION CARD STYLES
+================================= */
 .cert-card {
+  position: relative;
   background: #fff;
   padding: 20px 25px;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(124, 58, 237, 0.15);
   color: #4c1d95;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .cert-card h3 {
@@ -816,6 +815,34 @@ Responsive
   font-size: 0.95em;
   line-height: 1.5;
   margin: 6px 0;
+}
+
+/* ===============================
+   RIBBON STYLE
+================================= */
+.ribbon {
+  position: absolute;
+  top: 12px;
+  left: -12px;
+  background: #7c3aed;
+  color: #fff;
+  padding: 6px 20px;
+  font-size: 0.75em;
+  font-weight: bold;
+  transform: rotate(-45deg);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  white-space: nowrap;
+}
+
+/* ===============================
+   RESPONSIVE BEHAVIOR
+================================= */
+@media (max-width: 600px) {
+  .certification-cards {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
 }
 
 
@@ -1127,27 +1154,26 @@ Responsive
 
 <section id="certifications" class="certifications-section">
   <h2>Certifications & Workshops</h2>
-  <div class="certification-cards">
-
-    <div class="cert-card">
-      <h3>Entrepreneurship Orientation Program</h3>
-      <p><strong>Organizer:</strong> National Small Industries Corporation (NSIC)</p>
-      <p><strong>Focus:</strong> Launching and sustaining startups</p>
-    </div>
-
-    <div class="cert-card">
-      <h3>Ad Mad Competition</h3>
-      <p><strong>Theme:</strong> Strategic advertising in high-pressure environments</p>
-    </div>
-
 <div class="cert-card">
-  <h3>Business Analytical Club</h3>
-  <p><strong>Organizer:</strong> University of North Texas Business School</p>
-  <p><strong>Academics:</strong> Actively participated in guest lectures on technologies and business as part of the curriculum</p>
+  <div class="ribbon">Certified</div>
+  <h3>Entrepreneurship Orientation Program</h3>
+  <p><strong>Organizer:</strong> National Small Industries Corporation (NSIC)</p>
+  <p><strong>Focus:</strong> Launching and sustaining startups</p>
 </div>
 
+<div class="cert-card">
+  <div class="ribbon">Winner</div>
+  <h3>Ad Mad Competition</h3>
+  <p><strong>Theme:</strong> Strategic advertising in high-pressure environments</p>
+</div>
 
-  </div>
+<div class="cert-card">
+  <div class="ribbon">UNT Guest Lecture</div>
+  <h3>Business Analytics Club</h3>
+  <p><strong>Organized by:</strong> UNT Business School</p>
+  <p><strong>Involvement:</strong> Actively participated in guest lectures on emerging technologies and business practices</p>
+</div>
+
 </section>
 
 
@@ -1313,26 +1339,34 @@ function showSection(sectionId) {
   window.addEventListener('scroll', showVisibleCerts);
   window.addEventListener('load', showVisibleCerts);
 
-/* ================================
-   MASONRY GRID ITEM RESIZING SCRIPT
-   Dynamically adjusts the grid row spans
-   for masonry-style layout based on item height
-================================= */
+// ================================
+   //MASONRY GRID ITEM RESIZING SCRIPT Dynamically adjusts the grid row spans for masonry-style layout based on item height
+//=================================
 function resizeMasonryItems() {
   const grid = document.querySelector('.certification-cards');
-  const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-  const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('gap'));
+  if (!grid) return; // Exit if the grid is not found
+
+  const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'), 10);
+  const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('gap'), 10);
   const items = grid.querySelectorAll('.cert-card');
 
   items.forEach(item => {
-    item.style.gridRowEnd = "span " + Math.ceil((item.getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
+    // Temporarily unset height for proper measurement
+    item.style.gridRowEnd = "span 1";
+    const contentHeight = item.scrollHeight;
+    const rowSpan = Math.ceil((contentHeight + rowGap) / (rowHeight + rowGap));
+    item.style.gridRowEnd = `span ${rowSpan}`;
   });
 }
 
-// Initial call
+// Recalculate on load and resize
 window.addEventListener('load', resizeMasonryItems);
-// Resize on window change
 window.addEventListener('resize', resizeMasonryItems);
+
+// Optional: Also resize after fonts/images load
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(resizeMasonryItems, 100); // Delay ensures all content is rendered
+});
 
   
 </script>
