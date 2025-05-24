@@ -32,9 +32,6 @@ body > *:not(footer) {
 /* =========================
    NAVIGATION BAR STYLES
 ========================= */
-/* =========================
-   NAVIGATION BAR STYLES
-========================= */
 .glass-nav {
   position: fixed;
   top: 0;
@@ -537,29 +534,55 @@ Child Elements
 /* =========================
    FOOTER
 ========================= */
-footer {
-  background-color: #0f2027;
-  color: white;
-  padding: 1.5rem 0;
-  text-align: center;
-  animation: fadeSlideUp 2s ease-in-out forwards;
-  opacity: 0;
-  transform: translateY(30px);
-  flex-shrink: 0; /* Prevent footer from shrinking */
-  margin-top: 0; /* remove space above footer */
-}
 
-@keyframes fadeSlideUp {
-  from {
+  main {
+    flex: 1; /* Let content grow and push footer down */
+  }
+
+  .footer {
+    background: linear-gradient(135deg, #e9d5ff, #c084fc); /* Light purple gradient */
+    color: #2d0353;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 1em;
+    animation: fadeSlideUp 2s ease forwards;
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
+  .social-icons {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .social-icons a {
+    color: #2d0353;
+    margin: 0 0.75rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .social-icons a:hover {
+    color: #6b21a8;
+    transform: scale(1.2) rotate(3deg);
+  }
+
+  #datetime {
+    font-size: 0.85rem;
+    color: #4c1d95;
+    margin-top: 0.25rem;
+  }
+
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
  /* ============================
    HOME SECTION BACKGROUND
 ============================ */
@@ -618,115 +641,97 @@ footer {
 /* ================================
    EDUCATION SECTION CARD STYLES
 ================================ */
-/* Logo and Title Alignment */
-.edu-title-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+/* ===== Education Timeline Section ===== */
+.education-timeline {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #2e1065;
+  text-align: center;
+  animation: fadeSlideUp 1.5s ease forwards;
+  opacity: 0;
+  transform: translateY(40px);
 }
 
-.edu-logo {
-  width: 50px;
-  height: auto;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease;
-}
-
-.edu-logo:hover {
-  transform: scale(1.1);
+.education-timeline h2 {
+  font-size: 2em;
+  margin-bottom: 40px;
+  color: #7c3aed; /* purple shade */
 }
 
 /* Timeline Container */
-.timeline {
+.education-timeline .timeline {
   position: relative;
-  max-width: 800px;
-  margin: 40px auto;
-  padding-left: 60px; /* slightly reduced for neatness */
-  list-style: none;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-left: 20px;
+  border-left: 4px solid #a78bfa; /* lighter purple */
+  padding-left: 20px;
 }
 
-/* Vertical line */
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 25px;
-  top: 0;
-  bottom: 0;
-  width: 5px;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  border-radius: 3px;
-  box-shadow: 0 0 8px rgba(106, 17, 203, 0.4);
-}
-
-/* Timeline year label */
-.timeline-year {
-  position: absolute;
-  left: -10px;
-  width: 70px;
-  font-weight: 700;
-  color: #6a11cb;
-  background: #f0f4ff;
-  border-radius: 8px;
-  padding: 8px 12px;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(106, 17, 203, 0.35);
-  font-size: 1em;
-  top: 20px;
-  user-select: none;
-}
-
-/* Each timeline event */
-.timeline li {
+/* Timeline Item */
+.education-timeline .timeline-item {
+  margin-bottom: 40px;
   position: relative;
-  margin-bottom: 55px;
-  padding-left: 90px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: default;
+  animation: fadeInLeft 1s ease-in-out forwards;
+  opacity: 0;
+  transform: translateX(-30px);
 }
 
-.timeline li:hover {
-  transform: translateX(10px);
-  box-shadow: 0 8px 20px rgba(106, 17, 203, 0.2);
+.education-timeline .timeline-item:last-child {
+  margin-bottom: 0;
 }
 
-/* Circular bullet */
-.timeline li::before {
-  content: '';
+/* Dot */
+.education-timeline .timeline-dot {
   position: absolute;
-  left: 15px;
-  top: 32px;
-  width: 22px;
-  height: 22px;
-  background: white;
-  border: 4px solid #6a11cb;
+  left: -12px;
+  top: 10px;
+  height: 16px;
+  width: 16px;
+  background-color: #7c3aed;
+  border: 3px solid #ede9fe;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(106, 17, 203, 0.5);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Timeline content box */
-.timeline-content {
-  background: rgba(255 255 255 / 0.95);
+/* Content */
+.education-timeline .timeline-content {
+  background: #f8f7ff;
+  padding: 20px 25px;
   border-radius: 12px;
-  padding: 22px 28px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  color: #222;
-  font-size: 1rem;
-  line-height: 1.5;
-  user-select: text;
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+  text-align: left;
 }
 
-/* Colored border left for cards */
-.purple-card {
-  border-left: 8px solid #6a11cb;
-  box-shadow: 0 0 15px rgba(106, 17, 203, 0.15);
+.education-timeline .timeline-content h3 {
+  margin: 0 0 12px;
+  font-size: 1.4em;
+  color: #5b21b6;
 }
 
-.blue-card {
-  border-left: 8px solid #2193b0;
-  box-shadow: 0 0 15px rgba(33, 147, 176, 0.15);
+.education-timeline .timeline-content p {
+  margin: 6px 0;
+  font-size: 1em;
+  color: #4c1d95;
+  line-height: 1.4;
+}
+
+.education-timeline .timeline-content strong {
+  color: #6d28d9;
+}
+
+/* Animations */
+@keyframes fadeSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* ================================
@@ -809,6 +814,42 @@ footer {
   }
 }
 
+/* ===== Career Summary Styling ===== */
+.career-summary {
+  max-width: 700px;
+  margin: 80px auto;
+  padding: 20px 30px;
+  background: #f3e8ff; /* light purple background */
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #4c1d95;
+  text-align: center;
+  animation: fadeInUp 1.5s ease forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.career-summary h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #7c3aed; /* purple shade */
+}
+
+.career-summary p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
   </style>
 </head>
@@ -859,50 +900,52 @@ footer {
 </section>
 
 
-<section id="career-summary" class="page-section">
-  <p>I am a highly motivated and analytical Master's student in Business Analytics, with a proven ability to leverage data for strategic decision-making. My experience spans AI-driven solutions, data visualization, and statistical modeling, allowing me to transform complex datasets into actionable insights. I thrive in dynamic environments where innovation and continuous learning are valued.</p>
+<!-- ===========================
+       CAREER SUMMARY SECTION
+============================ -->
+<section id="career-summary" class="career-summary">
+  <h2>Career Summary</h2>
+  <p>
+    Detail-oriented and analytical master's student specializing in Business Analytics, with a Bachelor of Commerce in Computer Applications. I am skilled in data analysis, problem-solving, and leveraging technology for business insights. Adept at applying statistical and analytical tools to drive decision-making and optimize business performance.
+  </p>
 </section>
 
+<!-- ===============================
+          EDUCATION SECTION
+================================= -->
+<section id="education" class="education-timeline">
+  <h2>🎓 Education</h2>
 
-<section id="education" class="page-section">
-  <h2>Education</h2>
-  <div class="education-list">
-    
-    <!-- UNT Section -->
-    <div class="education-item">
-      <div class="edu-header">
-        <div class="edu-title-logo">
-          <img src="https://cob.unt.edu/_files/college/_blb.jpg" alt="UNT Logo" class="edu-logo" />
-          <h3>University of North Texas</h3>
-        </div>
-        <p><em>M.S. Business Analytics</em></p>
-      </div>
-      <div class="edu-details">
+  <div class="timeline">
+
+    <!-- University of North Texas -->
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>University of North Texas</h3>
+        <p><strong>Degree:</strong> M.S. Business Analytics</p>
         <p><strong>Expected Graduation:</strong> Dec 2025</p>
         <p><strong>GPA:</strong> 3.5 / 4.0</p>
-        <p><strong>Coursework:</strong> <i class="icon-book"></i> Data Visualization, Data Mining, Predictive Analysis, Business Statistics</p>
+        <p><strong>Coursework:</strong> Data Visualization, Data Mining, Predictive Analysis, Business Statistics</p>
         <p><strong>Capstone:</strong> Improved sales forecasts by 15% using ML models</p>
       </div>
     </div>
 
-    <!-- Osmania Section -->
-    <div class="education-item">
-      <div class="edu-header">
-        <div class="edu-title-logo">
-          <img class="edu-logo" src="https://upload.wikimedia.org/wikipedia/en/2/29/Osmania_University_Logo.png" alt="Osmania University Logo" />
-          <h3>Osmania University</h3>
-        </div>
-        <p><em>Bachelor of Commerce (Computer Applications)</em></p>
-      </div>
-      <div class="edu-details">
+    <!-- Osmania University -->
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>Osmania University</h3>
+        <p><strong>Degree:</strong> Bachelor of Commerce (Computer Applications)</p>
         <p><strong>Duration:</strong> June 2020 – April 2023</p>
         <p><strong>GPA:</strong> 4.0 / 4.0</p>
-        <p><strong>Coursework:</strong> <i class="icon-book"></i> Database Management Systems, Business Statistics, Management Information Systems, Financial Accounting</p>
+        <p><strong>Coursework:</strong> Database Management Systems, Business Statistics, Management Information Systems, Financial Accounting</p>
       </div>
     </div>
 
   </div>
 </section>
+
 
 
 
@@ -1099,27 +1142,24 @@ footer {
 </section>
 
   <!-- Footer -->
-<footer style="background-color: #0f2027; color: white; padding: 1.5rem 0; text-align: center;">
+<footer class="footer">
   <!-- Social Icons -->
- <div style="font-size: 1.6rem; margin-bottom: 0.5rem;">
-  <!-- LinkedIn -->
-  <a href="https://www.linkedin.com/in/harshitha-sreiya-palaparthi-4434b4340" target="_blank" style="color: white; margin: 0 1rem;">
-    <i class="fab fa-linkedin"></i>
-  </a>
+  <div class="social-icons">
+    <a href="https://www.linkedin.com/in/harshitha-sreiya-palaparthi-4434b4340" target="_blank" title="LinkedIn">
+      <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="mailto:harshithasrieya@gmail.com" title="Email">
+      <i class="fas fa-envelope"></i>
+    </a>
+  </div>
 
-  <!-- Gmail -->
-  <a href="mailto:harshithasrieya@gmail.com" style="color: white; margin: 0 1rem;">
-    <i class="fas fa-envelope"></i>
-  </a>
-</div>
+  <!-- Footer Text -->
+  <p>Made with Github <igo class="fab fa-github"></i> by Harshitha</p>
 
-
-  <!-- Custom Text -->
-  <p style="margin: 0.5rem 0;">Made with <i class="fab fa-github"></i> by Harshitha</p>
-
-  <!-- Current Date and Time -->
-  <p id="datetime" style="font-size: 0.85rem; color: #ccc;"></p>
+  <!-- Dynamic Date and Time -->
+  <p id="datetime"></p>
 </footer>
+
 
 
 <script>
@@ -1170,19 +1210,17 @@ document.addEventListener('DOMContentLoaded', function () {
 // ================================
 // Time and Date Functionality
 // ================================
-const dtElem = document.getElementById('datetime'); // Element to display date/time
+ const dtElem = document.getElementById('datetime');
 
-// Function to update the datetime every minute
-function updateDateTime() {
-  const now = new Date();
-  if (dtElem) {
-    dtElem.textContent = now.toLocaleString(); // Show in local date/time format
+  function updateDateTime() {
+    const now = new Date();
+    if (dtElem) {
+      dtElem.textContent = now.toLocaleString();
+    }
   }
-}
 
-// Initial call + update every 60 seconds
-updateDateTime();
-setInterval(updateDateTime, 60000);
+  updateDateTime();
+  setInterval(updateDateTime, 60000);
   
 </script>
 </body>
